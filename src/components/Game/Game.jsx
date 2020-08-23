@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { Board } from "./../index";
 
 export const Game = () => {
-  return <></>;
+  const [size, setSize] = useState(0);
+
+  return (
+    <>
+      <Board />
+    </>
+  );
 };
