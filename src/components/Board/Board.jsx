@@ -5,10 +5,13 @@ import { Cell } from "./../index";
 import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
-  const boardGrid = [];
+  const cellGrid = [];
   for (let i = 0; i < props.size; i++) {
-    boardGrid.push(<Cell key={Cell + i} />);
+    cellGrid.push({
+      // testing by adding isBomb directly here. Will be replaced by a proper bomb populator
+      cell: <Cell key={Cell + i} isBomb={Math.round(Math.random())} />,
+    });
   }
 
-  return <BoardStyled>{boardGrid.map((curr) => curr)}</BoardStyled>;
+  return <BoardStyled>{cellGrid.map((curr) => curr.cell)}</BoardStyled>;
 };
