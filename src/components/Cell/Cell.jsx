@@ -1,5 +1,7 @@
 import React from "react";
 
-export const Cell = () => {
-  return <></>;
+import { CellStyled } from "./Cell.styled";
+
+export const Cell = (props) => {
+  return <CellStyled></CellStyled>;
 };
