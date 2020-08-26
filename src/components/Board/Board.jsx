@@ -18,6 +18,12 @@ export const Board = (props) => {
   );
   /////////////////////////
 
+  ///////////////////////// Bomb Checker
+
+  // This will be recursively called to reveal neighbours without bombs
+  const nearNoBombs = (cellNr) => {};
+  /////////////////////////
+
   return (
     <BoardStyled>
       {shuffledPopulatedGrid.map((curr, index) => (
