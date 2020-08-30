@@ -13,80 +13,81 @@ export const Board = (props) => {
   for (let j = 0; j < props.bombs; j++) {
     populatedGrid.push({ value: "💣", checked: false });
   }
-  const shuffledPopulatedGrid = populatedGrid.sort(
-    (a, b) => Math.random() - 0.5
-  );
+  const shuffledGrid = populatedGrid.sort((a, b) => Math.random() - 0.5);
 
   ///////////////////////// Click Handler
-  
   // From inside this I can choose to call mineCheck
   const squarePressed = (index) => {
     // After add to require it to be not checked.
-    if (shuffledPopulatedGrid[index].value === "💣") {
-      console.log("Game Over!")
-    } else if ()
-  }
+    // if (shuffledGrid[index].checked === false) {
+    // }
+    if (shuffledGrid[index].value === "💣") {
+      console.log("Game Over!");
+    } else {
+      mineCheck(index);
+      // execute the mineCheck
 
-
-
+      // if no bomb search neighbours BUT only reveal the ones without a bomb nearby.
+    }
+  };
 
   ///////////////////////// Bomb Checker
-  const mineCheck = (index) => {
+  const mineCheck = (variableIndex) => {
+    let checkerArray = [
+      variableIndex - props.gridWidth,
+      variableIndex - props.gridWidth + 1,
+      variableIndex + 1,
+      variableIndex + props.gridWidth + 1,
+      variableIndex + props.gridWidth,
+      variableIndex + props.gridWidth - 1,
+      variableIndex - 1,
+      variableIndex - props.gridWidth - 1,
+    ];
 
-    // This needs to be separate to clicking events, because it cannot look for a bomb and end the game whilst checking.
-    if (index % props.gridWidth === 0) { // Left Wall
-      if (index === 0) { // Top Left Corner
+    let bombCounter = 0;
 
-      } else if (index === props.size - props.gridWidth) { // Bottom Left Corner
-
-      }
-    } else if (index % props.gridWidth === props.gridWidth -1) { // Right Wall
-      if (index === props.gridWidth -1) { // Top Right Corner
-
-      } else if (index === props.size-1) { // Bottom Right Corner
-
-      }
-    } else { // Not agaisn't the wall
-
+    // mineCheck stops if it has a bomb
+    if (bombCounter === 0) {
+      // Currently here, not sure how to call this function recursevely meeting all the surrounding things for each run. mineCheck(checkerArray[0]) would always only check the top, maybe a checkerArray.map calling the function for each curr, not sure, maybe I should check the video again.
+      mineCheck();
+    } else {
     }
-  }
-  // This will be recursively called to reveal neighbours without bombs
-  // const runChecker = () => {
-  //   console.log(`runChecker is running.`);
-  //   const nearNoBombs = (cellIndex) => {
-  //     shuffledPopulatedGrid[cellIndex].value = 0;
-  //     shuffledPopulatedGrid[cellIndex].checked = true;
-  //     if (shuffledPopulatedGrid[cellIndex.value === "B"]) {
-  //       shuffledPopulatedGrid[cellIndex].value++;
-  //     } else {
-  //       nearNoBombs();
-  //     }
-  //   };
-  //   shuffledPopulatedGrid.map((curr, index) => {
-  //     let emptyFound = false;
-  //     if (curr.value === 0 && emptyFound === false) {
-  //       emptyFound = true;
-  //       nearNoBombs(index - 8);
-  //       nearNoBombs(index - 7);
-  //       nearNoBombs(index + 1);
-  //       nearNoBombs(index + 9);
-  //       nearNoBombs(index + 8);
-  //       nearNoBombs(index + 7);
-  //       nearNoBombs(index - 1);
-  //       nearNoBombs(index - 9);
-  //     }
-  //   });
-  // };
+
+    if (variableIndex % props.gridWidth === 0) {
+      // Left Wall
+      if (variableIndex === 0) {
+        // Top Left Corner
+      } else if (variableIndex === props.size - props.gridWidth) {
+        // Bottom Left Corner
+      }
+    } else if (variableIndex % props.gridWidth === props.gridWidth - 1) {
+      // Right Wall
+      if (variableIndex === props.gridWidth - 1) {
+        // Top Right Corner
+      } else if (variableIndex === props.size - 1) {
+        // Bottom Right Corner
+      }
+    } else {
+      bombCounter = 0;
+      // Not agains't the wall
+      checkerArray.map((curr) => {
+        if (shuffledGrid[curr].value === "💣") {
+          bombCounter++;
+        }
+        // if counter === 0 then call function clockwise somwhere
+      });
+    }
+  };
   /////////////////////////
 
   return (
     <BoardStyled>
-      {shuffledPopulatedGrid.map((curr, index) => (
+      {shuffledGrid.map((curr, index) => (
         <Cell
           gridWidth={props.gridWidth}
           key={"Cell" + index}
           isBomb={curr.value}
-          bombChecker={runChecker}
+          // bombChecker={runChecker}
         />
       ))}
     </BoardStyled>
