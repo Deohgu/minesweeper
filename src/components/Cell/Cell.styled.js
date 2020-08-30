@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { Game } from "./../Game/Game";
-
 export const CellStyled = styled.div`
   /* Have it modular, don't hard code the 8 or the 4. */
   display: flex;
