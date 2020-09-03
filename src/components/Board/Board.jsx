@@ -132,6 +132,7 @@ export const Board = (props) => {
       });
       console.log(`index: ${index}, mines: ${bombCounter}`);
     } else {
+      console.log(`index: ${index}`);
       bombCounter = 0;
       // Not agains't the wall
       checkerArray.map((curr) => {
@@ -160,25 +161,13 @@ export const Board = (props) => {
 
     const lonelySquares = (index) => {
       if (index % props.gridWidth === 0) {
-        // Left Wall
-        const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[5] && curr[6] && curr[7]
-        );
-        const bombCounter = 0;
-        tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
-            bombCounter++;
-          }
-          mineCheck(shuffledGrid[curr]);
-        });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
         if (index === 0) {
           // Top Left Corner
           const tempArray = checkerArray.filter(
             (curr) =>
               curr !== curr[0] && curr[1] && curr[5] && curr[6] && curr[7]
           );
-          const bombCounter = 0;
+          let bombCounter = 0;
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
@@ -192,7 +181,7 @@ export const Board = (props) => {
             (curr) =>
               curr !== curr[3] && curr[4] && curr[5] && curr[6] && curr[7]
           );
-          const bombCounter = 0;
+          let bombCounter = 0;
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
@@ -201,25 +190,25 @@ export const Board = (props) => {
           });
           console.log(`index: ${index}, mines: ${bombCounter}`);
         }
-      } else if (index % props.gridWidth === props.gridWidth - 1) {
-        // Right Wall
+        // Left Wall
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[1] && curr[2] && curr[3]
+          (curr) => curr !== curr[5] && curr[6] && curr[7]
         );
-        const bombCounter = 0;
+        let bombCounter = 0;
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
-            mineCheck(shuffledGrid[curr]);
           }
+          mineCheck(shuffledGrid[curr]);
         });
         console.log(`index: ${index}, mines: ${bombCounter}`);
+      } else if (index % props.gridWidth === props.gridWidth - 1) {
         if (index === props.gridWidth - 1) {
           // Top Right Corner
           const tempArray = checkerArray.filter(
             (curr) => curr !== curr[0] && curr[1] && curr[2] && curr[3]
           );
-          const bombCounter = 0;
+          let bombCounter = 0;
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
@@ -233,7 +222,7 @@ export const Board = (props) => {
             (curr) =>
               curr !== curr[1] && curr[2] && curr[3] && curr[4] && curr[5]
           );
-          const bombCounter = 0;
+          let bombCounter = 0;
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
@@ -242,6 +231,18 @@ export const Board = (props) => {
           });
           console.log(`index: ${index}, mines: ${bombCounter}`);
         }
+        // Right Wall
+        const tempArray = checkerArray.filter(
+          (curr) => curr !== curr[1] && curr[2] && curr[3]
+        );
+        let bombCounter = 0;
+        tempArray.map((curr) => {
+          if (shuffledGrid[curr].value === "💣") {
+            bombCounter++;
+            mineCheck(shuffledGrid[curr]);
+          }
+        });
+        console.log(`index: ${index}, mines: ${bombCounter}`);
       } else {
         bombCounter = 0;
         // Not agains't the wall
@@ -264,7 +265,8 @@ export const Board = (props) => {
           gridWidth={props.gridWidth}
           key={"Cell" + index}
           isBomb={curr.value}
-          bombChecker={squarePressed(index)}
+          bombChecker={squarePressed}
+          index={index}
         />
       ))}
     </BoardStyled>
