@@ -7,7 +7,7 @@ import { GameStyled } from "./Game.styled";
 export const Game = () => {
   const [gridWidth, setGridWidth] = useState(8);
   const [size, setSize] = useState(64);
-  const [bombs, setBombs] = useState(20);
+  const [bombs, setBombs] = useState(5);
 
   return (
     <GameStyled>
