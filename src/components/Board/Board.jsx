@@ -47,40 +47,60 @@ export const Board = (props) => {
     let bombCounter = 0;
 
     // runs without if statement checking placing so the first index meaning 0 check above it which is -8 index, meaning non existent in shuffledGrid.
+    console.log(`Begining. Index: ${index}, gridWith: ${props.gridWidth}`);
     if (index % props.gridWidth === 0) {
       if (index === 0) {
+        console.log(`Top Left corner init`);
         // Top Left Corner
 
         // Problem here, filter not working as expected, check line 60 console.log
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[0] && curr[1] && curr[5] && curr[6] && curr[7]
+          (curr) =>
+            curr !== checkerArray[0] &&
+            curr !== checkerArray[1] &&
+            curr !== checkerArray[5] &&
+            curr !== checkerArray[6] &&
+            curr !== checkerArray[7]
         );
         bombCounter = 0;
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
-            mineCheck(shuffledGrid[curr]);
           }
+          console.log(`curr: ${curr}`);
+          mineCheck(shuffledGrid[curr]);
         });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
       } else if (index === props.size - props.gridWidth) {
         // Bottom Left Corner
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[3] && curr[4] && curr[5] && curr[6] && curr[7]
+          (curr) =>
+            curr !== checkerArray[3] &&
+            curr !== checkerArray[4] &&
+            curr !== checkerArray[5] &&
+            curr !== checkerArray[6] &&
+            curr !== checkerArray[7]
         );
         bombCounter = 0;
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
-            mineCheck(shuffledGrid[curr]);
           }
+          mineCheck(shuffledGrid[curr]);
         });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
       }
 
       // Left Wall
       const tempArray = checkerArray.filter(
-        (curr) => curr !== curr[5] && curr[6] && curr[7]
+        (curr) =>
+          curr !== checkerArray[5] &&
+          curr !== checkerArray[6] &&
+          curr !== checkerArray[7]
       );
       bombCounter = 0;
       tempArray.map((curr) => {
@@ -89,48 +109,69 @@ export const Board = (props) => {
         }
         mineCheck(shuffledGrid[curr]);
       });
-      console.log(`index: ${index}, mines: ${bombCounter}`);
+      console.log(
+        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+      );
     } else if (index % props.gridWidth === props.gridWidth - 1) {
       if (index === props.gridWidth - 1) {
         // Top Right Corner
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[0] && curr[1] && curr[2] && curr[3]
+          (curr) =>
+            curr !== checkerArray[0] &&
+            curr !== checkerArray[1] &&
+            curr !== checkerArray[2] &&
+            curr !== checkerArray[3]
         );
         bombCounter = 0;
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
-            mineCheck(shuffledGrid[curr]);
           }
+          mineCheck(shuffledGrid[curr]);
         });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
       } else if (index === props.size - 1) {
         // Bottom Right Corner
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[1] && curr[2] && curr[3] && curr[4] && curr[5]
+          (curr) =>
+            curr !== checkerArray[1] &&
+            curr !== checkerArray[2] &&
+            curr !== checkerArray[3] &&
+            curr !== checkerArray[4] &&
+            curr !== checkerArray[5]
         );
+        console.log(tempArray);
         bombCounter = 0;
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
-            mineCheck(shuffledGrid[curr]);
           }
+          mineCheck(shuffledGrid[curr]);
         });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
       }
 
       // Right Wall
       const tempArray = checkerArray.filter(
-        (curr) => curr !== curr[1] && curr[2] && curr[3]
+        (curr) =>
+          curr !== checkerArray[1] &&
+          curr !== checkerArray[2] &&
+          curr !== checkerArray[3]
       );
       bombCounter = 0;
       tempArray.map((curr) => {
         if (shuffledGrid[curr].value === "💣") {
           bombCounter++;
-          mineCheck(shuffledGrid[curr]);
         }
+        mineCheck(shuffledGrid[curr]);
       });
-      console.log(`index: ${index}, mines: ${bombCounter}`);
+      console.log(
+        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+      );
     } else {
       console.log(`index: ${index}`);
       bombCounter = 0;
@@ -165,7 +206,11 @@ export const Board = (props) => {
           // Top Left Corner
           const tempArray = checkerArray.filter(
             (curr) =>
-              curr !== curr[0] && curr[1] && curr[5] && curr[6] && curr[7]
+              curr !== checkerArray[0] &&
+              curr !== checkerArray[1] &&
+              curr !== checkerArray[5] &&
+              curr !== checkerArray[6] &&
+              curr !== checkerArray[7]
           );
           let bombCounter = 0;
           tempArray.map((curr) => {
@@ -179,7 +224,11 @@ export const Board = (props) => {
           // Bottom Left Corner
           const tempArray = checkerArray.filter(
             (curr) =>
-              curr !== curr[3] && curr[4] && curr[5] && curr[6] && curr[7]
+              curr !== checkerArray[3] &&
+              curr !== checkerArray[4] &&
+              curr !== checkerArray[5] &&
+              curr !== checkerArray[6] &&
+              curr !== checkerArray[7]
           );
           let bombCounter = 0;
           tempArray.map((curr) => {
@@ -192,7 +241,10 @@ export const Board = (props) => {
         }
         // Left Wall
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[5] && curr[6] && curr[7]
+          (curr) =>
+            curr !== checkerArray[5] &&
+            curr !== checkerArray[6] &&
+            curr !== checkerArray[7]
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
@@ -206,7 +258,11 @@ export const Board = (props) => {
         if (index === props.gridWidth - 1) {
           // Top Right Corner
           const tempArray = checkerArray.filter(
-            (curr) => curr !== curr[0] && curr[1] && curr[2] && curr[3]
+            (curr) =>
+              curr !== checkerArray[0] &&
+              curr !== checkerArray[1] &&
+              curr !== checkerArray[2] &&
+              curr !== checkerArray[3]
           );
           let bombCounter = 0;
           tempArray.map((curr) => {
@@ -220,7 +276,11 @@ export const Board = (props) => {
           // Bottom Right Corner
           const tempArray = checkerArray.filter(
             (curr) =>
-              curr !== curr[1] && curr[2] && curr[3] && curr[4] && curr[5]
+              curr !== checkerArray[1] &&
+              curr !== checkerArray[2] &&
+              curr !== checkerArray[3] &&
+              curr !== checkerArray[4] &&
+              curr !== checkerArray[5]
           );
           let bombCounter = 0;
           tempArray.map((curr) => {
@@ -233,7 +293,10 @@ export const Board = (props) => {
         }
         // Right Wall
         const tempArray = checkerArray.filter(
-          (curr) => curr !== curr[1] && curr[2] && curr[3]
+          (curr) =>
+            curr !== checkerArray[1] &&
+            curr !== checkerArray[2] &&
+            curr !== checkerArray[3]
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
