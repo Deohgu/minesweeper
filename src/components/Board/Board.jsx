@@ -68,7 +68,7 @@ export const Board = (props) => {
             bombCounter++;
           }
           console.log(`curr: ${curr}`);
-          mineCheck(shuffledGrid[curr]);
+          // mineCheck(curr);
         });
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
@@ -88,7 +88,7 @@ export const Board = (props) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
           }
-          mineCheck(shuffledGrid[curr]);
+          // mineCheck(curr);
         });
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
@@ -107,7 +107,7 @@ export const Board = (props) => {
         if (shuffledGrid[curr].value === "💣") {
           bombCounter++;
         }
-        mineCheck(shuffledGrid[curr]);
+        // mineCheck(curr);
       });
       console.log(
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
@@ -120,14 +120,15 @@ export const Board = (props) => {
             curr !== checkerArray[0] &&
             curr !== checkerArray[1] &&
             curr !== checkerArray[2] &&
-            curr !== checkerArray[3]
+            curr !== checkerArray[3] &&
+            curr !== checkerArray[7]
         );
         bombCounter = 0;
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
           }
-          mineCheck(shuffledGrid[curr]);
+          // mineCheck(curr);
         });
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
@@ -148,7 +149,7 @@ export const Board = (props) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
           }
-          mineCheck(shuffledGrid[curr]);
+          // mineCheck(curr);
         });
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
@@ -166,8 +167,43 @@ export const Board = (props) => {
       tempArray.map((curr) => {
         if (shuffledGrid[curr].value === "💣") {
           bombCounter++;
+          // mineCheck(curr);
         }
-        mineCheck(shuffledGrid[curr]);
+      });
+      console.log(
+        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+      );
+    } else if (index > 0 && index < props.gridWidth - 1) {
+      // Top Wall strickly
+      const tempArray = checkerArray.filter(
+        (curr) =>
+          curr !== checkerArray[0] &&
+          curr !== checkerArray[1] &&
+          curr !== checkerArray[7]
+      );
+      bombCounter = 0;
+      tempArray.map((curr) => {
+        if (shuffledGrid[curr].value === "💣") {
+          bombCounter++;
+          // mineCheck(curr);
+        }
+      });
+      console.log(
+        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+      );
+    } else if (index > props.size - props.gridWidth && index < props.size - 1) {
+      // Bottom Wall strickly
+      const tempArray = checkerArray.filter(
+        (curr) =>
+          curr !== checkerArray[3] &&
+          curr !== checkerArray[4] &&
+          curr !== checkerArray[5]
+      );
+      bombCounter = 0;
+      tempArray.map((curr) => {
+        if (shuffledGrid[curr].value === "💣") {
+          bombCounter++;
+        }
       });
       console.log(
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
@@ -187,19 +223,11 @@ export const Board = (props) => {
       console.log(`index: ${index}, mines: ${bombCounter}`);
     }
 
-    if (bombCounter === 0) {
-      shuffledGrid.map((curr) => {
-        mineCheck(curr);
-      });
-    }
-
-    // mineCheck stops if it has a bomb
-    if (bombCounter === 0) {
-      // run until all squares that are not mines and connected are found. So probably call a separate function for this.
-      lonelySquares(index);
-    } else {
-    }
-
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
     const lonelySquares = (index) => {
       if (index % props.gridWidth === 0) {
         if (index === 0) {
@@ -216,10 +244,12 @@ export const Board = (props) => {
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
-              mineCheck(shuffledGrid[curr]);
+              // mineCheck(curr);
             }
           });
-          console.log(`index: ${index}, mines: ${bombCounter}`);
+          console.log(
+            `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+          );
         } else if (index === props.size - props.gridWidth) {
           // Bottom Left Corner
           const tempArray = checkerArray.filter(
@@ -234,10 +264,12 @@ export const Board = (props) => {
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
-              mineCheck(shuffledGrid[curr]);
+              // mineCheck(curr);
             }
           });
-          console.log(`index: ${index}, mines: ${bombCounter}`);
+          console.log(
+            `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+          );
         }
         // Left Wall
         const tempArray = checkerArray.filter(
@@ -251,9 +283,11 @@ export const Board = (props) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
           }
-          mineCheck(shuffledGrid[curr]);
+          // mineCheck(curr);
         });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
       } else if (index % props.gridWidth === props.gridWidth - 1) {
         if (index === props.gridWidth - 1) {
           // Top Right Corner
@@ -262,16 +296,19 @@ export const Board = (props) => {
               curr !== checkerArray[0] &&
               curr !== checkerArray[1] &&
               curr !== checkerArray[2] &&
-              curr !== checkerArray[3]
+              curr !== checkerArray[3] &&
+              curr !== checkerArray[7]
           );
           let bombCounter = 0;
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
-              mineCheck(shuffledGrid[curr]);
+              // mineCheck(curr);
             }
           });
-          console.log(`index: ${index}, mines: ${bombCounter}`);
+          console.log(
+            `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+          );
         } else if (index === props.size - 1) {
           // Bottom Right Corner
           const tempArray = checkerArray.filter(
@@ -286,10 +323,12 @@ export const Board = (props) => {
           tempArray.map((curr) => {
             if (shuffledGrid[curr].value === "💣") {
               bombCounter++;
-              mineCheck(shuffledGrid[curr]);
+              // mineCheck(curr);
             }
           });
-          console.log(`index: ${index}, mines: ${bombCounter}`);
+          console.log(
+            `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+          );
         }
         // Right Wall
         const tempArray = checkerArray.filter(
@@ -302,10 +341,51 @@ export const Board = (props) => {
         tempArray.map((curr) => {
           if (shuffledGrid[curr].value === "💣") {
             bombCounter++;
-            mineCheck(shuffledGrid[curr]);
+            // mineCheck(curr);
           }
         });
-        console.log(`index: ${index}, mines: ${bombCounter}`);
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
+      } else if (index > 0 && index < props.gridWidth - 1) {
+        // Top Wall strickly
+        const tempArray = checkerArray.filter(
+          (curr) =>
+            curr !== checkerArray[0] &&
+            curr !== checkerArray[1] &&
+            curr !== checkerArray[7]
+        );
+        let bombCounter = 0;
+        tempArray.map((curr) => {
+          if (shuffledGrid[curr].value === "💣") {
+            bombCounter++;
+            // mineCheck(curr);
+          }
+        });
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
+      } else if (
+        index > props.size - props.gridWidth &&
+        index < props.size - 1
+      ) {
+        // Bottom Wall strickly
+        const tempArray = checkerArray.filter(
+          (curr) =>
+            curr !== checkerArray[3] &&
+            curr !== checkerArray[4] &&
+            curr !== checkerArray[5]
+        );
+        let bombCounter = 0;
+        tempArray.map((curr) => {
+          if (shuffledGrid[curr].value === "💣") {
+            bombCounter++;
+            // mineCheck(curr);
+          }
+        });
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
       } else {
         bombCounter = 0;
         // Not agains't the wall
@@ -318,6 +398,23 @@ export const Board = (props) => {
         console.log(`index: ${index}, mines: ${bombCounter}`);
       }
     };
+
+    // if (bombCounter === 0) {
+    //   shuffledGrid.map((curr) => {
+    //     mineCheck(curr);
+    //   });
+    // }
+
+    // mineCheck stops if it has a bomb
+    console.log(`bombCounter just before last if Statement: ${bombCounter}`);
+    if (bombCounter === 0) {
+      // run until all squares that are not mines and connected are found. So probably call a separate function for this.
+      lonelySquares(index);
+    } else {
+      console.log(
+        `Bomb around so else in the statement that calls lonelySquares()`
+      );
+    }
   };
   /////////////////////////
 
