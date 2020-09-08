@@ -489,7 +489,7 @@ export const Board = (props) => {
 
   return (
     <BoardStyled>
-      {gridToShow.map((curr, index) => (
+      {/*{gridToShow.map((curr, index) => (
         <Cell
           gridWidth={props.gridWidth}
           key={"Cell" + index}
@@ -498,7 +498,12 @@ export const Board = (props) => {
           index={index}
           gridToShow={gridToShow}
         />
-      ))}
+      ))}*/}
+      <Cell
+        gridWidth={props.gridWidth}
+        grid={gridToShow}
+        bombChecker={squarePressed}
+      />
     </BoardStyled>
   );
 };

@@ -1,11 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { CellStyled } from "./Cell.styled";
 
 export const Cell = (props) => {
-  useEffect(() => {}, [props.gridToShow]);
 
   return (
+    <>
+      {props.grid.map((curr, index) =>
+        <CellStyled
+          gridWidth={props.gridWidth}
+          onClick={() => props.bombChecker(index)}
+        >
+          {curr.value}
+        </CellStyled>
+      )}
+      
+      
+      {/*
     <CellStyled
       gridWidth={props.gridWidth}
       onClick={() => props.bombChecker(props.index)}
@@ -13,5 +24,7 @@ export const Cell = (props) => {
       {props.value}
       {console.log(`Cell being called`)}
     </CellStyled>
+  */}
+    </>
   );
 };
