@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Cell } from "./../index";
 
 import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
+  const [gridToShow, setgridToShow] = useState([]);
   ///////////////////////// Creator of grid & Bomb Populator
-  const populatedGrid = [];
-  for (let i = 0; i < props.size - props.bombs; i++) {
-    populatedGrid.push({ value: "0", checked: false });
-  }
-  for (let j = 0; j < props.bombs; j++) {
-    populatedGrid.push({ value: "💣", checked: false });
-  }
-  const shuffledGrid = populatedGrid.sort((a, b) => Math.random() - 0.5);
 
+  useEffect(() => {
+    const populatedGrid = [];
+    for (let i = 0; i < props.size - props.bombs; i++) {
+      populatedGrid.push({ value: "0", checked: false });
+    }
+    for (let j = 0; j < props.bombs; j++) {
+      populatedGrid.push({ value: "💣", checked: false });
+    }
+    setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
+  }, []);
   ///////////////////////// Click Handler
   const squarePressed = (index) => {
     // After add to require it to be not checked.
-    if (shuffledGrid[index].value === "💣") {
+    if (gridToShow[index].value === "💣") {
       console.log("Game Over!");
     } else {
       mineCheck(index);
@@ -58,7 +61,7 @@ export const Board = (props) => {
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (gridToShow[curr].value === "💣") {
             bombCounter++;
             // mineCheck(curr);
           }
@@ -78,7 +81,7 @@ export const Board = (props) => {
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (gridToShow[curr].value === "💣") {
             bombCounter++;
             // mineCheck(curr);
           }
@@ -96,7 +99,7 @@ export const Board = (props) => {
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (gridToShow[curr].value === "💣") {
             bombCounter++;
           }
           // mineCheck(curr);
@@ -118,7 +121,7 @@ export const Board = (props) => {
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (gridToShow[curr].value === "💣") {
             bombCounter++;
             // mineCheck(curr);
           }
@@ -138,7 +141,7 @@ export const Board = (props) => {
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (gridToShow[curr].value === "💣") {
             bombCounter++;
             // mineCheck(curr);
           }
@@ -156,7 +159,7 @@ export const Board = (props) => {
         );
         let bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (gridToShow[curr].value === "💣") {
             bombCounter++;
             // mineCheck(curr);
           }
@@ -175,7 +178,7 @@ export const Board = (props) => {
       );
       let bombCounter = 0;
       tempArray.map((curr) => {
-        if (shuffledGrid[curr].value === "💣") {
+        if (gridToShow[curr].value === "💣") {
           bombCounter++;
           // mineCheck(curr);
         }
@@ -193,7 +196,7 @@ export const Board = (props) => {
       );
       let bombCounter = 0;
       tempArray.map((curr) => {
-        if (shuffledGrid[curr].value === "💣") {
+        if (gridToShow[curr].value === "💣") {
           bombCounter++;
           // mineCheck(curr);
         }
@@ -205,7 +208,7 @@ export const Board = (props) => {
       let bombCounter = 0;
       // Not agains't the wall
       checkerArray.map((curr) => {
-        if (shuffledGrid[curr].value === "💣") {
+        if (gridToShow[curr].value === "💣") {
           bombCounter++;
         }
         // if counter === 0 then call function clockwise somwhere
@@ -221,6 +224,8 @@ export const Board = (props) => {
   //////////////////////////////////////////////////////////
 
   const mineCheck = (index) => {
+    const testingGrid = gridToShow;
+
     let checkerArray = [
       index - props.gridWidth,
       index - props.gridWidth + 1,
@@ -246,13 +251,15 @@ export const Board = (props) => {
             curr !== checkerArray[1] &&
             curr !== checkerArray[5] &&
             curr !== checkerArray[6] &&
-            curr !== checkerArray[7]
+            curr !== checkerArray[7] &&
+            testingGrid[curr].checked !== true
         );
         bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
+          testingGrid[curr].checked = true;
           console.log(`curr: ${curr}`);
         });
         tempArray.map((curr) => {
@@ -263,6 +270,8 @@ export const Board = (props) => {
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
+        // TESTING HERE <---------------- Trying to update visually
+        testingGrid[index].value = bombCounter;
       } else if (index === props.size - props.gridWidth) {
         // Bottom Left Corner
         const tempArray = checkerArray.filter(
@@ -271,13 +280,15 @@ export const Board = (props) => {
             curr !== checkerArray[4] &&
             curr !== checkerArray[5] &&
             curr !== checkerArray[6] &&
-            curr !== checkerArray[7]
+            curr !== checkerArray[7] &&
+            testingGrid[curr].checked !== true
         );
         bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
+          testingGrid[curr].checked = true;
         });
         tempArray.map((curr) => {
           if (bombCounter === 0) {
@@ -293,13 +304,15 @@ export const Board = (props) => {
           (curr) =>
             curr !== checkerArray[5] &&
             curr !== checkerArray[6] &&
-            curr !== checkerArray[7]
+            curr !== checkerArray[7] &&
+            testingGrid[curr].checked !== true
         );
         bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
+          testingGrid[curr].checked = true;
         });
         tempArray.map((curr) => {
           if (bombCounter === 0) {
@@ -319,13 +332,15 @@ export const Board = (props) => {
             curr !== checkerArray[1] &&
             curr !== checkerArray[2] &&
             curr !== checkerArray[3] &&
-            curr !== checkerArray[7]
+            curr !== checkerArray[7] &&
+            testingGrid[curr].checked !== true
         );
         bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
+          testingGrid[curr].checked = true;
         });
         tempArray.map((curr) => {
           if (bombCounter === 0) {
@@ -343,13 +358,15 @@ export const Board = (props) => {
             curr !== checkerArray[2] &&
             curr !== checkerArray[3] &&
             curr !== checkerArray[4] &&
-            curr !== checkerArray[5]
+            curr !== checkerArray[5] &&
+            testingGrid[curr].checked !== true
         );
         bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
+          testingGrid[curr].checked = true;
         });
         tempArray.map((curr) => {
           if (bombCounter === 0) {
@@ -365,13 +382,16 @@ export const Board = (props) => {
           (curr) =>
             curr !== checkerArray[1] &&
             curr !== checkerArray[2] &&
-            curr !== checkerArray[3]
+            curr !== checkerArray[3] &&
+            testingGrid[curr].checked !== true
         );
         bombCounter = 0;
         tempArray.map((curr) => {
-          if (shuffledGrid[curr].value === "💣") {
+          if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
+          testingGrid[curr].checked = true;
+          testingGrid[curr].value = bombCounter;
         });
         tempArray.map((curr) => {
           if (bombCounter === 0) {
@@ -379,7 +399,7 @@ export const Board = (props) => {
           }
         });
         console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}, Checked?: ${testingGrid[index].checked}`
         );
       }
     } else if (index > 0 && index < props.gridWidth - 1) {
@@ -388,13 +408,15 @@ export const Board = (props) => {
         (curr) =>
           curr !== checkerArray[0] &&
           curr !== checkerArray[1] &&
-          curr !== checkerArray[7]
+          curr !== checkerArray[7] &&
+          testingGrid[curr].checked !== true
       );
       bombCounter = 0;
       tempArray.map((curr) => {
-        if (shuffledGrid[curr].value === "💣") {
+        if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
+        testingGrid[curr].checked = true;
       });
       tempArray.map((curr) => {
         if (bombCounter === 0) {
@@ -410,13 +432,15 @@ export const Board = (props) => {
         (curr) =>
           curr !== checkerArray[3] &&
           curr !== checkerArray[4] &&
-          curr !== checkerArray[5]
+          curr !== checkerArray[5] &&
+          testingGrid[curr].checked !== true
       );
       bombCounter = 0;
       tempArray.map((curr) => {
-        if (shuffledGrid[curr].value === "💣") {
+        if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
+        testingGrid[curr].checked = true;
       });
       tempArray.map((curr) => {
         if (bombCounter === 0) {
@@ -427,28 +451,52 @@ export const Board = (props) => {
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
       );
     } else {
-      console.log(`index: ${index}`);
+      const tempArray = checkerArray.filter(
+        (curr) => testingGrid[curr].checked !== true
+      );
       bombCounter = 0;
       // Not agains't the wall
-      checkerArray.map((curr) => {
+      tempArray.map((curr) => {
         console.log(curr);
-        if (shuffledGrid[curr].value === "💣") {
+        if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
+        testingGrid[curr].checked = true;
       });
       console.log(`index: ${index}, mines: ${bombCounter}`);
     }
+    // Change numbers of checked.
+    // Currently changing in the statement after changing .checked
+    // Just need to have it updated after this.
+    console.log(
+      `${testingGrid.map(
+        (curr) => curr.value
+      )}   Top left value changed to update.`
+    );
+    return setgridToShow(testingGrid);
+  };
+
+  // gridToShow is not updated when called a second time.
+  console.log(
+    `Board has been rendered. gridToShow: ${gridToShow.map(
+      (curr) => curr.value
+    )}`
+  );
+
+  const processValue = () => {
+    return gridToShow;
   };
 
   return (
     <BoardStyled>
-      {shuffledGrid.map((curr, index) => (
+      {gridToShow.map((curr, index) => (
         <Cell
           gridWidth={props.gridWidth}
           key={"Cell" + index}
-          isBomb={curr.value}
+          value={curr.value}
           bombChecker={squarePressed}
           index={index}
+          gridToShow={gridToShow}
         />
       ))}
     </BoardStyled>
