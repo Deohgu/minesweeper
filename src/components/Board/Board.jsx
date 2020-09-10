@@ -6,6 +6,7 @@ import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
   const [gridToShow, setgridToShow] = useState([]);
+  const [reRender, setReRender] = useState(false);
   ///////////////////////// Creator of grid & Bomb Populator
 
   useEffect(() => {
@@ -298,6 +299,7 @@ export const Board = (props) => {
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
+        testingGrid[index].value = bombCounter;
       } else {
         // Left Wall
         const tempArray = checkerArray.filter(
@@ -323,6 +325,7 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
       }
+      testingGrid[index].value = bombCounter;
     } else if (index % props.gridWidth === props.gridWidth - 1) {
       if (index === props.gridWidth - 1) {
         // Top Right Corner
@@ -350,6 +353,7 @@ export const Board = (props) => {
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
+        testingGrid[index].value = bombCounter;
       } else if (index === props.size - 1) {
         // Bottom Right Corner
         const tempArray = checkerArray.filter(
@@ -376,6 +380,7 @@ export const Board = (props) => {
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
+        testingGrid[index].value = bombCounter;
       } else {
         // Right Wall
         const tempArray = checkerArray.filter(
@@ -402,6 +407,7 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}, Checked?: ${testingGrid[index].checked}`
         );
       }
+      testingGrid[index].value = bombCounter;
     } else if (index > 0 && index < props.gridWidth - 1) {
       // Top Wall strickly
       const tempArray = checkerArray.filter(
@@ -426,6 +432,7 @@ export const Board = (props) => {
       console.log(
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
       );
+      testingGrid[index].value = bombCounter;
     } else if (index > props.size - props.gridWidth && index < props.size - 1) {
       // Bottom Wall strickly
       const tempArray = checkerArray.filter(
@@ -450,6 +457,7 @@ export const Board = (props) => {
       console.log(
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
       );
+      testingGrid[index].value = bombCounter;
     } else {
       const tempArray = checkerArray.filter(
         (curr) => testingGrid[curr].checked !== true
@@ -464,6 +472,7 @@ export const Board = (props) => {
         testingGrid[curr].checked = true;
       });
       console.log(`index: ${index}, mines: ${bombCounter}`);
+      testingGrid[index].value = bombCounter;
     }
     // Change numbers of checked.
     // Currently changing in the statement after changing .checked
@@ -503,7 +512,9 @@ export const Board = (props) => {
         gridWidth={props.gridWidth}
         grid={gridToShow}
         bombChecker={squarePressed}
+        reRender={setReRender}
       />
+      {console.log(`Testing Testing`)}
     </BoardStyled>
   );
 };
