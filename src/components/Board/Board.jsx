@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 
 import { Cell } from "./../index";
 
@@ -6,7 +6,6 @@ import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
   const [gridToShow, setgridToShow] = useState([]);
-  const [reRender, setReRender] = useState(false);
   ///////////////////////// Creator of grid & Bomb Populator
 
   useEffect(() => {
@@ -21,6 +20,7 @@ export const Board = (props) => {
   }, []);
   ///////////////////////// Click Handler
   const squarePressed = (index) => {
+    console.log(index);
     // After add to require it to be not checked.
     if (gridToShow[index].value === "💣") {
       console.log("Game Over!");
@@ -28,6 +28,8 @@ export const Board = (props) => {
       mineCheck(index);
     }
   };
+
+  const refForCell = createRef();
 
   ///////////////////////// Bomb Checker
 
@@ -482,38 +484,31 @@ export const Board = (props) => {
         (curr) => curr.value
       )}   Top left value changed to update.`
     );
-    return setgridToShow(testingGrid);
+    setgridToShow(testingGrid);
   };
 
   // gridToShow is not updated when called a second time.
-  console.log(
-    `Board has been rendered. gridToShow: ${gridToShow.map(
-      (curr) => curr.value
-    )}`
-  );
-
-  const processValue = () => {
-    return gridToShow;
-  };
+  // console.log(
+  //   `Board has been rendered. gridToShow: ${gridToShow.map(
+  //     (curr) => curr.value
+  //   )}`
+  // );
 
   return (
     <BoardStyled>
-      {/*{gridToShow.map((curr, index) => (
-        <Cell
-          gridWidth={props.gridWidth}
-          key={"Cell" + index}
-          value={curr.value}
-          bombChecker={squarePressed}
-          index={index}
-          gridToShow={gridToShow}
-        />
-      ))}*/}
-      <Cell
-        gridWidth={props.gridWidth}
-        grid={gridToShow}
-        bombChecker={squarePressed}
-        reRender={setReRender}
-      />
+      {gridToShow.map((curr, index) => {
+        // let value = curr.value;
+        console.log(curr.value);
+        return (
+          <Cell
+            onClick={() => squarePressed(index)}
+            gridWidth={props.gridWidth}
+            key={index}
+            value={curr.value}
+            ref={refForCell}
+          />
+        );
+      })}
       {console.log(`Testing Testing`)}
     </BoardStyled>
   );
