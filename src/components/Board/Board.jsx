@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Cell } from "./../index";
 
@@ -6,6 +6,7 @@ import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
   const [gridToShow, setgridToShow] = useState([]);
+
   ///////////////////////// Creator of grid & Bomb Populator
 
   useEffect(() => {
@@ -29,197 +30,7 @@ export const Board = (props) => {
     }
   };
 
-  const refForCell = createRef();
-
   ///////////////////////// Bomb Checker
-
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  // Might not need this in the end. Check Notion notes.
-  const lonelySquares = (index) => {
-    let checkerArray = [
-      index - props.gridWidth,
-      index - props.gridWidth + 1,
-      index + 1,
-      index + props.gridWidth + 1,
-      index + props.gridWidth,
-      index + props.gridWidth - 1,
-      index - 1,
-      index - props.gridWidth - 1,
-    ];
-
-    if (index % props.gridWidth === 0) {
-      if (index === 0) {
-        // Top Left Corner
-        const tempArray = checkerArray.filter(
-          (curr) =>
-            curr !== checkerArray[0] &&
-            curr !== checkerArray[1] &&
-            curr !== checkerArray[5] &&
-            curr !== checkerArray[6] &&
-            curr !== checkerArray[7]
-        );
-        let bombCounter = 0;
-        tempArray.map((curr) => {
-          if (gridToShow[curr].value === "💣") {
-            bombCounter++;
-            // mineCheck(curr);
-          }
-        });
-        console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-        );
-      } else if (index === props.size - props.gridWidth) {
-        // Bottom Left Corner
-        const tempArray = checkerArray.filter(
-          (curr) =>
-            curr !== checkerArray[3] &&
-            curr !== checkerArray[4] &&
-            curr !== checkerArray[5] &&
-            curr !== checkerArray[6] &&
-            curr !== checkerArray[7]
-        );
-        let bombCounter = 0;
-        tempArray.map((curr) => {
-          if (gridToShow[curr].value === "💣") {
-            bombCounter++;
-            // mineCheck(curr);
-          }
-        });
-        console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-        );
-      } else {
-        // Left Wall
-        const tempArray = checkerArray.filter(
-          (curr) =>
-            curr !== checkerArray[5] &&
-            curr !== checkerArray[6] &&
-            curr !== checkerArray[7]
-        );
-        let bombCounter = 0;
-        tempArray.map((curr) => {
-          if (gridToShow[curr].value === "💣") {
-            bombCounter++;
-          }
-          // mineCheck(curr);
-        });
-        console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-        );
-      }
-    } else if (index % props.gridWidth === props.gridWidth - 1) {
-      if (index === props.gridWidth - 1) {
-        // Top Right Corner
-        const tempArray = checkerArray.filter(
-          (curr) =>
-            curr !== checkerArray[0] &&
-            curr !== checkerArray[1] &&
-            curr !== checkerArray[2] &&
-            curr !== checkerArray[3] &&
-            curr !== checkerArray[7]
-        );
-        let bombCounter = 0;
-        tempArray.map((curr) => {
-          if (gridToShow[curr].value === "💣") {
-            bombCounter++;
-            // mineCheck(curr);
-          }
-        });
-        console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-        );
-      } else if (index === props.size - 1) {
-        // Bottom Right Corner
-        const tempArray = checkerArray.filter(
-          (curr) =>
-            curr !== checkerArray[1] &&
-            curr !== checkerArray[2] &&
-            curr !== checkerArray[3] &&
-            curr !== checkerArray[4] &&
-            curr !== checkerArray[5]
-        );
-        let bombCounter = 0;
-        tempArray.map((curr) => {
-          if (gridToShow[curr].value === "💣") {
-            bombCounter++;
-            // mineCheck(curr);
-          }
-        });
-        console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-        );
-      } else {
-        // Right Wall
-        const tempArray = checkerArray.filter(
-          (curr) =>
-            curr !== checkerArray[1] &&
-            curr !== checkerArray[2] &&
-            curr !== checkerArray[3]
-        );
-        let bombCounter = 0;
-        tempArray.map((curr) => {
-          if (gridToShow[curr].value === "💣") {
-            bombCounter++;
-            // mineCheck(curr);
-          }
-        });
-        console.log(
-          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-        );
-      }
-    } else if (index > 0 && index < props.gridWidth - 1) {
-      // Top Wall strickly
-      const tempArray = checkerArray.filter(
-        (curr) =>
-          curr !== checkerArray[0] &&
-          curr !== checkerArray[1] &&
-          curr !== checkerArray[7]
-      );
-      let bombCounter = 0;
-      tempArray.map((curr) => {
-        if (gridToShow[curr].value === "💣") {
-          bombCounter++;
-          // mineCheck(curr);
-        }
-      });
-      console.log(
-        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-      );
-    } else if (index > props.size - props.gridWidth && index < props.size - 1) {
-      // Bottom Wall strickly
-      const tempArray = checkerArray.filter(
-        (curr) =>
-          curr !== checkerArray[3] &&
-          curr !== checkerArray[4] &&
-          curr !== checkerArray[5]
-      );
-      let bombCounter = 0;
-      tempArray.map((curr) => {
-        if (gridToShow[curr].value === "💣") {
-          bombCounter++;
-          // mineCheck(curr);
-        }
-      });
-      console.log(
-        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-      );
-    } else {
-      let bombCounter = 0;
-      // Not agains't the wall
-      checkerArray.map((curr) => {
-        if (gridToShow[curr].value === "💣") {
-          bombCounter++;
-        }
-        // if counter === 0 then call function clockwise somwhere
-      });
-      console.log(`index: ${index}, mines: ${bombCounter}`);
-    }
-  };
-
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
@@ -227,7 +38,7 @@ export const Board = (props) => {
   //////////////////////////////////////////////////////////
 
   const mineCheck = (index) => {
-    const testingGrid = gridToShow;
+    const testingGrid = [...gridToShow];
 
     let checkerArray = [
       index - props.gridWidth,
@@ -476,9 +287,6 @@ export const Board = (props) => {
       console.log(`index: ${index}, mines: ${bombCounter}`);
       testingGrid[index].value = bombCounter;
     }
-    // Change numbers of checked.
-    // Currently changing in the statement after changing .checked
-    // Just need to have it updated after this.
     console.log(
       `${testingGrid.map(
         (curr) => curr.value
@@ -487,29 +295,18 @@ export const Board = (props) => {
     setgridToShow(testingGrid);
   };
 
-  // gridToShow is not updated when called a second time.
-  // console.log(
-  //   `Board has been rendered. gridToShow: ${gridToShow.map(
-  //     (curr) => curr.value
-  //   )}`
-  // );
-
   return (
     <BoardStyled>
       {gridToShow.map((curr, index) => {
-        // let value = curr.value;
-        console.log(curr.value);
         return (
           <Cell
             onClick={() => squarePressed(index)}
             gridWidth={props.gridWidth}
             key={index}
             value={curr.value}
-            ref={refForCell}
           />
         );
       })}
-      {console.log(`Testing Testing`)}
     </BoardStyled>
   );
 };
