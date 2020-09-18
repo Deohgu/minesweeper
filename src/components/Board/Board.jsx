@@ -58,201 +58,265 @@ export const Board = (props) => {
       if (index === 0) {
         console.log(`Top Left corner init`);
         // Top Left Corner
-
+        testingGrid[index].advancedChecked = true;
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[0] &&
             curr !== checkerArray[1] &&
             curr !== checkerArray[5] &&
             curr !== checkerArray[6] &&
-            curr !== checkerArray[7] &&
-            testingGrid[curr].checked !== true
+            curr !== checkerArray[7]
         );
         bombCounter = 0;
+        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
           testingGrid[curr].checked = true;
-          console.log(`curr: ${curr}`);
         });
-
+        testingGrid[index].value = bombCounter;
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
-        // TESTING HERE <---------------- Trying to update visually
-        testingGrid[index].value = bombCounter;
-        // does not mutate
-        const tempArrayAdvance = tempArray.filter(
-          (curr) =>
-            testingGrid[curr].advancedChecked !== true &&
-            testingGrid[curr].value !== "💣" &&
-            curr !== original
-        );
-        tempArrayAdvance.map((curr) => {
-          console.log(`checkerArray to advance: ${curr}`);
-          return mineCheck(curr, original);
-        });
-        console.log(tempArrayAdvance);
+        if (bombCounter === 0) {
+          foundBomb = true;
+
+          // does not mutate - Advance Algorithm
+          const tempArrayAdvance = tempArray.filter(
+            (curr) =>
+              testingGrid[curr].advancedChecked !== true &&
+              testingGrid[curr].value !== "💣" &&
+              curr !== original
+          );
+          tempArrayAdvance.map((curr) => {
+            console.log(`checkerArray to advance: ${curr} from: ${index}`);
+            return mineCheck(curr, original);
+          });
+          console.log(tempArrayAdvance);
+        }
       } else if (index === props.size - props.gridWidth) {
         // Bottom Left Corner
+        testingGrid[index].advancedChecked = true;
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[3] &&
             curr !== checkerArray[4] &&
             curr !== checkerArray[5] &&
             curr !== checkerArray[6] &&
-            curr !== checkerArray[7] &&
-            testingGrid[curr].checked !== true
+            curr !== checkerArray[7]
         );
         bombCounter = 0;
+        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
           testingGrid[curr].checked = true;
         });
-
+        testingGrid[index].value = bombCounter;
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
-        testingGrid[index].value = bombCounter;
-        // does not mutate
-        const tempArrayAdvance = tempArray.filter(
-          (curr) =>
-            testingGrid[curr].advancedChecked !== true &&
-            testingGrid[curr].value !== "💣" &&
-            curr !== original
-        );
-        tempArrayAdvance.map((curr) => {
-          console.log(`checkerArray to advance: ${curr}`);
-          return mineCheck(curr, original);
-        });
-        console.log(tempArrayAdvance);
+        if (bombCounter === 0) {
+          foundBomb = true;
+
+          // does not mutate - Advance Algorithm
+          const tempArrayAdvance = tempArray.filter(
+            (curr) =>
+              testingGrid[curr].advancedChecked !== true &&
+              testingGrid[curr].value !== "💣" &&
+              curr !== original
+          );
+          tempArrayAdvance.map((curr) => {
+            console.log(`checkerArray to advance: ${curr} from: ${index}`);
+            return mineCheck(curr, original);
+          });
+          console.log(tempArrayAdvance);
+        }
       } else {
         // Left Wall
+        testingGrid[index].advancedChecked = true;
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[5] &&
             curr !== checkerArray[6] &&
-            curr !== checkerArray[7] &&
-            testingGrid[curr].checked !== true
+            curr !== checkerArray[7]
         );
         bombCounter = 0;
+        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
           testingGrid[curr].checked = true;
         });
-
+        testingGrid[index].value = bombCounter;
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
-        testingGrid[index].value = bombCounter;
-        // does not mutate
-        const tempArrayAdvance = tempArray.filter(
-          (curr) =>
-            testingGrid[curr].advancedChecked !== true &&
-            testingGrid[curr].value !== "💣" &&
-            curr !== original
-        );
-        tempArrayAdvance.map((curr) => {
-          console.log(`checkerArray to advance: ${curr}`);
-          return mineCheck(curr, original);
-        });
-        console.log(tempArrayAdvance);
+        if (bombCounter === 0) {
+          foundBomb = true;
+
+          // does not mutate - Advance Algorithm
+          const tempArrayAdvance = tempArray.filter(
+            (curr) =>
+              testingGrid[curr].advancedChecked !== true &&
+              testingGrid[curr].value !== "💣" &&
+              curr !== original
+          );
+          tempArrayAdvance.map((curr) => {
+            console.log(`checkerArray to advance: ${curr} from: ${index}`);
+            return mineCheck(curr, original);
+          });
+          console.log(tempArrayAdvance);
+        }
       }
     } else if (index % props.gridWidth === props.gridWidth - 1) {
       if (index === props.gridWidth - 1) {
         // Top Right Corner
+        testingGrid[index].advancedChecked = true;
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[0] &&
             curr !== checkerArray[1] &&
             curr !== checkerArray[2] &&
             curr !== checkerArray[3] &&
-            curr !== checkerArray[7] &&
-            testingGrid[curr].checked !== true
+            curr !== checkerArray[7]
         );
+
+        // DEBUGGIN HERE.
+        console.log(`tempArray: ${tempArray}`);
+
         bombCounter = 0;
+        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
           testingGrid[curr].checked = true;
         });
-
+        testingGrid[index].value = bombCounter;
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
-        testingGrid[index].value = bombCounter;
-        // does not mutate
-        const tempArrayAdvance = tempArray.filter(
-          (curr) =>
-            testingGrid[curr].advancedChecked !== true &&
-            testingGrid[curr].value !== "💣" &&
-            curr !== original
-        );
-        tempArrayAdvance.map((curr) => {
-          console.log(`checkerArray to advance: ${curr}`);
-          return mineCheck(curr, original);
-        });
-        console.log(tempArrayAdvance);
+        if (bombCounter === 0) {
+          foundBomb = true;
+
+          // does not mutate - Advance Algorithm
+          const tempArrayAdvance = tempArray.filter(
+            (curr) =>
+              testingGrid[curr].advancedChecked !== true &&
+              testingGrid[curr].value !== "💣" &&
+              curr !== original
+          );
+          tempArrayAdvance.map((curr) => {
+            console.log(`checkerArray to advance: ${curr} from: ${index}`);
+            return mineCheck(curr, original);
+          });
+          console.log(tempArrayAdvance);
+        }
       } else if (index === props.size - 1) {
         // Bottom Right Corner
+        testingGrid[index].advancedChecked = true;
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[1] &&
             curr !== checkerArray[2] &&
             curr !== checkerArray[3] &&
             curr !== checkerArray[4] &&
-            curr !== checkerArray[5] &&
-            testingGrid[curr].checked !== true
+            curr !== checkerArray[5]
         );
         bombCounter = 0;
+        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
           testingGrid[curr].checked = true;
         });
-
+        testingGrid[index].value = bombCounter;
         console.log(
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
-        testingGrid[index].value = bombCounter;
-        // does not mutate
-        const tempArrayAdvance = tempArray.filter(
-          (curr) =>
-            testingGrid[curr].advancedChecked !== true &&
-            testingGrid[curr].value !== "💣" &&
-            curr !== original
-        );
-        tempArrayAdvance.map((curr) => {
-          console.log(`checkerArray to advance: ${curr}`);
-          return mineCheck(curr, original);
-        });
-        console.log(tempArrayAdvance);
+        if (bombCounter === 0) {
+          foundBomb = true;
+
+          // does not mutate - Advance Algorithm
+          const tempArrayAdvance = tempArray.filter(
+            (curr) =>
+              testingGrid[curr].advancedChecked !== true &&
+              testingGrid[curr].value !== "💣" &&
+              curr !== original
+          );
+          tempArrayAdvance.map((curr) => {
+            console.log(`checkerArray to advance: ${curr} from: ${index}`);
+            return mineCheck(curr, original);
+          });
+          console.log(tempArrayAdvance);
+        }
       } else {
         // Right Wall
+        testingGrid[index].advancedChecked = true;
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[1] &&
             curr !== checkerArray[2] &&
-            curr !== checkerArray[3] &&
-            testingGrid[curr].checked !== true
+            curr !== checkerArray[3]
         );
         bombCounter = 0;
+        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
           testingGrid[curr].checked = true;
-          // testingGrid[curr].value = bombCounter;
         });
         testingGrid[index].value = bombCounter;
-        // does not mutate
+        console.log(
+          `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+        );
+        if (bombCounter === 0) {
+          foundBomb = true;
+
+          // does not mutate - Advance Algorithm
+          const tempArrayAdvance = tempArray.filter(
+            (curr) =>
+              testingGrid[curr].advancedChecked !== true &&
+              testingGrid[curr].value !== "💣" &&
+              curr !== original
+          );
+          tempArrayAdvance.map((curr) => {
+            console.log(`checkerArray to advance: ${curr} from: ${index}`);
+            return mineCheck(curr, original);
+          });
+          console.log(tempArrayAdvance);
+        }
+      }
+    } else if (index > 0 && index < props.gridWidth - 1) {
+      // Top Wall strickly
+      testingGrid[index].advancedChecked = true;
+      const tempArray = checkerArray.filter(
+        (curr) =>
+          curr !== checkerArray[0] &&
+          curr !== checkerArray[1] &&
+          curr !== checkerArray[7]
+      );
+      bombCounter = 0;
+      let foundBomb = false;
+      tempArray.map((curr) => {
+        if (testingGrid[curr].value === "💣") {
+          bombCounter++;
+        }
+        testingGrid[curr].checked = true;
+      });
+      testingGrid[index].value = bombCounter;
+      console.log(
+        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
+      );
+      if (bombCounter === 0) {
+        foundBomb = true;
+        // does not mutate - Advance Algorithm
         const tempArrayAdvance = tempArray.filter(
           (curr) =>
             testingGrid[curr].advancedChecked !== true &&
@@ -260,84 +324,58 @@ export const Board = (props) => {
             curr !== original
         );
         tempArrayAdvance.map((curr) => {
-          console.log(`checkerArray to advance: ${curr}`);
+          console.log(`checkerArray to advance: ${curr} from: ${index}`);
           return mineCheck(curr, original);
         });
         console.log(tempArrayAdvance);
       }
-    } else if (index > 0 && index < props.gridWidth - 1) {
-      // Top Wall strickly
-      const tempArray = checkerArray.filter(
-        (curr) =>
-          curr !== checkerArray[0] &&
-          curr !== checkerArray[1] &&
-          curr !== checkerArray[7] &&
-          testingGrid[curr].checked !== true
-      );
-      bombCounter = 0;
-      tempArray.map((curr) => {
-        if (testingGrid[curr].value === "💣") {
-          bombCounter++;
-        }
-        testingGrid[curr].checked = true;
-      });
-      console.log(
-        `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
-      );
-      testingGrid[index].value = bombCounter;
-      // does not mutate
-      const tempArrayAdvance = tempArray.filter(
-        (curr) =>
-          testingGrid[curr].advancedChecked !== true &&
-          testingGrid[curr].value !== "💣" &&
-          curr !== original
-      );
-      tempArrayAdvance.map((curr) => {
-        console.log(`checkerArray to advance: ${curr}`);
-        return mineCheck(curr, original);
-      });
-      console.log(tempArrayAdvance);
     } else if (index > props.size - props.gridWidth && index < props.size - 1) {
       // Bottom Wall strickly
+      testingGrid[index].advancedChecked = true;
       const tempArray = checkerArray.filter(
         (curr) =>
           curr !== checkerArray[3] &&
           curr !== checkerArray[4] &&
-          curr !== checkerArray[5] &&
-          testingGrid[curr].checked !== true
+          curr !== checkerArray[5]
       );
       bombCounter = 0;
+      let foundBomb = false;
       tempArray.map((curr) => {
         if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
         testingGrid[curr].checked = true;
       });
+      testingGrid[index].value = bombCounter;
       console.log(
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
       );
-      testingGrid[index].value = bombCounter;
-      // does not mutate
-      const tempArrayAdvance = tempArray.filter(
-        (curr) =>
-          testingGrid[curr].advancedChecked !== true &&
-          testingGrid[curr].value !== "💣" &&
-          curr !== original
-      );
-      tempArrayAdvance.map((curr) => {
-        console.log(`checkerArray to advance: ${curr}`);
-        return mineCheck(curr, original);
-      });
-      console.log(tempArrayAdvance);
+      if (bombCounter === 0) {
+        foundBomb = true;
+        // does not mutate - Advance Algorithm
+        const tempArrayAdvance = tempArray.filter(
+          (curr) =>
+            testingGrid[curr].advancedChecked !== true &&
+            testingGrid[curr].value !== "💣" &&
+            curr !== original
+        );
+        tempArrayAdvance.map((curr) => {
+          console.log(`checkerArray to advance: ${curr} from: ${index}`);
+          return mineCheck(curr, original);
+        });
+        console.log(tempArrayAdvance);
+      }
     } else {
       testingGrid[index].advancedChecked = true;
       // Just check all of them for now and later optimize.
+      // Remember to also add to the others when initially filtering.
       // const tempArray = checkerArray.filter((curr) => {
       //   console.log(`curr on error: ${curr}`);
       //   return testingGrid[curr].checked !== true;
       // });
-      bombCounter = 0;
       // Not agains't the wall
+      bombCounter = 0;
+      let foundBomb = false;
       checkerArray.map((curr) => {
         console.log(curr);
         if (testingGrid[curr].value === "💣") {
@@ -345,20 +383,23 @@ export const Board = (props) => {
         }
         testingGrid[curr].checked = true;
       });
-      console.log(`index: ${index}, mines: ${bombCounter}`);
       testingGrid[index].value = bombCounter;
-      // does not mutate
-      const tempArrayAdvance = checkerArray.filter(
-        (curr) =>
-          testingGrid[curr].advancedChecked !== true &&
-          testingGrid[curr].value !== "💣" &&
-          curr !== original
-      );
-      tempArrayAdvance.map((curr) => {
-        console.log(`checkerArray to advance: ${curr}`);
-        return mineCheck(curr, original);
-      });
-      console.log(tempArrayAdvance);
+      console.log(`index: ${index}, mines: ${bombCounter}`);
+      if (bombCounter === 0) {
+        foundBomb = true;
+        // does not mutate - Advance Algorithm
+        const tempArrayAdvance = checkerArray.filter(
+          (curr) =>
+            testingGrid[curr].advancedChecked !== true &&
+            testingGrid[curr].value !== "💣" &&
+            curr !== original
+        );
+        tempArrayAdvance.map((curr) => {
+          console.log(`checkerArray to advance: ${curr} from: ${index}`);
+          return mineCheck(curr, original);
+        });
+        console.log(tempArrayAdvance);
+      }
     }
 
     setgridToShow(testingGrid);
