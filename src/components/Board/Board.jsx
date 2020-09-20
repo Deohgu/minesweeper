@@ -12,19 +12,29 @@ export const Board = (props) => {
   useEffect(() => {
     const populatedGrid = [];
     for (let i = 0; i < props.size - props.bombs; i++) {
-      populatedGrid.push({ value: "0", checked: false });
+      populatedGrid.push({
+        value: "0",
+        checked: false,
+        advancedChecked: false,
+      });
     }
     for (let j = 0; j < props.bombs; j++) {
-      populatedGrid.push({ value: "💣", checked: false });
+      populatedGrid.push({
+        value: "💣",
+        checked: false,
+        advancedChecked: false,
+      });
     }
     setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
   }, []);
   ///////////////////////// Click Handler
   const squarePressed = (index) => {
-    console.log(index);
     // After add to require it to be not checked.
     if (gridToShow[index].value === "💣") {
-      console.log("Game Over!");
+      let testingGrid = [...gridToShow];
+      testingGrid[index].advancedChecked = true;
+      setgridToShow(testingGrid);
+      alert("Game Over!");
     } else {
       mineCheck(index, index);
     }
@@ -413,7 +423,14 @@ export const Board = (props) => {
             onClick={() => squarePressed(index)}
             gridWidth={props.gridWidth}
             key={index}
-            value={curr.value === "💣" ? "💣" : curr.value + " " + index}
+            value={
+              curr.advancedChecked === false
+                ? ""
+                : curr.value === "💣"
+                ? "💣"
+                : curr.value
+            }
+            // value={curr.value === "💣" ? "💣" : curr.value + " " + index}
           />
         );
       })}
