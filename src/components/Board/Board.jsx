@@ -26,17 +26,20 @@ export const Board = (props) => {
       });
     }
     setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
-  }, []);
+  }, [props.gameOver]);
   ///////////////////////// Click Handler
   const squarePressed = (index) => {
     // After add to require it to be not checked.
-    if (gridToShow[index].value === "💣") {
-      let testingGrid = [...gridToShow];
-      testingGrid[index].advancedChecked = true;
-      setgridToShow(testingGrid);
-      alert("Game Over!");
-    } else {
-      mineCheck(index, index);
+    if (props.gameOver === false) {
+      // if bomb, gridToShow.map and change all to advancedChecked to be true in order to show them and change this index value to "💥"
+      if (gridToShow[index].value === "💣") {
+        let testingGrid = [...gridToShow];
+        testingGrid[index].advancedChecked = true;
+        setgridToShow(testingGrid);
+        props.gameOverHandler();
+      } else {
+        mineCheck(index, index);
+      }
     }
   };
 
@@ -423,6 +426,7 @@ export const Board = (props) => {
             onClick={() => squarePressed(index)}
             gridWidth={props.gridWidth}
             key={index}
+            pressed={curr.advancedChecked}
             value={
               curr.advancedChecked === false
                 ? ""
