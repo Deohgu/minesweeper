@@ -8,3 +8,17 @@ export const GameStyled = styled.div`
   width: 80vw;
   height: 80vw;
 `;
+
+export const ScoreBoard = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+`;
+
+export const Reset = styled.button`
+  margin: 0 10px;
+`;
+
+export const Paragraph = styled.p`
+  margin: 0 10px;
+`;
