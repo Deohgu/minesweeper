@@ -10,37 +10,37 @@ export const Game = () => {
   const [bombs, setBombs] = useState(10);
   const [gameOver, setGameOver] = useState(false);
   const [gridToShow, setgridToShow] = useState([]);
-  
+
   useEffect(() => {
-    const populatedGrid = [];
-    for (let i = 0; i < props.size - props.bombs; i++) {
-      populatedGrid.push({
-        value: "0",
-        checked: false,
-        advancedChecked: false,
-      });
+    if (gameOver === false) {
+      const populatedGrid = [];
+      for (let i = 0; i < size - bombs; i++) {
+        populatedGrid.push({
+          value: "0",
+          checked: false,
+          advancedChecked: false,
+          flagged: false,
+        });
+      }
+      for (let j = 0; j < bombs; j++) {
+        populatedGrid.push({
+          value: "💣",
+          checked: false,
+          advancedChecked: false,
+          flagged: false,
+        });
+      }
+      setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
     }
-    for (let j = 0; j < props.bombs; j++) {
-      populatedGrid.push({
-        value: "💣",
-        checked: false,
-        advancedChecked: false,
-      });
-    }
-    setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
-  }, [props.gameOver]);
-  
-  
+  }, [gameOver]);
+
   const gridToShowHandler = (newArray) => {
     setgridToShow(newArray);
-  }
+  };
 
-  const gameOverHandler = () => {
-    if (gameOver === false) {
-      setGameOver(true);
-    } else {
-      setGameOver(false);
-    }
+  const gameOverHandler = (grid) => {
+    setGameOver(true);
+    setgridToShow(grid);
   };
 
   return (
@@ -55,6 +55,7 @@ export const Game = () => {
         size={size}
         bombs={bombs}
         gameOver={gameOver}
+        gridToShow={gridToShow}
         gameOverHandler={gameOverHandler}
         gridToShowHandler={gridToShowHandler}
       />

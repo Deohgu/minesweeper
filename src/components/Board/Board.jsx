@@ -5,20 +5,21 @@ import { Cell } from "./../index";
 import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
-
   ///////////////////////// Creator of grid & Bomb Populator
 
-  
   ///////////////////////// Click Handler
   const squarePressed = (index) => {
     // After add to require it to be not checked.
     if (props.gameOver === false) {
-      // if bomb, gridToShow.map and change all to advancedChecked to be true in order to show them and change this index value to "💥"
-      if (gridToShow[index].value === "💣") {
-        let testingGrid = [...gridToShow];
-        testingGrid[index].advancedChecked = true;
-        setgridToShow(testingGrid);
-        props.gameOverHandler();
+      if (props.gridToShow[index].value === "💣") {
+        let testingGrid = [...props.gridToShow];
+        testingGrid.map((curr) => {
+          if (curr.value === "💣") {
+            curr.advancedChecked = true;
+          }
+        });
+        testingGrid[index].value = "💥";
+        props.gameOverHandler(testingGrid);
       } else {
         mineCheck(index, index);
       }
@@ -33,7 +34,7 @@ export const Board = (props) => {
   //////////////////////////////////////////////////////////
 
   const mineCheck = (index, original) => {
-    const testingGrid = [...gridToShow];
+    const testingGrid = [...props.gridToShow];
 
     let checkerArray = [
       index - props.gridWidth,
@@ -397,12 +398,12 @@ export const Board = (props) => {
       }
     }
 
-    setgridToShow(testingGrid);
+    props.gridToShowHandler(testingGrid);
   };
 
   return (
     <BoardStyled>
-      {gridToShow.map((curr, index) => {
+      {props.gridToShow.map((curr, index) => {
         return (
           <Cell
             onClick={() => squarePressed(index)}
