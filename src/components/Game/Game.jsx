@@ -29,6 +29,11 @@ export const Game = () => {
     }
     setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
   }, [props.gameOver]);
+  
+  
+  const gridToShowHandler = (newArray) => {
+    setgridToShow(newArray);
+  }
 
   const gameOverHandler = () => {
     if (gameOver === false) {
@@ -51,6 +56,7 @@ export const Game = () => {
         bombs={bombs}
         gameOver={gameOver}
         gameOverHandler={gameOverHandler}
+        gridToShowHandler={gridToShowHandler}
       />
     </GameStyled>
   );
