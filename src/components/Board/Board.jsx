@@ -1,32 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Cell } from "./../index";
 
 import { BoardStyled } from "./Board.styled";
 
 export const Board = (props) => {
-  const [gridToShow, setgridToShow] = useState([]);
 
   ///////////////////////// Creator of grid & Bomb Populator
 
-  useEffect(() => {
-    const populatedGrid = [];
-    for (let i = 0; i < props.size - props.bombs; i++) {
-      populatedGrid.push({
-        value: "0",
-        checked: false,
-        advancedChecked: false,
-      });
-    }
-    for (let j = 0; j < props.bombs; j++) {
-      populatedGrid.push({
-        value: "💣",
-        checked: false,
-        advancedChecked: false,
-      });
-    }
-    setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
-  }, [props.gameOver]);
+  
   ///////////////////////// Click Handler
   const squarePressed = (index) => {
     // After add to require it to be not checked.

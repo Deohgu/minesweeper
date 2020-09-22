@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Board } from "./../index";
 
@@ -9,6 +9,26 @@ export const Game = () => {
   const [size, setSize] = useState(64);
   const [bombs, setBombs] = useState(10);
   const [gameOver, setGameOver] = useState(false);
+  const [gridToShow, setgridToShow] = useState([]);
+  
+  useEffect(() => {
+    const populatedGrid = [];
+    for (let i = 0; i < props.size - props.bombs; i++) {
+      populatedGrid.push({
+        value: "0",
+        checked: false,
+        advancedChecked: false,
+      });
+    }
+    for (let j = 0; j < props.bombs; j++) {
+      populatedGrid.push({
+        value: "💣",
+        checked: false,
+        advancedChecked: false,
+      });
+    }
+    setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
+  }, [props.gameOver]);
 
   const gameOverHandler = () => {
     if (gameOver === false) {
