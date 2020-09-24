@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Cell } from "./../index";
 
@@ -64,7 +64,6 @@ export const Board = (props) => {
             curr !== checkerArray[7]
         );
         bombCounter = 0;
-        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
@@ -76,8 +75,6 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
         if (bombCounter === 0) {
-          foundBomb = true;
-
           // does not mutate - Advance Algorithm
           const tempArrayAdvance = tempArray.filter(
             (curr) =>
@@ -103,7 +100,6 @@ export const Board = (props) => {
             curr !== checkerArray[7]
         );
         bombCounter = 0;
-        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
@@ -115,8 +111,6 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
         if (bombCounter === 0) {
-          foundBomb = true;
-
           // does not mutate - Advance Algorithm
           const tempArrayAdvance = tempArray.filter(
             (curr) =>
@@ -140,7 +134,6 @@ export const Board = (props) => {
             curr !== checkerArray[7]
         );
         bombCounter = 0;
-        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
@@ -152,8 +145,6 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
         if (bombCounter === 0) {
-          foundBomb = true;
-
           // does not mutate - Advance Algorithm
           const tempArrayAdvance = tempArray.filter(
             (curr) =>
@@ -185,7 +176,6 @@ export const Board = (props) => {
         console.log(`tempArray: ${tempArray}`);
 
         bombCounter = 0;
-        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
@@ -197,8 +187,6 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
         if (bombCounter === 0) {
-          foundBomb = true;
-
           // does not mutate - Advance Algorithm
           const tempArrayAdvance = tempArray.filter(
             (curr) =>
@@ -224,7 +212,6 @@ export const Board = (props) => {
             curr !== checkerArray[5]
         );
         bombCounter = 0;
-        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
@@ -236,8 +223,6 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
         if (bombCounter === 0) {
-          foundBomb = true;
-
           // does not mutate - Advance Algorithm
           const tempArrayAdvance = tempArray.filter(
             (curr) =>
@@ -261,7 +246,6 @@ export const Board = (props) => {
             curr !== checkerArray[3]
         );
         bombCounter = 0;
-        let foundBomb = false;
         tempArray.map((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
@@ -273,8 +257,6 @@ export const Board = (props) => {
           `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
         );
         if (bombCounter === 0) {
-          foundBomb = true;
-
           // does not mutate - Advance Algorithm
           const tempArrayAdvance = tempArray.filter(
             (curr) =>
@@ -299,7 +281,7 @@ export const Board = (props) => {
           curr !== checkerArray[7]
       );
       bombCounter = 0;
-      let foundBomb = false;
+
       tempArray.map((curr) => {
         if (testingGrid[curr].value === "💣") {
           bombCounter++;
@@ -311,7 +293,6 @@ export const Board = (props) => {
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
       );
       if (bombCounter === 0) {
-        foundBomb = true;
         // does not mutate - Advance Algorithm
         const tempArrayAdvance = tempArray.filter(
           (curr) =>
@@ -335,7 +316,7 @@ export const Board = (props) => {
           curr !== checkerArray[5]
       );
       bombCounter = 0;
-      let foundBomb = false;
+
       tempArray.map((curr) => {
         if (testingGrid[curr].value === "💣") {
           bombCounter++;
@@ -347,7 +328,6 @@ export const Board = (props) => {
         `index: ${index}, mines: ${bombCounter}, tempArray: ${tempArray}`
       );
       if (bombCounter === 0) {
-        foundBomb = true;
         // does not mutate - Advance Algorithm
         const tempArrayAdvance = tempArray.filter(
           (curr) =>
@@ -371,7 +351,7 @@ export const Board = (props) => {
       // });
       // Not agains't the wall
       bombCounter = 0;
-      let foundBomb = false;
+
       checkerArray.map((curr) => {
         console.log(curr);
         if (testingGrid[curr].value === "💣") {
@@ -382,7 +362,6 @@ export const Board = (props) => {
       testingGrid[index].value = bombCounter;
       console.log(`index: ${index}, mines: ${bombCounter}`);
       if (bombCounter === 0) {
-        foundBomb = true;
         // does not mutate - Advance Algorithm
         const tempArrayAdvance = checkerArray.filter(
           (curr) =>
@@ -406,7 +385,7 @@ export const Board = (props) => {
       {props.gridToShow.map((curr, index) => {
         return (
           <Cell
-            onClick={() => squarePressed(index)}
+            onClick={(e) => squarePressed(e, index)}
             gridWidth={props.gridWidth}
             key={index}
             pressed={curr.advancedChecked}
