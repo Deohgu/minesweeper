@@ -8,11 +8,16 @@ export const Game = () => {
   const [gridWidth, setGridWidth] = useState(8);
   const [size, setSize] = useState(64);
   const [bombs, setBombs] = useState(10);
-  const [gameOver, setGameOver] = useState(false);
   const [gridToShow, setgridToShow] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+  const [runGridGen, setRunGridGen] = useState(true);
 
   useEffect(() => {
-    if (gameOver === false) {
+    // Testing
+    document.addEventListener("contextmenu", clickHandler);
+
+    if (runGridGen === true) {
+      setRunGridGen(false);
       const populatedGrid = [];
       for (let i = 0; i < size - bombs; i++) {
         populatedGrid.push({
@@ -32,7 +37,12 @@ export const Game = () => {
       }
       setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
     }
-  }, [gameOver]);
+  }, [runGridGen]);
+
+  // Testing
+  const clickHandler = (e) => {
+    e.preventDefault();
+  };
 
   const gridToShowHandler = (newArray) => {
     setgridToShow(newArray);
@@ -45,8 +55,16 @@ export const Game = () => {
 
   return (
     <GameStyled>
-      <ScoreBoard>
-        <Reset onClick={() => setGameOver(false)}>↻</Reset>
+      // Testing
+      <ScoreBoard onContextMenu={() => console.log(`right clicked`)}>
+        <Reset
+          onClick={() => {
+            setRunGridGen(true);
+            setGameOver(false);
+          }}
+        >
+          ↻
+        </Reset>
         <Paragraph>Timer:</Paragraph>
         <Paragraph>{gameOver === false ? "" : "Game Over!"}</Paragraph>
       </ScoreBoard>
