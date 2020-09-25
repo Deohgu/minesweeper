@@ -62,7 +62,9 @@ export const Board = (props) => {
       if (index === 0) {
         console.log(`Top Left corner init`);
         // Top Left Corner
-        testingGrid[index].advancedChecked = true;
+        if (testingGrid[index].flagged !== true) {
+          testingGrid[index].advancedChecked = true;
+        }
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[0] &&
@@ -98,7 +100,9 @@ export const Board = (props) => {
         }
       } else if (index === props.size - props.gridWidth) {
         // Bottom Left Corner
-        testingGrid[index].advancedChecked = true;
+        if (testingGrid[index].flagged !== true) {
+          testingGrid[index].advancedChecked = true;
+        }
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[3] &&
@@ -134,7 +138,9 @@ export const Board = (props) => {
         }
       } else {
         // Left Wall
-        testingGrid[index].advancedChecked = true;
+        if (testingGrid[index].flagged !== true) {
+          testingGrid[index].advancedChecked = true;
+        }
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[5] &&
@@ -170,7 +176,9 @@ export const Board = (props) => {
     } else if (index % props.gridWidth === props.gridWidth - 1) {
       if (index === props.gridWidth - 1) {
         // Top Right Corner
-        testingGrid[index].advancedChecked = true;
+        if (testingGrid[index].flagged !== true) {
+          testingGrid[index].advancedChecked = true;
+        }
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[0] &&
@@ -210,7 +218,9 @@ export const Board = (props) => {
         }
       } else if (index === props.size - 1) {
         // Bottom Right Corner
-        testingGrid[index].advancedChecked = true;
+        if (testingGrid[index].flagged !== true) {
+          testingGrid[index].advancedChecked = true;
+        }
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[1] &&
@@ -246,7 +256,9 @@ export const Board = (props) => {
         }
       } else {
         // Right Wall
-        testingGrid[index].advancedChecked = true;
+        if (testingGrid[index].flagged !== true) {
+          testingGrid[index].advancedChecked = true;
+        }
         const tempArray = checkerArray.filter(
           (curr) =>
             curr !== checkerArray[1] &&
@@ -281,7 +293,9 @@ export const Board = (props) => {
       }
     } else if (index > 0 && index < props.gridWidth - 1) {
       // Top Wall strickly
-      testingGrid[index].advancedChecked = true;
+      if (testingGrid[index].flagged !== true) {
+        testingGrid[index].advancedChecked = true;
+      }
       const tempArray = checkerArray.filter(
         (curr) =>
           curr !== checkerArray[0] &&
@@ -316,7 +330,9 @@ export const Board = (props) => {
       }
     } else if (index > props.size - props.gridWidth && index < props.size - 1) {
       // Bottom Wall strickly
-      testingGrid[index].advancedChecked = true;
+      if (testingGrid[index].flagged !== true) {
+        testingGrid[index].advancedChecked = true;
+      }
       const tempArray = checkerArray.filter(
         (curr) =>
           curr !== checkerArray[3] &&
@@ -350,7 +366,9 @@ export const Board = (props) => {
         console.log(tempArrayAdvance);
       }
     } else {
-      testingGrid[index].advancedChecked = true;
+      if (testingGrid[index].flagged !== true) {
+        testingGrid[index].advancedChecked = true;
+      }
       // Just check all of them for now and later optimize.
       // Remember to also add to the others when initially filtering.
       // const tempArray = checkerArray.filter((curr) => {
