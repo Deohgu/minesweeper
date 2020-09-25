@@ -7,6 +7,12 @@ export const GameStyled = styled.div`
   margin: 20% auto;
   width: 80vw;
   height: 80vw;
+  max-width: 700px;
+  max-height: 700px;
+
+  @media (min-width: 800px) {
+    margin: 5% auto;
+  }
 `;
 
 export const ScoreBoard = styled.div`
