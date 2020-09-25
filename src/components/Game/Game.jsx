@@ -13,9 +13,6 @@ export const Game = () => {
   const [runGridGen, setRunGridGen] = useState(true);
 
   useEffect(() => {
-    // Testing
-    document.addEventListener("contextmenu", clickHandler);
-
     if (runGridGen === true) {
       setRunGridGen(false);
       const populatedGrid = [];
@@ -39,9 +36,18 @@ export const Game = () => {
     }
   }, [runGridGen]);
 
-  // Testing
-  const clickHandler = (e) => {
+  const flagHandler = (e, index) => {
     e.preventDefault();
+    let tempGrid = [...gridToShow];
+    if (tempGrid[index].advancedChecked === false) {
+      if (tempGrid[index].flagged === false) {
+        tempGrid[index].flagged = true;
+      } else {
+        tempGrid[index].flagged = false;
+      }
+    }
+    setgridToShow(tempGrid);
+    console.log(gridToShow[index]);
   };
 
   const gridToShowHandler = (newArray) => {
@@ -55,8 +61,8 @@ export const Game = () => {
 
   return (
     <GameStyled>
-      // Testing
-      <ScoreBoard onContextMenu={() => console.log(`right clicked`)}>
+      {/* Testing */}
+      <ScoreBoard>
         <Reset
           onClick={() => {
             setRunGridGen(true);
@@ -76,6 +82,7 @@ export const Game = () => {
         gridToShow={gridToShow}
         gameOverHandler={gameOverHandler}
         gridToShowHandler={gridToShowHandler}
+        flagHandler={flagHandler}
       />
     </GameStyled>
   );
