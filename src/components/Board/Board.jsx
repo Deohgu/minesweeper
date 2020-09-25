@@ -8,14 +8,22 @@ export const Board = (props) => {
   ///////////////////////// Creator of grid & Bomb Populator
 
   ///////////////////////// Click Handler
-  const squarePressed = (index) => {
+  const squarePressed = (e, index) => {
+    if (e.button === 0) {
+      console.log(`Left button pressed in Cell`);
+    } else if (e.button === 1) {
+      console.log(`Right button pressed in Cell`);
+    }
+
     // After add to require it to be not checked.
-    if (props.gameOver === false) {
+    if (props.gameOver === false && props.gridToShow[index].flagged !== true) {
       if (props.gridToShow[index].value === "💣") {
         let testingGrid = [...props.gridToShow];
         testingGrid.map((curr) => {
           if (curr.value === "💣") {
             curr.advancedChecked = true;
+          } else if (curr.flagged === true) {
+            curr.flagged = "wrong";
           }
         });
         testingGrid[index].value = "💥";
@@ -386,17 +394,24 @@ export const Board = (props) => {
         return (
           <Cell
             onClick={(e) => squarePressed(e, index)}
+            onContextMenu={(e) => props.flagHandler(e, index)}
             gridWidth={props.gridWidth}
             key={index}
             pressed={curr.advancedChecked}
             value={
               curr.advancedChecked === false
-                ? ""
-                : curr.value === "💣"
-                ? "💣"
-                : curr.value
+                ? curr.flagged === true
+                  ? "🚩"
+                  : curr.flagged === "wrong"
+                  ? "❌"
+                  : ""
+                : curr.value !== "💣"
+                ? curr.value
+                : curr.flagged === "wrong"
+                ? "wrong"
+                : "💣"
             }
-            // value={curr.value === "💣" ? "💣" : curr.value + " " + index}
+            // {/*value={curr.value === "💣" ? "💣" : curr.value + " " + index}*/}
           />
         );
       })}
