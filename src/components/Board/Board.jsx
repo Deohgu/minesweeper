@@ -41,6 +41,8 @@ export const Board = (props) => {
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
 
+  // Doesn't work like this. It has to have a fixed initial zero and only add to it.
+
   const mineCheck = (index, original) => {
     const testingGrid = [...props.gridToShow];
 
@@ -424,9 +426,13 @@ export const Board = (props) => {
                   ? "❌"
                   : ""
                 : curr.value !== "💣"
-                ? curr.value
-                : curr.flagged === "wrong"
-                ? "wrong"
+                ? curr.value === 0
+                  ? ""
+                  : curr.flagged === true
+                  ? "🚩"
+                  : curr.flagged === "wrong"
+                  ? "wrong"
+                  : curr.value
                 : "💣"
             }
             // {/*value={curr.value === "💣" ? "💣" : curr.value + " " + index}*/}
