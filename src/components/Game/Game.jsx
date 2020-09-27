@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Board } from "./../index";
+import { Board, Timer } from "./../index";
 
 import { GameStyled, Reset, ScoreBoard, Paragraph } from "./Game.styled";
 
@@ -18,6 +18,7 @@ export const Game = () => {
     if (runGridGen === true) {
       setRunGridGen(false);
       setCheckedNumber(0);
+      setFlaggedAmount(bombs);
       const populatedGrid = [];
       for (let i = 0; i < size - bombs; i++) {
         populatedGrid.push({
@@ -92,7 +93,9 @@ export const Game = () => {
         >
           ↻
         </Reset>
-        <Paragraph>Timer:</Paragraph>
+        <Paragraph>
+          Timer: <Timer gameOver={gameOver} />
+        </Paragraph>
         <Paragraph>{gameOver === false ? "" : "Game Over!"}</Paragraph>
         <Paragraph>
           {checkedNumber === size - bombs ? "You won!" : ""}
