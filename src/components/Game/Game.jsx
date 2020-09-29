@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import { Board, Timer } from "./../index";
 
-import { GameStyled, Reset, ScoreBoard, Paragraph } from "./Game.styled";
+import {
+  GameStyled,
+  Reset,
+  ScoreBoard,
+  Paragraph,
+  TimerParagraph,
+} from "./Game.styled";
 
 export const Game = () => {
   const [gridWidth, setGridWidth] = useState(8);
@@ -13,9 +19,11 @@ export const Game = () => {
   const [runGridGen, setRunGridGen] = useState(true);
   const [checkedNumber, setCheckedNumber] = useState(0);
   const [flaggedAmount, setFlaggedAmount] = useState(bombs);
+  const [firstPress, setFirstPress] = useState(false);
 
   useEffect(() => {
     if (runGridGen === true) {
+      setFirstPress(false);
       setRunGridGen(false);
       setCheckedNumber(0);
       setFlaggedAmount(bombs);
@@ -65,6 +73,9 @@ export const Game = () => {
   };
 
   const gridToShowHandler = (newArray) => {
+    if (firstPress === false) {
+      setFirstPress(true);
+    }
     setgridToShow(newArray);
 
     // Not the most efficient way to run another loop everytime, but it works.
@@ -81,7 +92,6 @@ export const Game = () => {
     setGameOver(true);
     setgridToShow(grid);
   };
-  console.log(checkedNumber);
 
   return (
     <GameStyled>
@@ -91,13 +101,19 @@ export const Game = () => {
           onClick={() => {
             setRunGridGen(true);
             setGameOver(false);
+            setFirstPress(false);
           }}
         >
           ↻
         </Reset>
-        <Paragraph>
-          Timer: <Timer gameOver={gameOver} />
-        </Paragraph>
+        <TimerParagraph>
+          Timer:{" "}
+          <Timer
+            gameOver={gameOver}
+            firstPress={firstPress}
+            runGridGen={runGridGen}
+          />
+        </TimerParagraph>
         <Paragraph>{gameOver === false ? "" : "Game Over!"}</Paragraph>
         <Paragraph>
           {checkedNumber === size - bombs ? "You won!" : ""}

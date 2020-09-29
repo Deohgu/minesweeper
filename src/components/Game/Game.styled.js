@@ -26,5 +26,12 @@ export const Reset = styled.button`
 `;
 
 export const Paragraph = styled.p`
+  /* width: 100px; */
+  /* height: fit-content; */
+  margin: 0 10px;
+`;
+
+export const TimerParagraph = styled.p`
+  width: 100px;
   margin: 0 10px;
 `;
