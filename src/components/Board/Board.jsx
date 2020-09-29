@@ -16,7 +16,11 @@ export const Board = (props) => {
     }
 
     // After add to require it to be not checked.
-    if (props.gameOver === false && props.gridToShow[index].flagged !== true) {
+    if (
+      props.gameOver === false &&
+      props.won !== true &&
+      props.gridToShow[index].flagged !== true
+    ) {
       if (props.gridToShow[index].value === "💣") {
         let testingGrid = [...props.gridToShow];
         testingGrid.map((curr) => {
