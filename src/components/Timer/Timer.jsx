@@ -2,26 +2,43 @@ import React, { useState, useEffect, useRef } from "react";
 
 export const Timer = (props) => {
   const [timerSeconds, setTimerSeconds] = useState(0);
-
-  const millisecTime = () => new Date().getMilliseconds();
+  const [hasRun, setHasRun] = useState(false);
 
   const counterRef = useRef(null);
 
   useEffect(() => {
-    if (props.gameOver === true) {
+    // console.log(`PAUSED RUN`);
+
+    if (
+      props.checkedNumber === 0 ||
+      timerSeconds >= 30 ||
+      props.runGridGen === true ||
+      props.gameOver === true
+    ) {
+      // console.log(`PAUSED IF STATEMENT RUN`);
+      setHasRun(false);
       clearInterval(counterRef.current);
     }
   }, [timerSeconds]);
 
+  console.log(`Checked Number: ${props.checkedNumber}`);
+
   useEffect(() => {
-    startTimer();
-  }, []);
+    if (props.gameOver || props.won || props.runGridGen) {
+      setTimerSeconds(0);
+    }
 
-  // console.log(`new Date(): ${today}`);
-
-  console.log(`timerSeconds: ${timerSeconds}`);
-
-  // console.log(`Game Over? ${props.gameOver}`);
+    if (
+      props.gameOver !== true &&
+      props.won !== true &&
+      props.checkedNumber !== 0 &&
+      hasRun === false
+    ) {
+      console.log(`START TIMER RUN`);
+      startTimer();
+      setHasRun(true);
+    }
+  }, [props.checkedNumber, props.runGridGen]);
 
   const startTimer = () => {
     counterRef.current = setInterval(() => {

@@ -19,11 +19,16 @@ export const Game = () => {
   const [runGridGen, setRunGridGen] = useState(true);
   const [checkedNumber, setCheckedNumber] = useState(0);
   const [flaggedAmount, setFlaggedAmount] = useState(bombs);
-  const [firstPress, setFirstPress] = useState(false);
+  const [won, setWon] = useState(false);
+
+  useEffect(() => {
+    if (checkedNumber === size - bombs) {
+      setWon(true);
+    }
+  }, [checkedNumber]);
 
   useEffect(() => {
     if (runGridGen === true) {
-      setFirstPress(false);
       setRunGridGen(false);
       setCheckedNumber(0);
       setFlaggedAmount(bombs);
@@ -50,7 +55,7 @@ export const Game = () => {
 
   const flagHandler = (e, index) => {
     e.preventDefault();
-    if (gameOver === false) {
+    if (gameOver === false && won !== true) {
       let tempGrid = [...gridToShow];
       if (tempGrid[index].advancedChecked === false) {
         if (tempGrid[index].flagged === false) {
@@ -73,9 +78,6 @@ export const Game = () => {
   };
 
   const gridToShowHandler = (newArray) => {
-    if (firstPress === false) {
-      setFirstPress(true);
-    }
     setgridToShow(newArray);
 
     // Not the most efficient way to run another loop everytime, but it works.
@@ -101,7 +103,7 @@ export const Game = () => {
           onClick={() => {
             setRunGridGen(true);
             setGameOver(false);
-            setFirstPress(false);
+            setWon(false);
           }}
         >
           ↻
@@ -109,15 +111,14 @@ export const Game = () => {
         <TimerParagraph>
           Timer:{" "}
           <Timer
+            won={won}
             gameOver={gameOver}
-            firstPress={firstPress}
+            checkedNumber={checkedNumber}
             runGridGen={runGridGen}
           />
         </TimerParagraph>
         <Paragraph>{gameOver === false ? "" : "Game Over!"}</Paragraph>
-        <Paragraph>
-          {checkedNumber === size - bombs ? "You won!" : ""}
-        </Paragraph>
+        <Paragraph>{won === true ? "You won!" : ""}</Paragraph>
         <Paragraph>Number of bombs left: {flaggedAmount}</Paragraph>
       </ScoreBoard>
       <Board
@@ -130,6 +131,7 @@ export const Game = () => {
         gameOverHandler={gameOverHandler}
         gridToShowHandler={gridToShowHandler}
         flagHandler={flagHandler}
+        won={won}
       />
     </GameStyled>
   );
