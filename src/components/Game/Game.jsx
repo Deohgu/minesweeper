@@ -42,24 +42,26 @@ export const Game = () => {
 
   const flagHandler = (e, index) => {
     e.preventDefault();
-    let tempGrid = [...gridToShow];
-    if (tempGrid[index].advancedChecked === false) {
-      if (tempGrid[index].flagged === false) {
-        tempGrid[index].flagged = true;
+    if (gameOver === false) {
+      let tempGrid = [...gridToShow];
+      if (tempGrid[index].advancedChecked === false) {
+        if (tempGrid[index].flagged === false) {
+          tempGrid[index].flagged = true;
 
-        let TempFlaggedAmount = flaggedAmount;
-        TempFlaggedAmount--;
-        setFlaggedAmount(TempFlaggedAmount);
-      } else {
-        tempGrid[index].flagged = false;
+          let TempFlaggedAmount = flaggedAmount;
+          TempFlaggedAmount--;
+          setFlaggedAmount(TempFlaggedAmount);
+        } else {
+          tempGrid[index].flagged = false;
 
-        let TempFlaggedAmount = flaggedAmount;
-        TempFlaggedAmount++;
-        setFlaggedAmount(TempFlaggedAmount);
+          let TempFlaggedAmount = flaggedAmount;
+          TempFlaggedAmount++;
+          setFlaggedAmount(TempFlaggedAmount);
+        }
       }
+      setgridToShow(tempGrid);
+      console.log(gridToShow[index]);
     }
-    setgridToShow(tempGrid);
-    console.log(gridToShow[index]);
   };
 
   const gridToShowHandler = (newArray) => {
