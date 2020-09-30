@@ -104,6 +104,7 @@ export const Game = () => {
             setRunGridGen(true);
             setGameOver(false);
             setWon(false);
+            setCheckedNumber(0);
           }}
         >
           ↻

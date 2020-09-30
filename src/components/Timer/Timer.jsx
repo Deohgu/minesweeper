@@ -13,13 +13,14 @@ export const Timer = (props) => {
       props.checkedNumber === 0 ||
       timerSeconds >= 30 ||
       props.runGridGen === true ||
-      props.gameOver === true
+      props.gameOver === true ||
+      props.won === true
     ) {
-      // console.log(`PAUSED IF STATEMENT RUN`);
-      setHasRun(false);
+      console.log(`PAUSED IF STATEMENT RUN`);
       clearInterval(counterRef.current);
+      setHasRun(false);
     }
-  }, [timerSeconds]);
+  }, [timerSeconds, props.runGridGen, props.won, props.gameOver]);
 
   console.log(`Checked Number: ${props.checkedNumber}`);
 
@@ -32,7 +33,8 @@ export const Timer = (props) => {
       props.gameOver !== true &&
       props.won !== true &&
       props.checkedNumber !== 0 &&
-      hasRun === false
+      hasRun === false &&
+      props.runGridGen !== true
     ) {
       console.log(`START TIMER RUN`);
       startTimer();
@@ -44,7 +46,7 @@ export const Timer = (props) => {
     counterRef.current = setInterval(() => {
       // Need to use the Date object, this way is veryy inacurate when using miliseconds.
       setTimerSeconds((timerSeconds) =>
-        Number((timerSeconds + 0.01).toPrecision(4))
+        Number((timerSeconds + 0.01).toFixed(2))
       );
     }, 10);
   };
