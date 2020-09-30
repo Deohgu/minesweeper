@@ -11,7 +11,6 @@ export const Timer = (props) => {
 
     if (
       props.checkedNumber === 0 ||
-      timerSeconds >= 30 ||
       props.runGridGen === true ||
       props.gameOver === true ||
       props.won === true
