@@ -8,6 +8,7 @@ import {
   ScoreBoard,
   Paragraph,
   TimerParagraph,
+  GameStatus,
 } from "./Game.styled";
 
 export const Game = () => {
@@ -115,7 +116,7 @@ export const Game = () => {
           ↻
         </Reset>
         <TimerParagraph>
-          Timer:{" "}
+          🕑{" "}
           <Timer
             won={won}
             gameOver={gameOver}
@@ -123,10 +124,11 @@ export const Game = () => {
             runGridGen={runGridGen}
           />
         </TimerParagraph>
+        <Paragraph noMargin={true}>🚩 {flaggedAmount}</Paragraph>
         <Paragraph>{gameOver === false ? "" : "Game Over!"}</Paragraph>
         <Paragraph>{won === true ? "You won!" : ""}</Paragraph>
-        <Paragraph>Number of bombs left: {flaggedAmount}</Paragraph>
       </ScoreBoard>
+      <GameStatus>Testing - You Won! You Lost!</GameStatus>
       <Board
         gridWidth={gridWidth}
         size={size}

@@ -11,11 +11,12 @@ export const CellStyled = styled.div`
 
   width: calc((100% / ${(props) => props.gridWidth}) - ${margin * 2}px);
   height: calc((100% / ${(props) => props.gridWidth}) - ${margin * 2}px);
-  background-color: lightgrey;
+  background-color: ${(props) =>
+    props.pressed ? "hsl(0deg 0% 77%)" : "hsl(0deg 0% 83%)"};
   margin: ${margin}px;
 
   box-shadow: ${(props) =>
     props.pressed
-      ? "inset 1px 1px 1px 1px grey"
-      : "inset -1px -1px 1px 1px grey"};
+      ? "inset 2px 2px 1px 1px grey"
+      : "inset -2px -2px 1px 1px grey"};
 `;
