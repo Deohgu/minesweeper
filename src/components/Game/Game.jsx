@@ -24,6 +24,11 @@ export const Game = () => {
   useEffect(() => {
     if (checkedNumber === size - bombs) {
       setWon(true);
+      const tempGrid = [...gridToShow];
+      tempGrid.map((curr) => {
+        curr.advancedChecked = true;
+      });
+      setgridToShow(tempGrid);
     }
   }, [checkedNumber]);
 
