@@ -5,8 +5,8 @@ export const GameStyled = styled.div`
   align-items: center;
   justify-content: center; */
   margin: 20% auto;
-  /* width: 100vw;
-  height: 100vw; */
+  width: 100vw;
+  height: 100vw;
   max-width: 700px;
   max-height: 700px;
 
@@ -19,7 +19,7 @@ export const ScoreBoard = styled.div`
   font-size: 25px;
 
   display: flex;
-  width: 80vw;
+  width: 80%;
   margin: 0 auto;
   border: 15px ridge lightgrey;
   border-bottom: none;
@@ -46,6 +46,7 @@ export const Paragraph = styled.p`
 `;
 
 export const TimerParagraph = styled.p`
+  width: 118px;
   margin: 0;
   margin-right: 20px;
 `;

@@ -14,7 +14,7 @@ import {
 export const Game = () => {
   const [gridWidth, setGridWidth] = useState(8);
   const [size, setSize] = useState(64);
-  const [bombs, setBombs] = useState(5);
+  const [bombs, setBombs] = useState(8);
   const [gridToShow, setgridToShow] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [runGridGen, setRunGridGen] = useState(true);
