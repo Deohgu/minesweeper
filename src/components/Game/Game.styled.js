@@ -59,3 +59,7 @@ export const GameStatus = styled.div`
   width: fit-content;
   background-color: yellow;
 `;
+
+export const Icons = styled.div`
+  margin-right: 5px;
+`;
