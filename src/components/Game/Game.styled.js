@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const GameStyled = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   margin: 20% auto;
-  width: 100vw;
-  height: 100vw;
+  border: 15px ridge lightgrey;
+  width: 80vw;
+  height: calc(80vw + 12vw);
   max-width: 700px;
   max-height: 700px;
 
@@ -16,38 +14,27 @@ export const GameStyled = styled.div`
 `;
 
 export const ScoreBoard = styled.div`
-  font-size: 25px;
-
   display: flex;
-  width: 80%;
-  margin: 0 auto;
-  border: 15px ridge lightgrey;
+  justify-content: space-between;
+
+  font-size: 25px;
+  font-weight: 400;
+  color: white;
+
+  width: 100%;
+  height: 15%;
+  /* margin: 0 auto; */
+  /* border: 15px ridge lightgrey; */
   border-bottom: none;
-  padding: 8px 0;
+  /* padding: 8px 0; */
   justify-content: center;
-  background-color: hsl(0deg 0% 83%);
+  background-color: hsl(0deg 0% 55%);
 `;
 
-export const Reset = styled.button`
-  width: 35px;
-  height: 35px;
-  margin: 0;
-  margin-right: 20px;
-  /* border: 2px solid grey; */
-  border: none;
-  border-radius: 100%;
-  box-shadow: inset -1px -1px 1px 1px grey;
-`;
+export const Text = styled.div``;
 
-export const Paragraph = styled.p`
-  /* width: 100px; */
-  /* height: fit-content; */
-  margin: 0;
-`;
-
-export const TimerParagraph = styled.p`
+export const TimerText = styled.div`
   width: 118px;
-  margin: 0;
   margin-right: 20px;
 `;
 
@@ -61,5 +48,5 @@ export const GameStatus = styled.div`
 `;
 
 export const Icons = styled.div`
-  margin-right: 5px;
+  margin: 5px;
 `;

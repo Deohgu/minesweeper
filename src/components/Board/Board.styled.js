@@ -1,11 +1,8 @@
 import styled from "styled-components";
 
 export const BoardStyled = styled.div`
-  display: flexbox;
+  display: flex;
   flex-wrap: wrap;
-  width: 80%;
-  height: 80%;
-  margin: auto;
-  border: 15px ridge lightgrey;
-  border-top: none;
+  width: 100%;
+  height: 85%;
 `;
