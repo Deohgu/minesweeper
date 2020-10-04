@@ -30,6 +30,7 @@ export const Board = (props) => {
             curr.flagged = "wrong";
           }
         });
+        // Here we will start showing a bomb insead of the explosion. Maybe?
         testingGrid[index].value = "💥";
         props.gameOverHandler(testingGrid);
       } else {
@@ -381,21 +382,32 @@ export const Board = (props) => {
             key={index}
             pressed={curr.advancedChecked}
             value={
-              curr.advancedChecked === false
-                ? curr.flagged === true
-                  ? "🚩"
-                  : curr.flagged === "wrong"
-                  ? "❌"
-                  : ""
-                : curr.value !== "💣"
-                ? curr.value === 0
-                  ? ""
-                  : curr.flagged === true
-                  ? "🚩"
-                  : curr.flagged === "wrong"
-                  ? "wrong"
-                  : curr.value
-                : "💣"
+              curr.advancedChecked === false ? (
+                curr.flagged === true ? (
+                  // flag
+                  <i class="fas fa-flag" style={{ "font-size": "30px" }}></i>
+                ) : curr.flagged === "wrong" ? (
+                  <i class="fas fa-flag" style={{ "font-size": "30px" }}></i>
+                ) : (
+                  ""
+                )
+              ) : curr.value !== "💣" ? (
+                curr.value === 0 ? (
+                  ""
+                ) : curr.flagged === true ? (
+                  // flag
+                  // <Icons>
+                  <i class="far fa-flag fa-lg"></i>
+                ) : // </Icons>
+                curr.flagged === "wrong" ? (
+                  "wrong"
+                ) : (
+                  curr.value
+                )
+              ) : (
+                // bomb
+                <i class="fas fa-bomb fa-lg"></i>
+              )
             }
             // {/*value={curr.value === "💣" ? "💣" : curr.value + " " + index}*/}
           />
