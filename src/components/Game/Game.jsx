@@ -6,9 +6,10 @@ import {
   GameStyled,
   Reset,
   ScoreBoard,
-  Paragraph,
-  TimerParagraph,
+  Text,
+  TimerText,
   GameStatus,
+  Icons,
 } from "./Game.styled";
 
 export const Game = () => {
@@ -105,7 +106,7 @@ export const Game = () => {
     <GameStyled>
       {/* Testing */}
       <ScoreBoard>
-        <Reset
+        <Icons
           onClick={() => {
             setRunGridGen(true);
             setGameOver(false);
@@ -113,20 +114,27 @@ export const Game = () => {
             setCheckedNumber(0);
           }}
         >
-          ↻
-        </Reset>
-        <TimerParagraph>
-          🕑{" "}
+          <i class="fas fa-redo-alt"></i>
+        </Icons>
+        <Icons>
+          {/* clock */}
+          <i class="far fa-clock fa-lg"></i>
+        </Icons>
+        <TimerText>
           <Timer
             won={won}
             gameOver={gameOver}
             checkedNumber={checkedNumber}
             runGridGen={runGridGen}
           />
-        </TimerParagraph>
-        <Paragraph noMargin={true}>🚩 {flaggedAmount}</Paragraph>
-        <Paragraph>{gameOver === false ? "" : "Game Over!"}</Paragraph>
-        <Paragraph>{won === true ? "You won!" : ""}</Paragraph>
+        </TimerText>
+        <Icons>
+          {/* flag */}
+          <i class="far fa-flag fa-lg"></i>
+        </Icons>
+        <Text noMargin={true}>{flaggedAmount}</Text>
+        <Text>{gameOver === false ? "" : "Game Over!"}</Text>
+        <Text>{won === true ? "You won!" : ""}</Text>
       </ScoreBoard>
       <GameStatus>Testing - You Won! You Lost!</GameStatus>
       <Board
