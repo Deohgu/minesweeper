@@ -39,10 +39,12 @@ export const TimerText = styled.div`
 `;
 
 export const GameStatus = styled.div`
+  font-size: 30px;
   position: absolute;
   /* 80 = size of board, 8 size of grid, 7 not sure but it works*/
-  top: calc(80vw / 8 * 7);
-  /* left: calc(50vw); */
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: fit-content;
   background-color: yellow;
 `;
