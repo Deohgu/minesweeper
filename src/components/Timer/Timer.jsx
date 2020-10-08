@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 export const Timer = (props) => {
-  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timerSeconds, setTimerSeconds] = useState("000.00");
   const [hasRun, setHasRun] = useState(false);
 
   const counterRef = useRef(null);
@@ -25,7 +25,7 @@ export const Timer = (props) => {
 
   useEffect(() => {
     if (props.gameOver || props.won || props.runGridGen) {
-      setTimerSeconds(0);
+      setTimerSeconds("000.00");
     }
 
     if (
@@ -45,7 +45,11 @@ export const Timer = (props) => {
     counterRef.current = setInterval(() => {
       // Need to use the Date object, this way is veryy inacurate when using miliseconds.
       setTimerSeconds((timerSeconds) =>
-        Number((timerSeconds + 0.01).toFixed(2))
+        timerSeconds <= 9.9999999
+          ? "00" + (Number(timerSeconds) + 0.01).toFixed(2)
+          : timerSeconds <= 99.9999999
+          ? "0" + (Number(timerSeconds) + 0.01).toFixed(2)
+          : (Number(timerSeconds) + Number("000.01")).toFixed(2)
       );
     }, 10);
   };
