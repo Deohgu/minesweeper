@@ -6,10 +6,10 @@ import {
   GameStyled,
   Reset,
   ScoreBoard,
-  Text,
   TimerText,
   GameStatus,
-  Icons,
+  IconGroup,
+  Icon,
 } from "./Game.styled";
 
 export const Game = () => {
@@ -106,7 +106,7 @@ export const Game = () => {
     <GameStyled>
       {/* Testing */}
       <ScoreBoard>
-        <Icons
+        <IconGroup
           onClick={() => {
             setRunGridGen(true);
             setGameOver(false);
@@ -114,27 +114,42 @@ export const Game = () => {
             setCheckedNumber(0);
           }}
         >
-          <i class="fas fa-redo-alt"></i>
-        </Icons>
-        <Icons>
-          {/* clock */}
-          <i class="far fa-clock fa-lg"></i>
-        </Icons>
-        <TimerText>
-          <Timer
-            won={won}
-            gameOver={gameOver}
-            checkedNumber={checkedNumber}
-            runGridGen={runGridGen}
-          />
-        </TimerText>
-        <Icons>
-          {/* flag */}
-          <i class="far fa-flag fa-lg"></i>
-        </Icons>
-        <Text noMargin={true}>{flaggedAmount}</Text>
-        <Text>{gameOver === false ? "" : "Game Over!"}</Text>
-        <Text>{won === true ? "You won!" : ""}</Text>
+          <Icon>
+            {/* Reset Icon */}
+            <i
+              class="fas fa-redo-alt"
+              style={{ margin: "auto 0 auto 10px" }}
+            ></i>
+          </Icon>
+        </IconGroup>
+        <IconGroup>
+          <Icon>
+            {/* clock Icon */}
+            <i
+              class="far fa-clock fa-lg"
+              style={{ "margin-right": "10px" }}
+            ></i>
+          </Icon>
+          <TimerText>
+            <Timer
+              won={won}
+              gameOver={gameOver}
+              checkedNumber={checkedNumber}
+              runGridGen={runGridGen}
+            />
+          </TimerText>
+        </IconGroup>
+        <IconGroup>
+          <Icon>
+            {/* flag Icon */}
+            <i class="far fa-flag fa-lg" style={{ "margin-right": "10px" }}></i>
+          </Icon>
+          <div noMargin={true} style={{ margin: "auto 10px auto 0" }}>
+            {flaggedAmount}
+          </div>
+          <div>{gameOver === false ? "" : "Game Over!"}</div>
+          <div>{won === true ? "You won!" : ""}</div>
+        </IconGroup>
       </ScoreBoard>
       <GameStatus>Testing - You Won! You Lost!</GameStatus>
       <Board

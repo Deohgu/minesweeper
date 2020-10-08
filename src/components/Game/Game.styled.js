@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const GameStyled = styled.div`
+  position: relative;
   margin: 20% auto;
   border: 15px ridge lightgrey;
   width: 80vw;
@@ -15,40 +16,39 @@ export const GameStyled = styled.div`
 
 export const ScoreBoard = styled.div`
   display: flex;
+  flex-grow: 0;
   justify-content: space-between;
 
-  font-size: 25px;
+  font-size: calc(8vw);
   font-weight: 400;
   color: white;
 
   width: 100%;
   height: 15%;
-  /* margin: 0 auto; */
-  /* border: 15px ridge lightgrey; */
-  border-bottom: none;
-  /* padding: 8px 0; */
-  justify-content: center;
   background-color: hsl(0deg 0% 55%);
+  @media (min-width: 800px) {
+    font-size: 63.68px;
+  }
 `;
 
-export const Text = styled.div``;
-
 export const TimerText = styled.div`
-  width: 118px;
-  margin-right: 20px;
+  margin: auto;
 `;
 
 export const GameStatus = styled.div`
   font-size: 30px;
   position: absolute;
-  /* 80 = size of board, 8 size of grid, 7 not sure but it works*/
-  top: 43%;
+  top: calc(50% + 30px + 16px);
   left: 50%;
   transform: translate(-50%, -50%);
-  width: fit-content;
   background-color: yellow;
 `;
 
-export const Icons = styled.div`
-  margin: 5px;
+export const IconGroup = styled.div`
+  display: flex;
+`;
+
+export const Icon = styled.div`
+  transform: translateY(15%);
+  /* margin-right: 10px; */
 `;
