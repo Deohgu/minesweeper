@@ -147,11 +147,11 @@ export const Game = () => {
           <div noMargin={true} style={{ margin: "auto 10px auto 0" }}>
             {flaggedAmount}
           </div>
-          <div>{gameOver === false ? "" : "Game Over!"}</div>
-          <div>{won === true ? "You won!" : ""}</div>
         </IconGroup>
       </ScoreBoard>
-      <GameStatus>Testing - You Won! You Lost!</GameStatus>
+      <GameStatus>
+        {gameOver === true ? "Game Over!" : won === true ? "You won!" : ""}
+      </GameStatus>
       <Board
         gridWidth={gridWidth}
         size={size}
