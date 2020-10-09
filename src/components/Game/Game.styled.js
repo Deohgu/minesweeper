@@ -6,8 +6,8 @@ export const GameStyled = styled.div`
   border: 15px ridge lightgrey;
   width: 80vw;
   height: calc(80vw + 12vw);
-  max-width: 700px;
-  max-height: 700px;
+  max-width: calc(700px * .8);
+  max-height: calc(700px * .92);
 
   @media (min-width: 800px) {
     margin: 5% auto;
