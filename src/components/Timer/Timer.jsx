@@ -45,9 +45,9 @@ export const Timer = (props) => {
     counterRef.current = setInterval(() => {
       // Need to use the Date object, this way is veryy inacurate when using miliseconds.
       setTimerSeconds((timerSeconds) =>
-        timerSeconds <= 9.9999999
+        timerSeconds <= 9.99
           ? "00" + (Number(timerSeconds) + 0.01).toFixed(2)
-          : timerSeconds <= 99.9999999
+          : timerSeconds <= 99.99
           ? "0" + (Number(timerSeconds) + 0.01).toFixed(2)
           : (Number(timerSeconds) + Number("000.01")).toFixed(2)
       );
