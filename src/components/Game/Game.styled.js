@@ -32,7 +32,15 @@ export const ScoreBoard = styled.div`
 `;
 
 export const TimerText = styled.div`
+  display: flex;
+  justify-content: flex-start;
   margin: auto;
+  /* width: calc(100% + 20%); */
+  width: 25vw;
+
+  @media (min-width: 800px) {
+    width: 200px;
+  }
 `;
 
 export const GameStatus = styled.div`
@@ -50,5 +58,8 @@ export const IconGroup = styled.div`
 
 export const Icon = styled.div`
   transform: translateY(15%);
-  /* margin-right: 10px; */
+
+  @media (min-width: 330px) {
+    margin: 5px;
+  }
 `;
