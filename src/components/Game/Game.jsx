@@ -130,14 +130,16 @@ export const Game = () => {
               style={{ "margin-right": "10px" }}
             ></i>
           </Icon>
-          <TimerText>
-            <Timer
-              won={won}
-              gameOver={gameOver}
-              checkedNumber={checkedNumber}
-              runGridGen={runGridGen}
-            />
-          </TimerText>
+          <div style={{margin: "auto"}}>
+            <TimerText>
+              <Timer
+                won={won}
+                gameOver={gameOver}
+                checkedNumber={checkedNumber}
+                runGridGen={runGridGen}
+              />
+            </TimerText>
+          </div>
         </IconGroup>
         <IconGroup>
           <Icon>
@@ -152,7 +154,7 @@ export const Game = () => {
       <GameStatus>
         {gameOver === true ? "Game Over!" : won === true ? "You won!" : ""}
       </GameStatus>
-      <Board
+        <Board
         gridWidth={gridWidth}
         size={size}
         bombs={bombs}
