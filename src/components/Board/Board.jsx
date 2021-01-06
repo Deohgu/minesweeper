@@ -23,7 +23,7 @@ export const Board = (props) => {
     ) {
       if (props.gridToShow[index].value === "💣") {
         let testingGrid = [...props.gridToShow];
-        testingGrid.map((curr) => {
+        testingGrid.forEach((curr) => {
           if (curr.value === "💣") {
             curr.advancedChecked = true;
           } else if (curr.flagged === true) {
@@ -79,7 +79,7 @@ export const Board = (props) => {
             curr !== checkerArray[7]
         );
         bombCounter = 0;
-        tempArray.map((curr) => {
+        tempArray.forEach((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
@@ -94,7 +94,7 @@ export const Board = (props) => {
               testingGrid[curr].value !== "💣" &&
               curr !== original
           );
-          tempArrayAdvance.map((curr) => {
+          tempArrayAdvance.forEach((curr) => {
             return mineCheck(curr, original);
           });
         }
@@ -112,7 +112,7 @@ export const Board = (props) => {
             curr !== checkerArray[7]
         );
         bombCounter = 0;
-        tempArray.map((curr) => {
+        tempArray.forEach((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
@@ -128,7 +128,7 @@ export const Board = (props) => {
               testingGrid[curr].value !== "💣" &&
               curr !== original
           );
-          tempArrayAdvance.map((curr) => {
+          tempArrayAdvance.forEach((curr) => {
             return mineCheck(curr, original);
           });
         }
@@ -144,7 +144,7 @@ export const Board = (props) => {
             curr !== checkerArray[7]
         );
         bombCounter = 0;
-        tempArray.map((curr) => {
+        tempArray.forEach((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
@@ -160,7 +160,7 @@ export const Board = (props) => {
               testingGrid[curr].value !== "💣" &&
               curr !== original
           );
-          tempArrayAdvance.map((curr) => {
+          tempArrayAdvance.forEach((curr) => {
             return mineCheck(curr, original);
           });
         }
@@ -181,7 +181,7 @@ export const Board = (props) => {
         );
 
         bombCounter = 0;
-        tempArray.map((curr) => {
+        tempArray.forEach((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
@@ -197,7 +197,7 @@ export const Board = (props) => {
               testingGrid[curr].value !== "💣" &&
               curr !== original
           );
-          tempArrayAdvance.map((curr) => {
+          tempArrayAdvance.forEach((curr) => {
             return mineCheck(curr, original);
           });
         }
@@ -215,7 +215,7 @@ export const Board = (props) => {
             curr !== checkerArray[5]
         );
         bombCounter = 0;
-        tempArray.map((curr) => {
+        tempArray.forEach((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
@@ -231,7 +231,7 @@ export const Board = (props) => {
               testingGrid[curr].value !== "💣" &&
               curr !== original
           );
-          tempArrayAdvance.map((curr) => {
+          tempArrayAdvance.forEach((curr) => {
             return mineCheck(curr, original);
           });
         }
@@ -247,7 +247,7 @@ export const Board = (props) => {
             curr !== checkerArray[3]
         );
         bombCounter = 0;
-        tempArray.map((curr) => {
+        tempArray.forEach((curr) => {
           if (testingGrid[curr].value === "💣") {
             bombCounter++;
           }
@@ -263,7 +263,7 @@ export const Board = (props) => {
               testingGrid[curr].value !== "💣" &&
               curr !== original
           );
-          tempArrayAdvance.map((curr) => {
+          tempArrayAdvance.forEach((curr) => {
             return mineCheck(curr, original);
           });
         }
@@ -281,7 +281,7 @@ export const Board = (props) => {
       );
       bombCounter = 0;
 
-      tempArray.map((curr) => {
+      tempArray.forEach((curr) => {
         if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
@@ -297,7 +297,7 @@ export const Board = (props) => {
             testingGrid[curr].value !== "💣" &&
             curr !== original
         );
-        tempArrayAdvance.map((curr) => {
+        tempArrayAdvance.forEach((curr) => {
           return mineCheck(curr, original);
         });
       }
@@ -314,7 +314,7 @@ export const Board = (props) => {
       );
       bombCounter = 0;
 
-      tempArray.map((curr) => {
+      tempArray.forEach((curr) => {
         if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
@@ -330,7 +330,7 @@ export const Board = (props) => {
             testingGrid[curr].value !== "💣" &&
             curr !== original
         );
-        tempArrayAdvance.map((curr) => {
+        tempArrayAdvance.forEach((curr) => {
           return mineCheck(curr, original);
         });
       }
@@ -347,7 +347,7 @@ export const Board = (props) => {
       // Not agains't the wall
       bombCounter = 0;
 
-      checkerArray.map((curr) => {
+      checkerArray.forEach((curr) => {
         if (testingGrid[curr].value === "💣") {
           bombCounter++;
         }
@@ -362,7 +362,7 @@ export const Board = (props) => {
             testingGrid[curr].value !== "💣" &&
             curr !== original
         );
-        tempArrayAdvance.map((curr) => {
+        tempArrayAdvance.forEach((curr) => {
           return mineCheck(curr, original);
         });
       }
