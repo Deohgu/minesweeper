@@ -117,7 +117,7 @@ export const Game = () => {
           <Icon>
             {/* Reset Icon */}
             <i
-              class="fas fa-redo-alt"
+              className="fas fa-redo-alt"
               style={{ margin: "auto 0 auto 10px" }}
             ></i>
           </Icon>
@@ -126,8 +126,8 @@ export const Game = () => {
           <Icon>
             {/* clock Icon */}
             <i
-              class="far fa-clock fa-lg"
-              style={{ "margin-right": "10px" }}
+              className="far fa-clock fa-lg"
+              style={{ "marginRight": "10px" }}
             ></i>
           </Icon>
           <div style={{margin: "auto"}}>
@@ -144,9 +144,9 @@ export const Game = () => {
         <IconGroup>
           <Icon>
             {/* flag Icon */}
-            <i class="far fa-flag fa-lg" style={{ "margin-right": "10px" }}></i>
+            <i className="far fa-flag fa-lg" style={{ "marginRight": "10px" }}></i>
           </Icon>
-          <div noMargin={true} style={{ margin: "auto 10px auto 0" }}>
+          <div style={{ margin: "auto 10px auto 0" }}>
             {flaggedAmount}
           </div>
         </IconGroup>
