@@ -1,18 +1,8 @@
 # Minesweeper
 A minesweeper game developed using in React.js coupled with Styled Components.
 
-## To Do:
+---
 
-#### Logic:
-* Right Button press on iOS.
-* Clean the code.
+The app has been developed due to my love for minesweeper and to be able to work on challenging algorithms such as optimizing searches in a matrix, and working out solutions that enable features such as an easy start, guess free game, and so on.
 
-#### Styling:
-* Background texture of mines and explosions created using P5.js
-* Adjust max size.
-* Style Win/Lose Popup.
-
-## Future Features:
-* Night Mode
-* Infinite scrolling
-* Easy first play
+In the future I intend on developing a minesweeper solver.
