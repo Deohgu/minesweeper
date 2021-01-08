@@ -17,17 +17,22 @@ export const Game = () => {
   const [size, setSize] = useState(64);
   const [bombs, setBombs] = useState(8);
   const [gridToShow, setgridToShow] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
   const [runGridGen, setRunGridGen] = useState(true);
   const [checkedNumber, setCheckedNumber] = useState(0);
   const [flaggedAmount, setFlaggedAmount] = useState(bombs);
+
+  // Will be changed to one state => shouldReset.
+  const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
+
+  const [shouldReset, setShouldReset] = useState(false)
+  const [gameStatus, setGameStatus] = useState("waiting") // Won, lost, waiting, running.
 
   useEffect(() => {
     if (checkedNumber === size - bombs) {
       setWon(true);
       const tempGrid = [...gridToShow];
-      tempGrid.map((curr) => {
+      tempGrid.forEach((curr) => {
         curr.advancedChecked = true;
       });
       setgridToShow(tempGrid);
@@ -62,7 +67,7 @@ export const Game = () => {
 
   const flagHandler = (e, index) => {
     e.preventDefault();
-    if (gameOver === false && won !== true) {
+    if (gameStatus === "running") {
       let tempGrid = [...gridToShow];
       if (tempGrid[index].advancedChecked === false) {
         if (tempGrid[index].flagged === false) {
@@ -89,7 +94,7 @@ export const Game = () => {
 
     // Not the most efficient way to run another loop everytime, but it works.
     let advCheckedAmount = 0;
-    gridToShow.map((curr) => {
+    gridToShow.forEach((curr) => {
       if (curr.advancedChecked) {
         advCheckedAmount++;
       }
@@ -97,10 +102,25 @@ export const Game = () => {
     setCheckedNumber(advCheckedAmount);
   };
 
-  const gameOverHandler = (grid) => {
-    setGameOver(true);
+  const statusHandler = (status, grid) => {
+    gameStatus !== status && setGameStatus(status); 
     setgridToShow(grid);
+
+    let advCheckedAmount = 0;
+    gridToShow.forEach((curr) => {
+      if (curr.advancedChecked) {
+        advCheckedAmount++;
+      }
+    });
+    setCheckedNumber(advCheckedAmount);
   };
+
+  const resetHandler = () => {
+    setShouldReset(false);
+    setGameStatus("waiting")
+  }
+
+  console.log(`Global game status: ${gameStatus}`)
 
   return (
     <GameStyled>
@@ -108,6 +128,7 @@ export const Game = () => {
       <ScoreBoard>
         <IconGroup
           onClick={() => {
+            setShouldReset(true)
             setRunGridGen(true);
             setGameOver(false);
             setWon(false);
@@ -133,6 +154,9 @@ export const Game = () => {
           <div style={{margin: "auto"}}>
             <TimerText>
               <Timer
+                resetHandler={resetHandler}
+                gameStatus={GameStatus}
+                shouldReset={shouldReset}
                 won={won}
                 gameOver={gameOver}
                 checkedNumber={checkedNumber}
@@ -158,13 +182,13 @@ export const Game = () => {
         gridWidth={gridWidth}
         size={size}
         bombs={bombs}
-        gameOver={gameOver}
+        gameStatus={gameStatus}
         gridToShow={gridToShow}
         checkedNumber={checkedNumber}
-        gameOverHandler={gameOverHandler}
         gridToShowHandler={gridToShowHandler}
         flagHandler={flagHandler}
         won={won}
+        statusHandler={statusHandler}
       />
     </GameStyled>
   );
