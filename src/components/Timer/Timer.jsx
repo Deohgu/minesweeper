@@ -1,45 +1,79 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const Timer = (props) => {
   const [timerSeconds, setTimerSeconds] = useState("000.00");
-  const [hasRun, setHasRun] = useState(false);
+  const [asRun, setAsRun] = useState(false);
+
+  const [shouldReset, setShouldReset] = useState(false)
 
   const counterRef = useRef(null);
 
-  useEffect(() => {
+  /*
+  // useEffect(() => {
     // console.log(`PAUSED RUN`);
-
-    if (
-      props.checkedNumber === 0 ||
-      props.runGridGen === true ||
-      props.gameOver === true ||
-      props.won === true
-    ) {
-      console.log(`PAUSED IF STATEMENT RUN`);
-      clearInterval(counterRef.current);
-      setHasRun(false);
+    if (props.shouldReset === true) {
+      props.resetHandler()
+      if (
+        props.checkedNumber === 0 ||
+        props.runGridGen === true ||
+        props.gameOver === true ||
+        props.won === true
+      ) {
+        console.log(`PAUSED IF STATEMENT RUN`);
+        clearInterval(counterRef.current);
+        setAsRun(false);
+      }
     }
-  }, [timerSeconds, props.runGridGen, props.won, props.gameOver]);
+  // }, [timerSeconds, props.runGridGen, props.won, props.gameOver]);
+  */
+
+  useEffect(() => {
+    if (props.shouldReset === true) {
+      props.resetHandler()
+      clearInterval(counterRef.current);
+      setAsRun(false);
+    }
+    return () => props.resetHandler()
+  },[props.shouldReset])
+
+  console.log(`gameStatus inside timer: ${props.gameStatus}`)
+  
+  useEffect(() => {
+    if (props.gameStatus === "won" || props.gameStatus === "lost") {
+      console.log(`PAUSED IF STATEMENT RUN`);
+        clearInterval(counterRef.current);
+        setAsRun(false);
+    } else if (props.gameStatus === "running") {
+      console.log(`START TIMER RUN`);
+      startTimer();
+      setAsRun(true);
+    }
+    console.log(`Checker in Timer for status as RUN`)
+  }, [props.gameStatus])
+
 
   console.log(`Checked Number: ${props.checkedNumber}`);
 
+  /*
   useEffect(() => {
     if (props.gameOver || props.won || props.runGridGen) {
       setTimerSeconds("000.00");
     }
 
     if (
+      // Possibly manage everything with gameStatus
       props.gameOver !== true &&
       props.won !== true &&
       props.checkedNumber !== 0 &&
-      hasRun === false &&
+      asRun === false && //  gameStatus === "running"
       props.runGridGen !== true
     ) {
       console.log(`START TIMER RUN`);
       startTimer();
-      setHasRun(true);
+      setAsRun(true);
     }
-  }, [props.checkedNumber, props.runGridGen]);
+  }, [props.checkedNumber, props.runGridGen]); // gameStatus?
+  */
 
   const startTimer = () => {
     counterRef.current = setInterval(() => {
