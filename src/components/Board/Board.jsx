@@ -17,11 +17,11 @@ export const Board = (props) => {
 
     // After add to require it to be not checked.
     if (
-      props.gameOver === false &&
-      props.won !== true &&
-      props.gridToShow[index].flagged !== true
+      (props.gameStatus === "waiting" || props.gameStatus === "running")  &&
+      props.gridToShow[index].flagged !== true // Stops the player from activating a flagged cell.
     ) {
       if (props.gridToShow[index].value === "💣") {
+        // Sets all the cells that are bombs to "advancedChecked" meaning checked, meaning to be visible.
         let testingGrid = [...props.gridToShow];
         testingGrid.forEach((curr) => {
           if (curr.value === "💣") {
@@ -30,9 +30,11 @@ export const Board = (props) => {
             curr.flagged = "wrong";
           }
         });
-        // Here we will start showing a bomb insead of the explosion. Maybe?
+        // Shows an explosion to demonstrate that it was a bomb
         testingGrid[index].value = "💥";
-        props.gameOverHandler(testingGrid);
+
+        // 
+        props.statusHandler("lost", testingGrid);
       } else {
         mineCheck(index, index);
       }
@@ -368,7 +370,10 @@ export const Board = (props) => {
       }
     }
 
-    props.gridToShowHandler(testingGrid);
+    console.log(`Has passed the "running" status`);
+
+    props.statusHandler("running", testingGrid);
+    // props.gridToShowHandler(testingGrid);
   };
 
   return (
