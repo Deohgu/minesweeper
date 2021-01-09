@@ -370,10 +370,12 @@ export const Board = (props) => {
       }
     }
 
-    console.log(`Has passed the "running" status`);
+    // returns testingGrid
+    // and then in line 40 it passes what was returned, and not at the end of mineCheck
+    // Although how does it reach the bottom so many times?Expected it do only reach the bottom once after all the calculations are done. perhaps needs returns.
 
+    console.log("minecheck has reached the bottom")
     props.statusHandler("running", testingGrid);
-    // props.gridToShowHandler(testingGrid);
   };
 
   return (
