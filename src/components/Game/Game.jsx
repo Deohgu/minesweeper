@@ -17,20 +17,14 @@ export const Game = () => {
   const [size, setSize] = useState(64);
   const [bombs, setBombs] = useState(8);
   const [gridToShow, setgridToShow] = useState([]);
-  const [runGridGen, setRunGridGen] = useState(true);
   const [checkedNumber, setCheckedNumber] = useState(0);
   const [flaggedAmount, setFlaggedAmount] = useState(bombs);
 
-  // Will be changed to one state => shouldReset.
-  const [gameOver, setGameOver] = useState(false);
-  const [won, setWon] = useState(false);
-
-  const [shouldReset, setShouldReset] = useState(false)
   const [gameStatus, setGameStatus] = useState("waiting") // Won, lost, waiting, running.
 
   useEffect(() => {
     if (checkedNumber === size - bombs) {
-      setWon(true);
+      setGameStatus("won")
       const tempGrid = [...gridToShow];
       tempGrid.forEach((curr) => {
         curr.advancedChecked = true;
@@ -39,9 +33,10 @@ export const Game = () => {
     }
   }, [checkedNumber]);
 
+  // If the status of the game is changed to waiting generate a new algorithm.
+  // This will run at the start and each time the reset button is pressed.
   useEffect(() => {
-    if (runGridGen === true) {
-      setRunGridGen(false);
+    if (gameStatus === "waiting") {
       setCheckedNumber(0);
       setFlaggedAmount(bombs);
       const populatedGrid = [];
@@ -63,8 +58,9 @@ export const Game = () => {
       }
       setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
     }
-  }, [runGridGen]);
+  }, [gameStatus]);
 
+  // Places flags on right click when the game is considered to be running.
   const flagHandler = (e, index) => {
     e.preventDefault();
     if (gameStatus === "running") {
@@ -89,8 +85,9 @@ export const Game = () => {
     }
   };
 
-  const gridToShowHandler = (newArray) => {
-    setgridToShow(newArray);
+  const statusHandler = (status, grid) => {
+    status !== gameStatus && setGameStatus(status); 
+    setgridToShow(grid);
 
     // Not the most efficient way to run another loop everytime, but it works.
     let advCheckedAmount = 0;
@@ -102,24 +99,6 @@ export const Game = () => {
     setCheckedNumber(advCheckedAmount);
   };
 
-  const statusHandler = (status, grid) => {
-    gameStatus !== status && setGameStatus(status); 
-    setgridToShow(grid);
-
-    let advCheckedAmount = 0;
-    gridToShow.forEach((curr) => {
-      if (curr.advancedChecked) {
-        advCheckedAmount++;
-      }
-    });
-    setCheckedNumber(advCheckedAmount);
-  };
-
-  const resetHandler = () => {
-    setShouldReset(false);
-    setGameStatus("waiting")
-  }
-
   console.log(`Global game status: ${gameStatus}`)
 
   return (
@@ -128,11 +107,7 @@ export const Game = () => {
       <ScoreBoard>
         <IconGroup
           onClick={() => {
-            setShouldReset(true)
-            setRunGridGen(true);
-            setGameOver(false);
-            setWon(false);
-            setCheckedNumber(0);
+            setGameStatus("waiting")
           }}
         >
           <Icon>
@@ -154,13 +129,8 @@ export const Game = () => {
           <div style={{margin: "auto"}}>
             <TimerText>
               <Timer
-                resetHandler={resetHandler}
-                gameStatus={GameStatus}
-                shouldReset={shouldReset}
-                won={won}
-                gameOver={gameOver}
+                gameStatus={gameStatus}
                 checkedNumber={checkedNumber}
-                runGridGen={runGridGen}
               />
             </TimerText>
           </div>
@@ -176,18 +146,16 @@ export const Game = () => {
         </IconGroup>
       </ScoreBoard>
       <GameStatus>
-        {gameOver === true ? "Game Over!" : won === true ? "You won!" : ""}
+        {gameStatus === "lost" ? "Game Over." : gameStatus === "won" && "You won!"}
       </GameStatus>
-        <Board
+      <Board
         gridWidth={gridWidth}
         size={size}
         bombs={bombs}
         gameStatus={gameStatus}
         gridToShow={gridToShow}
         checkedNumber={checkedNumber}
-        gridToShowHandler={gridToShowHandler}
         flagHandler={flagHandler}
-        won={won}
         statusHandler={statusHandler}
       />
     </GameStyled>
