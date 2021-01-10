@@ -7,6 +7,7 @@ export const Cell = ({ gridWidth, value, pressed, ...rest }) => {
 
   return (
     <CellStyled gridWidth={gridWidth} pressed={pressed} {...rest}>
+      {/* CellStyled to be replaced with a reusable container component */}
       {value}
     </CellStyled>
   );
