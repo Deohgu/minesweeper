@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const Theme = styled.div`
+export const Container = styled.div`
   width: calc(100vw - (100vw - 100%));
   height: calc(100vh - (100vh - 100%));
 `;
