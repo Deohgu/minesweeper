@@ -1,14 +1,15 @@
 import React from "react";
 
-import { Theme, GlobalStyle } from "./App.styled";
+import { Container, GlobalStyle } from "./App.styled";
 
 import { Game } from "./components";
 
 export const App = () => {
   return (
-    <Theme>
+    <Container>
+      {/* Container to be replaced with a reusable container component */}
       <GlobalStyle />
       <Game />
-    </Theme>
+    </Container>
   );
 };

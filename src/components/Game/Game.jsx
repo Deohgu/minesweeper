@@ -4,120 +4,103 @@ import { Board, Timer } from "./../index";
 
 import {
   GameStyled,
-  Reset,
   ScoreBoard,
   TimerText,
-  GameStatus,
   IconGroup,
   Icon,
 } from "./Game.styled";
 
 export const Game = () => {
-  const [gridWidth, setGridWidth] = useState(8);
-  const [size, setSize] = useState(64);
-  const [bombs, setBombs] = useState(8);
-  const [gridToShow, setgridToShow] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
-  const [runGridGen, setRunGridGen] = useState(true);
-  const [checkedNumber, setCheckedNumber] = useState(0);
+  const [gridWidth] = useState(8);
+  const [size] = useState(64);
+  const [bombs] = useState(8);
+  const [cellArray, setCellArray] = useState([]);
   const [flaggedAmount, setFlaggedAmount] = useState(bombs);
-  const [won, setWon] = useState(false);
 
-  useEffect(() => {
-    if (checkedNumber === size - bombs) {
-      setWon(true);
-      const tempGrid = [...gridToShow];
-      tempGrid.map((curr) => {
-        curr.advancedChecked = true;
-      });
-      setgridToShow(tempGrid);
-    }
-  }, [checkedNumber]);
+  const [gameStatus, setGameStatus] = useState("waiting"); // Won, lost, waiting, running.
 
+  // If status of the game changes to "waiting" -> generate a new Cell array.
+  // Runs at the start and at each reset button press.
   useEffect(() => {
-    if (runGridGen === true) {
-      setRunGridGen(false);
-      setCheckedNumber(0);
+    if (gameStatus === "waiting") {
       setFlaggedAmount(bombs);
-      const populatedGrid = [];
+      const newCellArray = [];
       for (let i = 0; i < size - bombs; i++) {
-        populatedGrid.push({
-          value: "0",
+        newCellArray.push({
           checked: false,
           advancedChecked: false,
           flagged: false,
         });
       }
       for (let j = 0; j < bombs; j++) {
-        populatedGrid.push({
+        newCellArray.push({
           value: "💣",
           checked: false,
           advancedChecked: false,
           flagged: false,
         });
       }
-      setgridToShow(populatedGrid.sort((a, b) => Math.random() - 0.5));
+      setCellArray(newCellArray.sort((a, b) => Math.random() - 0.5));
     }
-  }, [runGridGen]);
+  }, [gameStatus, bombs, size]);
 
+  // Places flags on right click when the game is considered to be running.
   const flagHandler = (e, index) => {
     e.preventDefault();
-    if (gameOver === false && won !== true) {
-      let tempGrid = [...gridToShow];
-      if (tempGrid[index].advancedChecked === false) {
-        if (tempGrid[index].flagged === false) {
-          tempGrid[index].flagged = true;
-
-          let TempFlaggedAmount = flaggedAmount;
-          TempFlaggedAmount--;
-          setFlaggedAmount(TempFlaggedAmount);
+    if (gameStatus === "running") {
+      let cellArrayCopy = [...cellArray];
+      if (cellArrayCopy[index].advancedChecked === false) {
+        if (cellArrayCopy[index].flagged === false) {
+          cellArrayCopy[index].flagged = true;
+          setFlaggedAmount(flaggedAmount - 1);
         } else {
-          tempGrid[index].flagged = false;
-
-          let TempFlaggedAmount = flaggedAmount;
-          TempFlaggedAmount++;
-          setFlaggedAmount(TempFlaggedAmount);
+          cellArrayCopy[index].flagged = false;
+          setFlaggedAmount(flaggedAmount + 1);
         }
       }
-      setgridToShow(tempGrid);
-      console.log(gridToShow[index]);
+      setCellArray(cellArrayCopy);
     }
   };
 
-  const gridToShowHandler = (newArray) => {
-    setgridToShow(newArray);
+  const statusHandler = (status, grid) => {
+    status !== gameStatus && setGameStatus(status);
+    setCellArray(grid);
 
-    // Not the most efficient way to run another loop everytime, but it works.
+    // Algorithm To be improved
     let advCheckedAmount = 0;
-    gridToShow.map((curr) => {
+    cellArray.forEach((curr) => {
       if (curr.advancedChecked) {
         advCheckedAmount++;
       }
     });
-    setCheckedNumber(advCheckedAmount);
-  };
 
-  const gameOverHandler = (grid) => {
-    setGameOver(true);
-    setgridToShow(grid);
+    if (advCheckedAmount === size - bombs) {
+      setGameStatus("won");
+      const cellArrayCopy = [...cellArray];
+      cellArrayCopy.forEach((curr) => {
+        curr.advancedChecked = true; // makes everything visible
+      });
+      // To be able to pass cellArray to the dependencies without an infinite loop
+      cellArray !== cellArrayCopy && setCellArray(cellArrayCopy);
+    }
   };
 
   return (
     <GameStyled>
-      {/* Testing */}
+      {/* GameStyled to be replaced with a reusable container component */}
       <ScoreBoard>
+        {/* ScoreBoard to be replaced with a reusable container component */}
         <IconGroup
           onClick={() => {
-            setRunGridGen(true);
-            setGameOver(false);
-            setWon(false);
-            setCheckedNumber(0);
+            setGameStatus("waiting");
           }}
         >
+          {/* IconGroups to be replaced with a reusable container component */}
           <Icon>
+            {/* Icons to be replaced with a reusable container component */}
             {/* Reset Icon */}
             <i
-              class="fas fa-redo-alt"
+              className="fas fa-redo-alt"
               style={{ margin: "auto 0 auto 10px" }}
             ></i>
           </Icon>
@@ -126,45 +109,38 @@ export const Game = () => {
           <Icon>
             {/* clock Icon */}
             <i
-              class="far fa-clock fa-lg"
-              style={{ "margin-right": "10px" }}
+              className="far fa-clock fa-lg"
+              style={{ marginRight: "10px" }}
             ></i>
           </Icon>
-          <div style={{margin: "auto"}}>
+          <div style={{ margin: "auto" }}>
+            {/* div needed? To be replaced with the reusable container component */}
             <TimerText>
-              <Timer
-                won={won}
-                gameOver={gameOver}
-                checkedNumber={checkedNumber}
-                runGridGen={runGridGen}
-              />
+              {/* TimerText to be replaced with a reusable container component */}
+              <Timer gameStatus={gameStatus} />
             </TimerText>
           </div>
         </IconGroup>
         <IconGroup>
           <Icon>
             {/* flag Icon */}
-            <i class="far fa-flag fa-lg" style={{ "margin-right": "10px" }}></i>
+            <i
+              className="far fa-flag fa-lg"
+              style={{ marginRight: "10px" }}
+            ></i>
           </Icon>
-          <div noMargin={true} style={{ margin: "auto 10px auto 0" }}>
-            {flaggedAmount}
-          </div>
+          <div style={{ margin: "auto 10px auto 0" }}>{flaggedAmount}</div>
+          {/* div to be replaced with a reusable container component */}
         </IconGroup>
       </ScoreBoard>
-      <GameStatus>
-        {gameOver === true ? "Game Over!" : won === true ? "You won!" : ""}
-      </GameStatus>
-        <Board
+      <Board
         gridWidth={gridWidth}
         size={size}
         bombs={bombs}
-        gameOver={gameOver}
-        gridToShow={gridToShow}
-        checkedNumber={checkedNumber}
-        gameOverHandler={gameOverHandler}
-        gridToShowHandler={gridToShowHandler}
+        gameStatus={gameStatus}
+        cellArray={cellArray}
         flagHandler={flagHandler}
-        won={won}
+        statusHandler={statusHandler}
       />
     </GameStyled>
   );
