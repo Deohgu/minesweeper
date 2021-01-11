@@ -4,10 +4,14 @@ export const GameStyled = styled.div`
   position: relative;
   margin: 20% auto;
   border: 15px ridge lightgrey;
-  width: 80vw;
+
+  // increase the width from 80vw to 90vw
+  width: 90vw;
   height: calc(80vw + 12vw);
-  max-width: calc(700px * .8);
-  max-height: calc(700px * .92);
+
+  // change max-width and max-height media query from 700px to 800px
+  max-width: calc(800px * .8);
+  max-height: calc(800px * .92);
 
   @media (min-width: 800px) {
     margin: 5% auto;
@@ -15,7 +19,7 @@ export const GameStyled = styled.div`
 `;
 
 export const ScoreBoard = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-grow: 0;
   justify-content: space-between;
 
