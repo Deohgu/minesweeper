@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { Board, Timer } from "./../index";
 
+import { Box } from "../Box";
+
 import {
   GameStyled,
   ScoreBoard,
@@ -90,6 +92,11 @@ export const Game = () => {
       {/* GameStyled to be replaced with a reusable container component */}
       <ScoreBoard>
         {/* ScoreBoard to be replaced with a reusable container component */}
+        {/* <Box
+          justifyContent={"space-between"}
+          fontSize={"calc(8vw)"}
+          color={"white"}
+        > */}
         <IconGroup
           onClick={() => {
             setGameStatus("waiting");
@@ -132,6 +139,7 @@ export const Game = () => {
           <div style={{ margin: "auto 10px auto 0" }}>{flaggedAmount}</div>
           {/* div to be replaced with a reusable container component */}
         </IconGroup>
+        {/* </Box> */}
       </ScoreBoard>
       <Board
         gridWidth={gridWidth}
