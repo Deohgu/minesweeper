@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const GameStyled = styled.div`
   position: fixed;
-  display: block;
   margin: auto;
   left: 0;
   right: 0;
@@ -13,6 +12,10 @@ export const GameStyled = styled.div`
   border: 15px ridge lightgrey;
   max-width: calc(800px * .8);
   max-height: calc(800px * .92);
+  @media (max-width: calc(800px * .8)) {
+    width: 100vw;
+    height: calc(100vw * 1.15)
+  }
 `;
 
 export const ScoreBoard = styled.div`
@@ -25,11 +28,8 @@ export const ScoreBoard = styled.div`
   width: 100%;
   height: 15%;
   background-color: hsl(0deg 0% 55%);
-  @media (min-width: 800px) {
+  @media (min-width: calc(800px * .8)) {
     font-size: 55px;
-  }
-  @media (max-width: 500px) {
-    font-size: 25px;
   }
 `;
 
