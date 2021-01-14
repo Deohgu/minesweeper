@@ -4,7 +4,7 @@ import { Board, Timer } from "./../index";
 
 import { Box } from "../Box";
 
-import { GameBox, ScoreBoardBox, IconGroup, Icon } from "./Game.styled";
+import { GameBox, ScoreBoardBox } from "./Game.styled";
 
 export const Game = () => {
   const [gridWidth] = useState(8);
@@ -84,43 +84,23 @@ export const Game = () => {
   return (
     <GameBox>
       <ScoreBoardBox>
-        <IconGroup
+        {/* Reset Icon */}
+        <Box
           onClick={() => {
             setGameStatus("waiting");
           }}
-        >
-          {/* IconGroups to be replaced with a reusable container component */}
-          <Icon>
-            {/* Icons to be replaced with a reusable container component */}
-            {/* Reset Icon */}
-            <i
-              className="fas fa-redo-alt"
-              style={{ margin: "auto 0 auto 10px" }}
-            ></i>
-          </Icon>
-        </IconGroup>
-        <IconGroup>
-          <Icon>
-            {/* clock Icon */}
-            <i
-              className="far fa-clock fa-lg"
-              style={{ marginRight: "10px" }}
-            ></i>
-          </Icon>
-          {/* div needed? To be replaced with the reusable container component */}
+          className="fas fa-redo-alt"
+        ></Box>
+        <Box>
+          {/* clock Icon */}
+          <Box className="far fa-clock fa-lg" margin={"0 5px 0 0"}></Box>
           <Timer gameStatus={gameStatus} />
-        </IconGroup>
-        <IconGroup>
-          <Icon>
-            {/* flag Icon */}
-            <i
-              className="far fa-flag fa-lg"
-              style={{ marginRight: "10px" }}
-            ></i>
-          </Icon>
-          <div style={{ margin: "auto 10px auto 0" }}>{flaggedAmount}</div>
-          {/* div to be replaced with a reusable container component */}
-        </IconGroup>
+        </Box>
+        <Box>
+          {/* flag Icon */}
+          <Box className="far fa-flag fa-lg" margin={"0 5px 0 0"}></Box>
+          <Box>{flaggedAmount}</Box>
+        </Box>
       </ScoreBoardBox>
       <Board
         gridWidth={gridWidth}

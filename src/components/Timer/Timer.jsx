@@ -31,5 +31,5 @@ export const Timer = (props) => {
     }, 10);
   };
 
-  return <div style={{ margin: "auto" }}>{timerSeconds}</div>;
+  return <div>{timerSeconds}</div>;
 };
