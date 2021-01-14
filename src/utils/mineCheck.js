@@ -1,4 +1,4 @@
-export const mineCheck = (index, original, props, copiedArray) => {
+export const mineCheck = (index, original, props) => {
   const cellArrayCopy = [...props.cellArray];
 
   // Array is displayed as a matrix. So it checks the ones near the index starting from above and continues clockwise.
@@ -47,7 +47,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
         );
         // Recursion, calls the mineCheck to do the same to the next indexes
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props, cellArrayCopy);
+          return mineCheck(curr, original, props);
         });
       }
     } else if (index === props.size - props.gridWidth) {
@@ -78,7 +78,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props, cellArrayCopy);
+          return mineCheck(curr, original, props);
         });
       }
     } else {
@@ -107,7 +107,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props, cellArrayCopy);
+          return mineCheck(curr, original, props);
         });
       }
     }
@@ -141,7 +141,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props, cellArrayCopy);
+          return mineCheck(curr, original, props);
         });
       }
     } else if (index === props.size - 1) {
@@ -172,7 +172,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props, cellArrayCopy);
+          return mineCheck(curr, original, props);
         });
       }
     } else {
@@ -201,7 +201,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props, cellArrayCopy);
+          return mineCheck(curr, original, props);
         });
       }
     }
@@ -232,7 +232,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
-        return mineCheck(curr, original, props, cellArrayCopy);
+        return mineCheck(curr, original, props);
       });
     }
   } else if (index > props.size - props.gridWidth && index < props.size - 1) {
@@ -262,7 +262,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
-        return mineCheck(curr, original, props, cellArrayCopy);
+        return mineCheck(curr, original, props);
       });
     }
   } else {
@@ -287,7 +287,7 @@ export const mineCheck = (index, original, props, copiedArray) => {
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
-        return mineCheck(curr, original, props, cellArrayCopy);
+        return mineCheck(curr, original, props);
       });
     }
   }
