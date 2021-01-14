@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 import { Box } from "../Box";
 
 export const GameBox = styled(Box)`
@@ -11,12 +12,15 @@ export const GameBox = styled(Box)`
   // It wasn't working perfectly with 700px, not sure why. -14px being the size of the border ...
   max-height: calc(686px);
   border: 15px ridge lightgrey;
+
 `;
 
 export const ScoreBoardBox = styled(Box)`
   justify-content: space-between;
+
   align-items: center;
   font-size: clamp(3px, 9.4vw, calc((700px * 0.85) * 0.094));
+
   color: white;
   width: 100%;
   height: 15%;
