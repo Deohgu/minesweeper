@@ -1,9 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
-
-export const Container = styled.div`
-  width: calc(100vw - (100vw - 100%));
-  height: calc(100vh - (100vh - 100%));
-`;
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   

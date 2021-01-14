@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
+import { Box } from "./../Box";
+
 const margin = 1;
 
-export const CellStyled = styled.div`
+export const CellStyled = styled(Box)`
   font-size: 25px;
   font-weight: 600;
 
-  /* Have it modular, don't hard code the 8 or the 4. */
-  /* Centering numbers & bombs in Cell */
-  display: flex;
   align-items: center;
   justify-content: center;
 

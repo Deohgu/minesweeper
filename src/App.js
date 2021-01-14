@@ -1,15 +1,21 @@
 import React from "react";
 
-import { Container, GlobalStyle } from "./App.styled";
+import { GlobalStyle } from "./App.styled";
 
 import { Game } from "./components";
 
+import { Box } from "./components/Box";
+
 export const App = () => {
   return (
-    <Container>
-      {/* Container to be replaced with a reusable container component */}
+    <Box
+      alignItems={"center"}
+      justifyContent={"center"}
+      width={"calc(100vw)"}
+      height={"100vh"}
+    >
       <GlobalStyle />
       <Game />
-    </Container>
+    </Box>
   );
 };
