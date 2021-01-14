@@ -4,13 +4,7 @@ import { Board, Timer } from "./../index";
 
 import { Box } from "../Box";
 
-import {
-  GameStyled,
-  ScoreBoard,
-  TimerText,
-  IconGroup,
-  Icon,
-} from "./Game.styled";
+import { GameBox, ScoreBoardBox, IconGroup, Icon } from "./Game.styled";
 
 export const Game = () => {
   const [gridWidth] = useState(8);
@@ -88,15 +82,8 @@ export const Game = () => {
   };
 
   return (
-    <GameStyled>
-      {/* GameStyled to be replaced with a reusable container component */}
-      <ScoreBoard>
-        {/* ScoreBoard to be replaced with a reusable container component */}
-        {/* <Box
-          justifyContent={"space-between"}
-          fontSize={"calc(8vw)"}
-          color={"white"}
-        > */}
+    <GameBox>
+      <ScoreBoardBox>
         <IconGroup
           onClick={() => {
             setGameStatus("waiting");
@@ -120,13 +107,8 @@ export const Game = () => {
               style={{ marginRight: "10px" }}
             ></i>
           </Icon>
-          <div style={{ margin: "auto" }}>
-            {/* div needed? To be replaced with the reusable container component */}
-            <TimerText>
-              {/* TimerText to be replaced with a reusable container component */}
-              <Timer gameStatus={gameStatus} />
-            </TimerText>
-          </div>
+          {/* div needed? To be replaced with the reusable container component */}
+          <Timer gameStatus={gameStatus} />
         </IconGroup>
         <IconGroup>
           <Icon>
@@ -139,8 +121,7 @@ export const Game = () => {
           <div style={{ margin: "auto 10px auto 0" }}>{flaggedAmount}</div>
           {/* div to be replaced with a reusable container component */}
         </IconGroup>
-        {/* </Box> */}
-      </ScoreBoard>
+      </ScoreBoardBox>
       <Board
         gridWidth={gridWidth}
         size={size}
@@ -150,6 +131,6 @@ export const Game = () => {
         flagHandler={flagHandler}
         statusHandler={statusHandler}
       />
-    </GameStyled>
+    </GameBox>
   );
 };
