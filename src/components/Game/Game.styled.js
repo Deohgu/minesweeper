@@ -1,16 +1,20 @@
 import styled from "styled-components";
 
 export const GameStyled = styled.div`
-  position: relative;
-  margin: 20% auto;
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   border: 15px ridge lightgrey;
-  width: 80vw;
-  height: calc(80vw + 12vw);
-  max-width: calc(700px * .8);
-  max-height: calc(700px * .92);
-
-  @media (min-width: 800px) {
-    margin: 5% auto;
+  max-width: calc(800px * .8);
+  max-height: calc(800px * .92);
+  @media (max-width: calc(800px * .8)) {
+    width: 100vw;
+    height: calc(100vw * 1.15)
   }
 `;
 
@@ -18,16 +22,14 @@ export const ScoreBoard = styled.div`
   display: flex;
   flex-grow: 0;
   justify-content: space-between;
-
   font-size: calc(8vw);
   font-weight: 400;
   color: white;
-
   width: 100%;
   height: 15%;
   background-color: hsl(0deg 0% 55%);
-  @media (min-width: 800px) {
-    font-size: 63.68px;
+  @media (min-width: calc(800px * .8)) {
+    font-size: 55px;
   }
 `;
 
@@ -37,7 +39,6 @@ export const TimerText = styled.div`
   margin: auto;
   /* width: calc(100% + 20%); */
   width: 25vw;
-
   @media (min-width: 800px) {
     width: 200px;
   }
@@ -58,7 +59,6 @@ export const IconGroup = styled.div`
 
 export const Icon = styled.div`
   transform: translateY(15%);
-
   @media (min-width: 330px) {
     margin: 5px;
   }

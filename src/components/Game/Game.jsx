@@ -110,7 +110,8 @@ export const Game = () => {
             {/* clock Icon */}
             <i
               className="far fa-clock fa-lg"
-              style={{ marginRight: "10px" }}
+              /** change style to apply margin right */
+              style={{ margin: "0 0 0 15px" }}
             ></i>
           </Icon>
           <div style={{ margin: "auto" }}>
@@ -126,7 +127,8 @@ export const Game = () => {
             {/* flag Icon */}
             <i
               className="far fa-flag fa-lg"
-              style={{ marginRight: "10px" }}
+              /** Change style to apply flag margin right only */
+              style={{ margin: "0 0 0 40px" }}
             ></i>
           </Icon>
           <div style={{ margin: "auto 10px auto 0" }}>{flaggedAmount}</div>
