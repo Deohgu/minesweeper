@@ -47,6 +47,8 @@ export const Board = (props) => {
             gridWidth={props.gridWidth}
             key={index}
             pressed={curr.advancedChecked}
+            index={index}
+            props={props}
             value={
               curr.advancedChecked === false ? (
                 curr.flagged === true ? (
