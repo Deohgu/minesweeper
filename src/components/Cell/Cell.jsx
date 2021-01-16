@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CellStyled } from "./Cell.styled";
+import { CellStyled, Icons } from "./Cell.styled";
 
 // Take aways from today
 // Working but the code needs refactoring before a PR
@@ -17,44 +17,57 @@ import num6 from "../../assets/6.png";
 import num7 from "../../assets/7.png";
 import num8 from "../../assets/8.png";
 import bomb from "../../assets/bomb.png";
+import flag from "../../assets/flag.png";
+import wrong_flag from "../../assets/wrong_flag.png";
 
 export const Cell = ({ gridWidth, value, pressed, index, props, ...rest }) => {
-  // Allows importing onto the img src with a "variable" variable bellow
+  // Allows refering in the Icons src with a "variable" variable bellow -> `num${value}`
   const importedImg = { num1, num2, num3, num4, num5, num6, num7, num8 };
 
   console.log(props.cellArray[index]);
 
-  return (
-    <CellStyled gridWidth={gridWidth} pressed={pressed} {...rest}>
-      {/* We will resolve this mess */}
-      {/* The Cell component should dictate what to render based on props, clean ou Board conditionals */}
-      {props.cellArray[index].value === "💥" &&
-        props.cellArray[index].advancedChecked === true && (
-          // <Box backgroundColor={"red"} width={"100%"} height={"100%"}>
-          <div
-            style={{ backgroundColor: "red", width: "100%", height: "100%" }}
+  // to be moved to utils folder in its own file
+  const toDisplay = () => {
+    if (props.cellArray[index].advancedChecked === true) {
+      if (props.cellArray[index].value === "bombPressed") {
+        return (
+          <Box
+            alignItems={"center"}
+            justifyContent={"center"}
+            backgroundColor={"red"}
+            width={"100%"}
+            height={"100%"}
           >
-            <img
-              src={bomb}
-              alt={value}
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-            ></img>
-          </div>
-          // </Box>
-        )}
-      {props.cellArray[index].value === "💣" &&
-        props.cellArray[index].advancedChecked === true && (
-          <img src={bomb} alt={value}></img>
-        )}
-      {props.cellArray[index].value && (
-        <img
-          src={importedImg["num" + props.cellArray[index].value]}
-          alt={value}
-        ></img>
-      )}
+            {" "}
+            <Icons src={bomb} alt={value} draggable="false" />
+          </Box>
+        );
+      } else if (props.cellArray[index].value === "bomb") {
+        return <Icons src={bomb} alt={value} draggable="false" />;
+      } else {
+        return (
+          <Icons
+            src={importedImg[`num${props.cellArray[index].value}`]}
+            alt={value}
+            draggable="false"
+          />
+        );
+      }
+    } else if (props.cellArray[index].flagged === "wrong") {
+      return <Icons src={wrong_flag} alt={"wrong"} draggable="false" />;
+    } else if (props.cellArray[index].flagged === true) {
+      return <Icons src={flag} alt={"flag"} draggable="false" />;
+    }
+  };
+
+  return (
+    <CellStyled
+      gridWidth={gridWidth}
+      pressed={pressed}
+      {...rest}
+      draggable="false"
+    >
+      {toDisplay()}
     </CellStyled>
   );
 };
