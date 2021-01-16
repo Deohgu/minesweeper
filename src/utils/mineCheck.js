@@ -32,7 +32,7 @@ export const mineCheck = (index, original, props) => {
       );
       bombCounter = 0;
       filteredCheckerArray.forEach((curr) => {
-        cellArrayCopy[curr].value === "💣" && bombCounter++;
+        cellArrayCopy[curr].value === "bomb" && bombCounter++;
         cellArrayCopy[curr].checked = true; // Will be skipped in the future
       });
       if (bombCounter > 0) {
@@ -42,7 +42,7 @@ export const mineCheck = (index, original, props) => {
         const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
           (curr) =>
             cellArrayCopy[curr].advancedChecked !== true &&
-            cellArrayCopy[curr].value !== "💣" &&
+            cellArrayCopy[curr].value !== "bomb" &&
             curr !== original
         );
         // Recursion, calls the mineCheck to do the same to the next indexes
@@ -65,7 +65,7 @@ export const mineCheck = (index, original, props) => {
       );
       bombCounter = 0;
       filteredCheckerArray.forEach((curr) => {
-        cellArrayCopy[curr].value === "💣" && bombCounter++;
+        cellArrayCopy[curr].value === "bomb" && bombCounter++;
         cellArrayCopy[curr].checked = true;
       });
       if (bombCounter > 0) {
@@ -74,7 +74,7 @@ export const mineCheck = (index, original, props) => {
         const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
           (curr) =>
             cellArrayCopy[curr].advancedChecked !== true &&
-            cellArrayCopy[curr].value !== "💣" &&
+            cellArrayCopy[curr].value !== "bomb" &&
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
@@ -94,7 +94,7 @@ export const mineCheck = (index, original, props) => {
       );
       bombCounter = 0;
       filteredCheckerArray.forEach((curr) => {
-        cellArrayCopy[curr].value === "💣" && bombCounter++;
+        cellArrayCopy[curr].value === "bomb" && bombCounter++;
         cellArrayCopy[curr].checked = true;
       });
       if (bombCounter > 0) {
@@ -103,7 +103,7 @@ export const mineCheck = (index, original, props) => {
         const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
           (curr) =>
             cellArrayCopy[curr].advancedChecked !== true &&
-            cellArrayCopy[curr].value !== "💣" &&
+            cellArrayCopy[curr].value !== "bomb" &&
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
@@ -128,7 +128,7 @@ export const mineCheck = (index, original, props) => {
 
       bombCounter = 0;
       filteredCheckerArray.forEach((curr) => {
-        cellArrayCopy[curr].value === "💣" && bombCounter++;
+        cellArrayCopy[curr].value === "bomb" && bombCounter++;
         cellArrayCopy[curr].checked = true;
       });
       if (bombCounter > 0) {
@@ -137,7 +137,7 @@ export const mineCheck = (index, original, props) => {
         const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
           (curr) =>
             cellArrayCopy[curr].advancedChecked !== true &&
-            cellArrayCopy[curr].value !== "💣" &&
+            cellArrayCopy[curr].value !== "bomb" &&
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
@@ -159,7 +159,7 @@ export const mineCheck = (index, original, props) => {
       );
       bombCounter = 0;
       filteredCheckerArray.forEach((curr) => {
-        cellArrayCopy[curr].value === "💣" && bombCounter++;
+        cellArrayCopy[curr].value === "bomb" && bombCounter++;
         cellArrayCopy[curr].checked = true;
       });
       if (bombCounter > 0) {
@@ -168,7 +168,7 @@ export const mineCheck = (index, original, props) => {
         const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
           (curr) =>
             cellArrayCopy[curr].advancedChecked !== true &&
-            cellArrayCopy[curr].value !== "💣" &&
+            cellArrayCopy[curr].value !== "bomb" &&
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
@@ -188,7 +188,7 @@ export const mineCheck = (index, original, props) => {
       );
       bombCounter = 0;
       filteredCheckerArray.forEach((curr) => {
-        cellArrayCopy[curr].value === "💣" && bombCounter++;
+        cellArrayCopy[curr].value === "bomb" && bombCounter++;
         cellArrayCopy[curr].checked = true;
       });
       if (bombCounter > 0) {
@@ -197,7 +197,7 @@ export const mineCheck = (index, original, props) => {
         const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
           (curr) =>
             cellArrayCopy[curr].advancedChecked !== true &&
-            cellArrayCopy[curr].value !== "💣" &&
+            cellArrayCopy[curr].value !== "bomb" &&
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
@@ -219,7 +219,7 @@ export const mineCheck = (index, original, props) => {
     bombCounter = 0;
 
     filteredCheckerArray.forEach((curr) => {
-      cellArrayCopy[curr].value === "💣" && bombCounter++;
+      cellArrayCopy[curr].value === "bomb" && bombCounter++;
       cellArrayCopy[curr].checked = true;
     });
     if (bombCounter > 0) {
@@ -228,7 +228,7 @@ export const mineCheck = (index, original, props) => {
       const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
         (curr) =>
           cellArrayCopy[curr].advancedChecked !== true &&
-          cellArrayCopy[curr].value !== "💣" &&
+          cellArrayCopy[curr].value !== "bomb" &&
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
@@ -249,7 +249,7 @@ export const mineCheck = (index, original, props) => {
     bombCounter = 0;
 
     filteredCheckerArray.forEach((curr) => {
-      cellArrayCopy[curr].value === "💣" && bombCounter++;
+      cellArrayCopy[curr].value === "bomb" && bombCounter++;
       cellArrayCopy[curr].checked = true;
     });
     if (bombCounter > 0) {
@@ -258,7 +258,7 @@ export const mineCheck = (index, original, props) => {
       const filteredCheckerArrayAdvance = filteredCheckerArray.filter(
         (curr) =>
           cellArrayCopy[curr].advancedChecked !== true &&
-          cellArrayCopy[curr].value !== "💣" &&
+          cellArrayCopy[curr].value !== "bomb" &&
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
@@ -273,7 +273,7 @@ export const mineCheck = (index, original, props) => {
     bombCounter = 0;
 
     checkerArray.forEach((curr) => {
-      cellArrayCopy[curr].value === "💣" && bombCounter++;
+      cellArrayCopy[curr].value === "bomb" && bombCounter++;
       cellArrayCopy[curr].checked = true;
     });
 
@@ -283,7 +283,7 @@ export const mineCheck = (index, original, props) => {
       const filteredCheckerArrayAdvance = checkerArray.filter(
         (curr) =>
           cellArrayCopy[curr].advancedChecked !== true &&
-          cellArrayCopy[curr].value !== "💣" &&
+          cellArrayCopy[curr].value !== "bomb" &&
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {

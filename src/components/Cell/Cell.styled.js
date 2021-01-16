@@ -22,3 +22,9 @@ export const CellStyled = styled(Box)`
       ? "inset 2px 2px 1px 1px hsl(0deg 0% 40%)"
       : "inset -2px -2px 1px 1px hsl(0deg 0% 40%)"};
 `;
+
+export const Icons = styled.img`
+  image-rendering: pixelated;
+  height: 80%;
+  user-select: none;
+`;

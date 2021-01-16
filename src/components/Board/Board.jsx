@@ -16,18 +16,18 @@ export const Board = (props) => {
       (props.gameStatus === "waiting" || props.gameStatus === "running") &&
       props.cellArray[index].flagged !== true // Stops the player from activating a flagged cell.
     ) {
-      if (props.cellArray[index].value === "💣") {
+      if (props.cellArray[index].value === "bomb") {
         // Sets all the cells that are bombs to "advancedChecked" meaning checked, meaning to be visible.
         let cellArrayCopy = [...props.cellArray];
         cellArrayCopy.forEach((curr) => {
-          if (curr.value === "💣") {
+          if (curr.value === "bomb") {
             curr.advancedChecked = true;
           } else if (curr.flagged === true) {
             curr.flagged = "wrong";
           }
         });
         // Shows an explosion to demonstrate that it was a bomb
-        cellArrayCopy[index].value = "💥";
+        cellArrayCopy[index].value = "bombPressed";
 
         props.statusHandler("lost", cellArrayCopy);
       } else {
@@ -37,7 +37,7 @@ export const Board = (props) => {
   };
 
   return (
-    <BoardStyled>
+    <BoardStyled draggable="false">
       {/* BoardStyled to be replaced with a reusable container component */}
       {props.cellArray.map((curr, index) => {
         return (
@@ -47,32 +47,9 @@ export const Board = (props) => {
             gridWidth={props.gridWidth}
             key={index}
             pressed={curr.advancedChecked}
-            value={
-              curr.advancedChecked === false ? (
-                curr.flagged === true ? (
-                  // flag
-                  <i className="fas fa-flag" style={{ fontSize: "30px" }}></i>
-                ) : curr.flagged === "wrong" ? (
-                  <i className="fas fa-flag" style={{ fontSize: "30px" }}></i>
-                ) : (
-                  ""
-                )
-              ) : curr.value !== "💣" ? (
-                curr.value === 0 ? (
-                  ""
-                ) : curr.flagged === true ? (
-                  // flag
-                  <i className="far fa-flag fa-lg"></i>
-                ) : curr.flagged === "wrong" ? (
-                  "wrong"
-                ) : (
-                  curr.value
-                )
-              ) : (
-                // bomb
-                <i className="fas fa-bomb fa-lg"></i>
-              )
-            }
+            index={index}
+            props={props}
+            value={props.cellArray[index].value}
           />
         );
       })}

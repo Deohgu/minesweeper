@@ -7,9 +7,9 @@ import { Box } from "../Box";
 import { GameBox, ScoreBoardBox } from "./Game.styled";
 
 export const Game = () => {
-  const [gridWidth] = useState(8);
-  const [size] = useState(64);
-  const [bombs] = useState(8);
+  const [gridWidth] = useState(10);
+  const [size] = useState(100);
+  const [bombs] = useState(20);
   const [cellArray, setCellArray] = useState([]);
   const [flaggedAmount, setFlaggedAmount] = useState(bombs);
 
@@ -30,7 +30,7 @@ export const Game = () => {
       }
       for (let j = 0; j < bombs; j++) {
         newCellArray.push({
-          value: "💣",
+          value: "bomb",
           checked: false,
           advancedChecked: false,
           flagged: false,
