@@ -13,6 +13,7 @@ export const App = () => {
       justifyContent={"center"}
       width={"calc(100vw)"}
       height={"100vh"}
+      backgroundColor={"hsl(0, 0%, 15%)"}
     >
       <GlobalStyle />
       <Game />
