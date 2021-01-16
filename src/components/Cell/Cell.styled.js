@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 import { Box } from "./../Box";
 
-const margin = 1;
-
 export const CellStyled = styled(Box)`
   font-size: 25px;
   font-weight: 600;
@@ -11,16 +9,17 @@ export const CellStyled = styled(Box)`
   align-items: center;
   justify-content: center;
 
-  width: calc((100% / ${(props) => props.gridWidth}) - ${margin * 2}px);
-  height: calc((100% / ${(props) => props.gridWidth}) - ${margin * 2}px);
+  width: calc((100% / ${(props) => props.gridWidth}));
+  height: calc((100% / ${(props) => props.gridWidth}));
   background-color: ${(props) =>
-    props.pressed ? "hsl(0deg 0% 77%)" : "hsl(0deg 0% 74%)"};
-  margin: ${margin}px;
-
-  box-shadow: ${(props) =>
     props.pressed
-      ? "inset 2px 2px 1px 1px hsl(0deg 0% 40%)"
-      : "inset -2px -2px 1px 1px hsl(0deg 0% 40%)"};
+      ? "hsl(0deg 0% 74%)"
+      : "hsl(0deg 0% 74%)"}; // original doesn't seem to change.
+
+  border: ${(props) =>
+    props.pressed
+      ? "solid 2px hsl(0, 0%, 60%)"
+      : "outset 7px hsl(0deg 0% 92%)"};
 `;
 
 export const Icons = styled.img`
