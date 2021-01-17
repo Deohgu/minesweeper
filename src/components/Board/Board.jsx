@@ -14,8 +14,6 @@ export const Board = ({
   size,
   flagHandler,
 }) => {
-  ///////////////////////// Creator of grid & Bomb Populator
-
   return (
     <BoardStyled draggable="false">
       {cellArray.map((curr, index) => {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Board, Timer } from "./../index";
+import { Scoreboard } from "../Scoreboard/Scoreboard";
 
-import { Box } from "../Box";
+import { Board } from "../Board/Board";
 
-import { GameBox, ScoreBoardBox } from "./Game.styled";
+import { GameBox } from "./Game.styled";
 
 export const Game = () => {
   const [gridWidth] = useState(10);
@@ -15,6 +15,7 @@ export const Game = () => {
 
   const [gameStatus, setGameStatus] = useState("waiting"); // Won, lost, waiting, running.
 
+  ///////////////////////// Creator of grid & Bomb Populator
   // If status of the game changes to "waiting" -> generate a new Cell array.
   // Runs at the start and at each reset button press.
   useEffect(() => {
@@ -60,48 +61,35 @@ export const Game = () => {
 
   const statusHandler = (status, grid) => {
     status !== gameStatus && setGameStatus(status);
-    setCellArray(grid);
 
-    // Algorithm To be improved
-    let advCheckedAmount = 0;
-    cellArray.forEach((curr) => {
-      if (curr.advancedChecked) {
-        advCheckedAmount++;
-      }
-    });
-
-    if (advCheckedAmount === size - bombs) {
-      setGameStatus("won");
-      const cellArrayCopy = [...cellArray];
-      cellArrayCopy.forEach((curr) => {
-        curr.advancedChecked = true; // makes everything visible
+    if (grid) {
+      grid !== cellArray && setCellArray(grid);
+      // Algorithm To be improved
+      let advCheckedAmount = 0;
+      grid.forEach((curr) => {
+        if (curr.advancedChecked) {
+          advCheckedAmount++;
+        }
       });
-      // To be able to pass cellArray to the dependencies without an infinite loop
-      cellArray !== cellArrayCopy && setCellArray(cellArrayCopy);
+
+      if (advCheckedAmount === size - bombs) {
+        setGameStatus("won");
+        const cellArrayCopy = [...grid];
+        cellArrayCopy.forEach((curr) => {
+          curr.advancedChecked = true; // makes everything visible
+        });
+        setCellArray(cellArrayCopy);
+      }
     }
   };
 
   return (
     <GameBox>
-      <ScoreBoardBox>
-        {/* Reset Icon */}
-        <Box
-          onClick={() => {
-            setGameStatus("waiting");
-          }}
-          className="fas fa-redo-alt"
-        ></Box>
-        <Box>
-          {/* clock Icon */}
-          <Box className="far fa-clock fa-lg" margin={"0 5px 0 0"}></Box>
-          <Timer gameStatus={gameStatus} />
-        </Box>
-        <Box>
-          {/* flag Icon */}
-          <Box className="far fa-flag fa-lg" margin={"0 5px 0 0"}></Box>
-          <Box>{flaggedAmount}</Box>
-        </Box>
-      </ScoreBoardBox>
+      <Scoreboard
+        statusHandler={statusHandler}
+        gameStatus={gameStatus}
+        flaggedAmount={flaggedAmount}
+      />
       <Board
         gridWidth={gridWidth}
         gameStatus={gameStatus}
