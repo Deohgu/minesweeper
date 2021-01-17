@@ -31,5 +31,14 @@ export const Timer = (props) => {
     }, 10);
   };
 
-  return <div>{timerSeconds}</div>;
+  return (
+    <div>
+      {/* Going to use timerSeconds.split.map((curr) => `counter_${curr}` ) */}
+      {/* log the split to check */}
+      {timerSeconds}
+      {timerSeconds}
+      {timerSeconds}
+      {timerSeconds}
+    </div>
+  );
 };
