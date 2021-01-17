@@ -2,7 +2,7 @@ import React from "react";
 
 import { GlobalStyle } from "./App.styled";
 
-import { Game } from "./components";
+import { Game } from "./components/Game/Game";
 
 import { Box } from "./components/Box";
 

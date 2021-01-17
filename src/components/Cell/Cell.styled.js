@@ -14,7 +14,7 @@ export const CellStyled = styled(Box)`
   background-color: ${(props) =>
     props.pressed
       ? "hsl(0deg 0% 74%)"
-      : "hsl(0deg 0% 74%)"}; // original doesn't seem to change.
+      : "hsl(0deg 0% 74%)"}; // original minesweeper doesn't seem to change.
 
   border: ${(props) =>
     props.pressed

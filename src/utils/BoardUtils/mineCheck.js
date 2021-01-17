@@ -1,22 +1,22 @@
-export const mineCheck = (index, original, props) => {
-  const cellArrayCopy = [...props.cellArray];
+export const mineCheck = (index, original, cellArray, gridWidth, size) => {
+  const cellArrayCopy = [...cellArray];
 
   // Array is displayed as a matrix. So it checks the ones near the index starting from above and continues clockwise.
   // index - matrix width = the index above, index - matrix width + 1 = top right index, etc
   let checkerArray = [
-    index - props.gridWidth,
-    index - props.gridWidth + 1,
+    index - gridWidth,
+    index - gridWidth + 1,
     index + 1,
-    index + props.gridWidth + 1,
-    index + props.gridWidth,
-    index + props.gridWidth - 1,
+    index + gridWidth + 1,
+    index + gridWidth,
+    index + gridWidth - 1,
     index - 1,
-    index - props.gridWidth - 1,
+    index - gridWidth - 1,
   ];
 
   let bombCounter = 0;
 
-  if (index % props.gridWidth === 0) {
+  if (index % gridWidth === 0) {
     if (index === 0) {
       // Top Left Corner
       if (cellArrayCopy[index].flagged !== true) {
@@ -47,10 +47,10 @@ export const mineCheck = (index, original, props) => {
         );
         // Recursion, calls the mineCheck to do the same to the next indexes
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props);
+          return mineCheck(curr, original, cellArray, gridWidth, size);
         });
       }
-    } else if (index === props.size - props.gridWidth) {
+    } else if (index === size - gridWidth) {
       // Bottom Left Corner
       if (cellArrayCopy[index].flagged !== true) {
         cellArrayCopy[index].advancedChecked = true;
@@ -78,7 +78,7 @@ export const mineCheck = (index, original, props) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props);
+          return mineCheck(curr, original, cellArray, gridWidth, size);
         });
       }
     } else {
@@ -107,12 +107,12 @@ export const mineCheck = (index, original, props) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props);
+          return mineCheck(curr, original, cellArray, gridWidth, size);
         });
       }
     }
-  } else if (index % props.gridWidth === props.gridWidth - 1) {
-    if (index === props.gridWidth - 1) {
+  } else if (index % gridWidth === gridWidth - 1) {
+    if (index === gridWidth - 1) {
       // Top Right Corner
       if (cellArrayCopy[index].flagged !== true) {
         cellArrayCopy[index].advancedChecked = true;
@@ -141,10 +141,10 @@ export const mineCheck = (index, original, props) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props);
+          return mineCheck(curr, original, cellArray, gridWidth, size);
         });
       }
-    } else if (index === props.size - 1) {
+    } else if (index === size - 1) {
       // Bottom Right Corner
       if (cellArrayCopy[index].flagged !== true) {
         cellArrayCopy[index].advancedChecked = true;
@@ -172,7 +172,7 @@ export const mineCheck = (index, original, props) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props);
+          return mineCheck(curr, original, cellArray, gridWidth, size);
         });
       }
     } else {
@@ -201,11 +201,11 @@ export const mineCheck = (index, original, props) => {
             curr !== original
         );
         filteredCheckerArrayAdvance.forEach((curr) => {
-          return mineCheck(curr, original, props);
+          return mineCheck(curr, original, cellArray, gridWidth, size);
         });
       }
     }
-  } else if (index > 0 && index < props.gridWidth - 1) {
+  } else if (index > 0 && index < gridWidth - 1) {
     // Top Wall strickly
     if (cellArrayCopy[index].flagged !== true) {
       cellArrayCopy[index].advancedChecked = true;
@@ -232,10 +232,10 @@ export const mineCheck = (index, original, props) => {
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
-        return mineCheck(curr, original, props);
+        return mineCheck(curr, original, cellArray, gridWidth, size);
       });
     }
-  } else if (index > props.size - props.gridWidth && index < props.size - 1) {
+  } else if (index > size - gridWidth && index < size - 1) {
     // Bottom Wall strickly
     if (cellArrayCopy[index].flagged !== true) {
       cellArrayCopy[index].advancedChecked = true;
@@ -262,7 +262,7 @@ export const mineCheck = (index, original, props) => {
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
-        return mineCheck(curr, original, props);
+        return mineCheck(curr, original, cellArray, gridWidth, size);
       });
     }
   } else {
@@ -287,7 +287,7 @@ export const mineCheck = (index, original, props) => {
           curr !== original
       );
       filteredCheckerArrayAdvance.forEach((curr) => {
-        return mineCheck(curr, original, props);
+        return mineCheck(curr, original, cellArray, gridWidth, size);
       });
     }
   }
