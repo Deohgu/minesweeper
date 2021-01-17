@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import { Board, Timer } from "./../index";
 
+import { Cell } from "../Cell/Cell";
+
 import { Box } from "../Box";
 
 import { GameBox, ScoreBoardBox } from "./Game.styled";
+
+import { cellPressed } from "../../utils/GameUtils/cellPressed";
 
 export const Game = () => {
   const [gridWidth] = useState(10);
@@ -102,15 +106,34 @@ export const Game = () => {
           <Box>{flaggedAmount}</Box>
         </Box>
       </ScoreBoardBox>
-      <Board
-        gridWidth={gridWidth}
-        size={size}
-        bombs={bombs}
-        gameStatus={gameStatus}
-        cellArray={cellArray}
-        flagHandler={flagHandler}
-        statusHandler={statusHandler}
-      />
+      <Board>
+        {cellArray.map((curr, index) => {
+          return (
+            <Cell
+              onClick={(e) =>
+                cellPressed(
+                  e,
+                  index,
+                  gameStatus,
+                  cellArray,
+                  statusHandler,
+                  gridWidth,
+                  size
+                )
+              }
+              onContextMenu={(e) => flagHandler(e, index)}
+              gridWidth={gridWidth}
+              pressed={curr.advancedChecked}
+              index={index}
+              value={cellArray[index].value}
+              gameStatus={gameStatus}
+              statusHandler={statusHandler}
+              cellArray={cellArray}
+              key={index}
+            />
+          );
+        })}
+      </Board>
     </GameBox>
   );
 };
