@@ -2,7 +2,6 @@ import { mineCheck } from "./mineCheck";
 
 ///////////////////////// Click Handler
 export const cellPressed = (
-  e,
   index,
   gameStatus,
   cellArray,
@@ -10,10 +9,10 @@ export const cellPressed = (
   gridWidth,
   size
 ) => {
-  // After add to require it to be not checked.
   if (
     (gameStatus === "waiting" || gameStatus === "running") &&
-    cellArray[index].flagged !== true // Stops the player from activating a flagged cell.
+    cellArray[index].flagged !== true && // Stops the player from activating a flagged cell.
+    cellArray[index].advancedChecked === false
   ) {
     if (cellArray[index].value === "bomb") {
       // Sets all the cells that are bombs to "advancedChecked" meaning checked, meaning to be visible.

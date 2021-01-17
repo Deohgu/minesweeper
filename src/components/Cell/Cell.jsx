@@ -6,19 +6,16 @@ import { toDisplay } from "../../utils/CellUtils/toDisplay";
 
 export const Cell = ({
   gridWidth,
-  value,
   pressed,
-  index,
   cellArray,
-  statusHandler,
+  index,
+  value,
   ...rest
 }) => {
   return (
     <CellStyled
       gridWidth={gridWidth}
       pressed={pressed}
-      cellArray={cellArray}
-      statusHandler={statusHandler}
       {...rest}
       draggable="false"
     >
