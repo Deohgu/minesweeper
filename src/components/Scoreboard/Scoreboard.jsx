@@ -1,35 +1,27 @@
 import React from "react";
 
+import { BombsDisplay } from "../BombsDisplay/BombsDisplay";
+
 import { Timer } from "../Timer/Timer";
 
-import { ScoreboardBox, BombsBox } from "./ScoreboardBox.styled";
+import { ScoreboardBox } from "./ScoreboardBox.styled";
 
-import { Box } from "../Box/";
+import face_waiting from "../../assets/face_waiting.png";
 
 export const Scoreboard = ({ statusHandler, gameStatus, flaggedAmount }) => {
   return (
     <ScoreboardBox>
-      <BombsBox>
-        <Box>
-          {/* flag Icon */}
-          <Box margin={"0 5px 0 0"} />
-          <Box>{flaggedAmount}</Box>
-        </Box>
-      </BombsBox>
+      <BombsDisplay flaggedAmount={flaggedAmount} />
       {/* Reset Icon */}
-      <Box
+      <img
+        src={face_waiting}
+        alt={"reset"}
         onClick={() => {
           statusHandler("waiting");
         }}
-        className="fas fa-redo-alt"
+        style={{ height: "100%", imageRendering: "pixelated" }}
       />
-      <BombsBox>
-        <Box>
-          {/* clock Icon */}
-          <Box margin={"0 5px 0 0"} />
-          <Timer gameStatus={gameStatus} />
-        </Box>
-      </BombsBox>
+      <Timer gameStatus={gameStatus} />
     </ScoreboardBox>
   );
 };
