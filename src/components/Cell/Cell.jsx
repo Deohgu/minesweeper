@@ -20,7 +20,6 @@ export const Cell = ({
       draggable="false"
     >
       {toDisplay(cellArray, index, value)}
-      {console.log(`Cell re renderIntoDocument`)}
     </CellStyled>
   );
 };
