@@ -1,5 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import { TimerBox, Counter } from "../Timer/Timer.styled";
+
+import counter_0 from "../../assets/counter_0.png";
+import counter_1 from "../../assets/counter_1.png";
+import counter_2 from "../../assets/counter_2.png";
+import counter_3 from "../../assets/counter_3.png";
+import counter_4 from "../../assets/counter_4.png";
+import counter_5 from "../../assets/counter_5.png";
+import counter_6 from "../../assets/counter_6.png";
+import counter_7 from "../../assets/counter_7.png";
+import counter_8 from "../../assets/counter_8.png";
+import counter_9 from "../../assets/counter_9.png";
+import counter_null from "../../assets/counter_null.png";
+
+const importedImage = {
+  counter_0,
+  counter_1,
+  counter_2,
+  counter_3,
+  counter_4,
+  counter_5,
+  counter_6,
+  counter_7,
+  counter_8,
+  counter_9,
+  counter_null,
+};
+
 export const Timer = (props) => {
   const [timerSeconds, setTimerSeconds] = useState("000.00");
 
@@ -32,13 +60,27 @@ export const Timer = (props) => {
   };
 
   return (
-    <div>
-      {/* Going to use timerSeconds.split.map((curr) => `counter_${curr}` ) */}
-      {/* log the split to check */}
-      {timerSeconds}
-      {timerSeconds}
-      {timerSeconds}
-      {timerSeconds}
-    </div>
+    <TimerBox>
+      <Counter
+        src={importedImage[`counter_${timerSeconds.charAt(0)}`]} // turns into array to be able to select a char string
+        alt={timerSeconds.charAt(0)}
+      />
+      <Counter
+        src={importedImage[`counter_${timerSeconds.charAt(1)}`]}
+        alt={timerSeconds.charAt(1)}
+      />
+      <Counter
+        src={importedImage[`counter_${timerSeconds.charAt(2)}`]}
+        alt={timerSeconds.charAt(2)}
+      />
+      <Counter
+        src={importedImage[`counter_${timerSeconds.charAt(4)}`]} // skips the dot - will fix later
+        alt={timerSeconds.charAt(4)}
+      />
+      <Counter
+        src={importedImage[`counter_${timerSeconds.charAt(5)}`]}
+        alt={timerSeconds.charAt(5)}
+      />
+    </TimerBox>
   );
 };
