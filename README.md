@@ -1,5 +1,5 @@
 # Minesweeper
-A minesweeper game developed using in React.js coupled with Styled Components.
+A minesweeper game developed using React.js coupled with Styled Components.
 
 ---
 
