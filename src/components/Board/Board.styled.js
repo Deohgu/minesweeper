@@ -8,6 +8,6 @@ export const BoardStyled = styled(Box)`
   width: calc(100% - (100% * 0.06));
   height: calc(85% - (85% * 0.06));
   margin: calc(85% * 0.03) calc(100% * 0.03);
-  border: inset 10px hsl(0deg 0% 92%);
+  border: inset 6px hsl(0deg 0% 92%);
   background-color: lightgray;
 `;

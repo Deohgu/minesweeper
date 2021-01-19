@@ -73,6 +73,11 @@ export const Timer = (props) => {
         src={importedImage[`counter_${timerSeconds.charAt(2)}`]}
         alt={timerSeconds.charAt(2)}
       />
+      {/* <div style={{ width: "15px" }} /> */}
+      <Counter
+        src={counter_null} // skips the dot - will fix later
+        alt={"-"}
+      />
       <Counter
         src={importedImage[`counter_${timerSeconds.charAt(4)}`]} // skips the dot - will fix later
         alt={timerSeconds.charAt(4)}

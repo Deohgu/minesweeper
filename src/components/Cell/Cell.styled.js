@@ -19,7 +19,7 @@ export const CellStyled = styled(Box)`
   border: ${(props) =>
     props.pressed
       ? "solid 2px hsl(0, 0%, 60%)"
-      : "outset 7px hsl(0deg 0% 92%)"};
+      : "outset 4px hsl(0deg 0% 92%)"};
 `;
 
 export const Icons = styled.img`
