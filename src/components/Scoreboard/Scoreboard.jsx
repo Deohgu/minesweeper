@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BombsDisplay } from "../BombsDisplay/BombsDisplay";
+import { BombsDisplay } from "./BombsDisplay";
 
 import { Timer } from "../Timer/Timer";
 
