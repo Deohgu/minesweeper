@@ -9,8 +9,8 @@ export const CellStyled = styled(Box)`
   align-items: center;
   justify-content: center;
 
-  width: calc((100% / ${(props) => props.gridWidth}));
-  height: calc((100% / ${(props) => props.gridWidth}));
+  width: calc((100% / ${({ gridColumns }) => gridColumns}));
+  height: calc((100% / ${({ gridColumns }) => gridColumns}));
   background-color: ${(props) =>
     props.pressed
       ? "hsl(0deg 0% 74%)"

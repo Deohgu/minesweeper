@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { BoardStyled } from "./Board.styled";
 
@@ -7,13 +8,13 @@ import { Cell } from "../Cell/Cell";
 import { cellPressed } from "../../utils/BoardUtils/cellPressed";
 
 export const Board = ({
-  gridWidth,
   gameStatus,
   statusHandler,
   cellArray,
-  size,
   flagHandler,
 }) => {
+  const { gridColumns, gridSize } = useSelector((state) => state.settings);
+
   return (
     <BoardStyled draggable="false">
       {cellArray.map((curr, index) => {
@@ -25,12 +26,12 @@ export const Board = ({
                 gameStatus,
                 cellArray,
                 statusHandler,
-                gridWidth,
-                size
+                gridColumns,
+                gridSize
               )
             }
             onContextMenu={(e) => flagHandler(e, index)}
-            gridWidth={gridWidth}
+            gridColumns={gridColumns}
             pressed={curr.advancedChecked}
             cellArray={cellArray}
             index={index}

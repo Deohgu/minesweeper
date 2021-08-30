@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { Scoreboard } from "../Scoreboard/Scoreboard";
 
@@ -7,11 +8,10 @@ import { Board } from "../Board/Board";
 import { GameBox } from "./Game.styled";
 
 export const Game = () => {
-  const [gridWidth] = useState(10);
-  const [size] = useState(100);
-  const [bombs] = useState(20);
+  const { gridSize, bombsAmount } = useSelector((state) => state.settings);
+
   const [cellArray, setCellArray] = useState([]);
-  const [flaggedAmount, setFlaggedAmount] = useState(bombs);
+  const [flaggedAmount, setFlaggedAmount] = useState(bombsAmount);
 
   const [gameStatus, setGameStatus] = useState("waiting"); // Won, lost, waiting, running.
 
@@ -20,16 +20,16 @@ export const Game = () => {
   // Runs at the start and at each reset button press.
   useEffect(() => {
     if (gameStatus === "waiting") {
-      setFlaggedAmount(bombs);
+      setFlaggedAmount(bombsAmount);
       const newCellArray = [];
-      for (let i = 0; i < size - bombs; i++) {
+      for (let i = 0; i < gridSize - bombsAmount; i++) {
         newCellArray.push({
           checked: false,
           advancedChecked: false,
           flagged: false,
         });
       }
-      for (let j = 0; j < bombs; j++) {
+      for (let j = 0; j < bombsAmount; j++) {
         newCellArray.push({
           value: "bomb",
           checked: false,
@@ -39,7 +39,7 @@ export const Game = () => {
       }
       setCellArray(newCellArray.sort((a, b) => Math.random() - 0.5));
     }
-  }, [gameStatus, bombs, size]);
+  }, [gameStatus, bombsAmount, gridSize]);
 
   // Places flags on right click when the game is considered to be running.
   const flagHandler = (e, index) => {
@@ -72,7 +72,7 @@ export const Game = () => {
         }
       });
 
-      if (advCheckedAmount === size - bombs) {
+      if (advCheckedAmount === gridSize - bombsAmount) {
         setGameStatus("won");
         const cellArrayCopy = [...grid];
         cellArrayCopy.forEach((curr) => {
@@ -91,11 +91,9 @@ export const Game = () => {
         flaggedAmount={flaggedAmount}
       />
       <Board
-        gridWidth={gridWidth}
         gameStatus={gameStatus}
         statusHandler={statusHandler}
         cellArray={cellArray}
-        size={size}
         flagHandler={flagHandler}
       />
     </GameBox>
