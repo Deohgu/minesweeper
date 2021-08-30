@@ -6,7 +6,7 @@ export const cellPressed = (
   gameStatus,
   cellArray,
   statusHandler,
-  gridWidth,
+  gridColumns,
   size
 ) => {
   if (
@@ -31,7 +31,7 @@ export const cellPressed = (
     } else {
       return statusHandler(
         "running",
-        mineCheck(index, index, cellArray, gridWidth, size)
+        mineCheck(index, index, cellArray, gridColumns, size)
       );
     }
   }
