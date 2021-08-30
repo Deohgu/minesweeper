@@ -8,10 +8,10 @@ import { ScoreboardBox, EmoteButton } from "./ScoreboardBox.styled";
 
 import face_waiting from "../../assets/face_waiting.png";
 
-export const Scoreboard = ({ statusHandler, gameStatus, flaggedAmount }) => {
+export const Scoreboard = ({ statusHandler, gameStatus }) => {
   return (
     <ScoreboardBox>
-      <BombsDisplay flaggedAmount={flaggedAmount} />
+      <BombsDisplay />
       <EmoteButton>
         {/* Reset Icon */}
         <img

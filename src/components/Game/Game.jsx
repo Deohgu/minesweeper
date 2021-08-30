@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  incFlagsAvailable,
+  decFlagsAvailable,
+  resetFlagsAvailable,
+} from "../settingsSlice";
 
 import { Scoreboard } from "../Scoreboard/Scoreboard";
 
@@ -9,10 +15,9 @@ import { GameBox } from "./Game.styled";
 
 export const Game = () => {
   const { gridSize, bombsAmount } = useSelector((state) => state.settings);
+  const dispatch = useDispatch();
 
   const [cellArray, setCellArray] = useState([]);
-  const [flaggedAmount, setFlaggedAmount] = useState(bombsAmount);
-
   const [gameStatus, setGameStatus] = useState("waiting"); // Won, lost, waiting, running.
 
   ///////////////////////// Creator of grid & Bomb Populator
@@ -20,7 +25,7 @@ export const Game = () => {
   // Runs at the start and at each reset button press.
   useEffect(() => {
     if (gameStatus === "waiting") {
-      setFlaggedAmount(bombsAmount);
+      dispatch(resetFlagsAvailable());
       const newCellArray = [];
       for (let i = 0; i < gridSize - bombsAmount; i++) {
         newCellArray.push({
@@ -39,7 +44,7 @@ export const Game = () => {
       }
       setCellArray(newCellArray.sort((a, b) => Math.random() - 0.5));
     }
-  }, [gameStatus, bombsAmount, gridSize]);
+  }, [dispatch, gameStatus, bombsAmount, gridSize]);
 
   // Places flags on right click when the game is considered to be running.
   const flagHandler = (e, index) => {
@@ -49,10 +54,10 @@ export const Game = () => {
       if (cellArrayCopy[index].advancedChecked === false) {
         if (cellArrayCopy[index].flagged === false) {
           cellArrayCopy[index].flagged = true;
-          setFlaggedAmount(flaggedAmount - 1);
+          dispatch(decFlagsAvailable());
         } else {
           cellArrayCopy[index].flagged = false;
-          setFlaggedAmount(flaggedAmount + 1);
+          dispatch(incFlagsAvailable());
         }
       }
       setCellArray(cellArrayCopy);
@@ -85,11 +90,7 @@ export const Game = () => {
 
   return (
     <GameBox>
-      <Scoreboard
-        statusHandler={statusHandler}
-        gameStatus={gameStatus}
-        flaggedAmount={flaggedAmount}
-      />
+      <Scoreboard statusHandler={statusHandler} gameStatus={gameStatus} />
       <Board
         gameStatus={gameStatus}
         statusHandler={statusHandler}

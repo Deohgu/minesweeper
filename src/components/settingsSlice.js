@@ -4,6 +4,9 @@ const initialState = {
   gridColumns: 10,
   gridSize: 100,
   bombsAmount: 20,
+  get flagsAvailable() {
+    return this.bombsAmount;
+  },
 };
 
 export const settingsSlice = createSlice({
@@ -19,10 +22,25 @@ export const settingsSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.bombsAmount += action.payload;
     },
+    incFlagsAvailable: (state) => {
+      state.flagsAvailable += 1;
+    },
+    decFlagsAvailable: (state) => {
+      state.flagsAvailable -= 1;
+    },
+    resetFlagsAvailable: (state) => {
+      state.flagsAvailable = state.bombsAmount;
+    },
   },
 });
 
-export const { increment, decrement, incrementByAmount } =
-  settingsSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  incFlagsAvailable,
+  decFlagsAvailable,
+  resetFlagsAvailable,
+} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

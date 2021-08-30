@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { BombsBox, BombsImg } from "./BombsDisplay.styled";
 
@@ -28,58 +29,60 @@ const importedImage = {
   counter_null,
 };
 
-// Turns to string to be able to add the 0's
-const stringFlaggedAmount = (flaggedAmount) => {
-  const stringfied = flaggedAmount.toString();
-  if (stringfied.length === 1) return "00" + flaggedAmount;
-  else if (stringfied.length === 2) return "0" + stringfied;
-  else return stringfied;
-};
+export const BombsDisplay = () => {
+  const { flagsAvailable } = useSelector((state) => state.settings);
 
-export const BombsDisplay = ({ flaggedAmount }) => {
+  // Turns to string to be able to add the 0's
+  const stringFlaggedAmount = (flagsAvailable) => {
+    const stringfied = flagsAvailable.toString();
+    if (stringfied.length === 1) return "00" + flagsAvailable;
+    else if (stringfied.length === 2) return "0" + stringfied;
+    else return stringfied;
+  };
+
   return (
     <BombsBox>
       <BombsImg
         src={
-          flaggedAmount < 0
+          flagsAvailable < 0
             ? counter_null
             : importedImage[
-                `counter_${stringFlaggedAmount(flaggedAmount).charAt(0)}`
+                `counter_${stringFlaggedAmount(flagsAvailable).charAt(0)}`
               ]
         }
         alt={
-          flaggedAmount < 0
+          flagsAvailable < 0
             ? "-"
             : importedImage[
-                `counter_${stringFlaggedAmount(flaggedAmount).charAt(0)}`
+                `counter_${stringFlaggedAmount(flagsAvailable).charAt(0)}`
               ]
         }
       />
       <BombsImg
         src={
-          flaggedAmount < 0 && flaggedAmount > -10
+          flagsAvailable < 0 && flagsAvailable > -10
             ? importedImage[`counter_0`]
             : importedImage[
-                `counter_${stringFlaggedAmount(flaggedAmount).charAt(1)}`
+                `counter_${stringFlaggedAmount(flagsAvailable).charAt(1)}`
               ]
         }
         alt={
-          flaggedAmount < 0 && flaggedAmount > -10
+          flagsAvailable < 0 && flagsAvailable > -10
             ? "0"
             : importedImage[
-                `counter_${stringFlaggedAmount(flaggedAmount).charAt(1)}`
+                `counter_${stringFlaggedAmount(flagsAvailable).charAt(1)}`
               ]
         }
       />
       <BombsImg
         src={
           importedImage[
-            `counter_${stringFlaggedAmount(flaggedAmount).charAt(2)}`
+            `counter_${stringFlaggedAmount(flagsAvailable).charAt(2)}`
           ]
         }
         alt={
           importedImage[
-            `counter_${stringFlaggedAmount(flaggedAmount).charAt(3)}`
+            `counter_${stringFlaggedAmount(flagsAvailable).charAt(3)}`
           ]
         }
       />
