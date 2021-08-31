@@ -9,6 +9,7 @@ export const cellPressed = (
   gridColumns,
   size
 ) => {
+  let cellArrayCopy = JSON.parse(JSON.stringify(cellArray));
   if (
     (gameStatus === "waiting" || gameStatus === "running") &&
     cellArray[index].flagged !== true && // Stops the player from activating a flagged cell.
@@ -16,7 +17,7 @@ export const cellPressed = (
   ) {
     if (cellArray[index].value === "bomb") {
       // Sets all the cells that are bombs to "advancedChecked" meaning checked, meaning to be visible.
-      let cellArrayCopy = [...cellArray];
+
       cellArrayCopy.forEach((curr) => {
         if (curr.value === "bomb") {
           curr.advancedChecked = true;
@@ -31,7 +32,7 @@ export const cellPressed = (
     } else {
       return statusHandler(
         "running",
-        mineCheck(index, index, cellArray, gridColumns, size)
+        mineCheck(index, index, cellArrayCopy, gridColumns, size)
       );
     }
   }

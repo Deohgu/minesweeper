@@ -5,6 +5,7 @@ import {
   incFlagsAvailable,
   decFlagsAvailable,
   resetFlagsAvailable,
+  setCellArray,
 } from "../settingsSlice";
 
 import { Scoreboard } from "../Scoreboard/Scoreboard";
@@ -14,10 +15,11 @@ import { Board } from "../Board/Board";
 import { GameBox } from "./Game.styled";
 
 export const Game = () => {
-  const { gridSize, bombsAmount } = useSelector((state) => state.settings);
+  const { gridSize, bombsAmount, cellArray } = useSelector(
+    (state) => state.settings
+  );
   const dispatch = useDispatch();
 
-  const [cellArray, setCellArray] = useState([]);
   const [gameStatus, setGameStatus] = useState("waiting"); // Won, lost, waiting, running.
 
   ///////////////////////// Creator of grid & Bomb Populator
@@ -42,7 +44,7 @@ export const Game = () => {
           flagged: false,
         });
       }
-      setCellArray(newCellArray.sort((a, b) => Math.random() - 0.5));
+      dispatch(setCellArray(newCellArray.sort((a, b) => Math.random() - 0.5)));
     }
   }, [dispatch, gameStatus, bombsAmount, gridSize]);
 
@@ -50,7 +52,7 @@ export const Game = () => {
   const flagHandler = (e, index) => {
     e.preventDefault();
     if (gameStatus === "running") {
-      let cellArrayCopy = [...cellArray];
+      let cellArrayCopy = JSON.parse(JSON.stringify(cellArray));
       if (cellArrayCopy[index].advancedChecked === false) {
         if (cellArrayCopy[index].flagged === false) {
           cellArrayCopy[index].flagged = true;
@@ -60,7 +62,7 @@ export const Game = () => {
           dispatch(incFlagsAvailable());
         }
       }
-      setCellArray(cellArrayCopy);
+      dispatch(setCellArray(cellArrayCopy));
     }
   };
 
@@ -68,7 +70,7 @@ export const Game = () => {
     status !== gameStatus && setGameStatus(status);
 
     if (grid) {
-      grid !== cellArray && setCellArray(grid);
+      grid !== cellArray && dispatch(setCellArray(grid));
       // Algorithm To be improved
       let advCheckedAmount = 0;
       grid.forEach((curr) => {
@@ -79,11 +81,11 @@ export const Game = () => {
 
       if (advCheckedAmount === gridSize - bombsAmount) {
         setGameStatus("won");
-        const cellArrayCopy = [...grid];
-        cellArrayCopy.forEach((curr) => {
+        const gridCopy = JSON.parse(JSON.stringify(grid));
+        gridCopy.forEach((curr) => {
           curr.advancedChecked = true; // makes everything visible
         });
-        setCellArray(cellArrayCopy);
+        dispatch(setCellArray(gridCopy));
       }
     }
   };
@@ -94,7 +96,6 @@ export const Game = () => {
       <Board
         gameStatus={gameStatus}
         statusHandler={statusHandler}
-        cellArray={cellArray}
         flagHandler={flagHandler}
       />
     </GameBox>

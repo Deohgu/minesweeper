@@ -7,13 +7,10 @@ import { Cell } from "../Cell/Cell";
 
 import { cellPressed } from "../../utils/BoardUtils/cellPressed";
 
-export const Board = ({
-  gameStatus,
-  statusHandler,
-  cellArray,
-  flagHandler,
-}) => {
-  const { gridColumns, gridSize } = useSelector((state) => state.settings);
+export const Board = ({ gameStatus, statusHandler, flagHandler }) => {
+  const { gridColumns, gridSize, cellArray } = useSelector(
+    (state) => state.settings
+  );
 
   return (
     <BoardStyled draggable="false">

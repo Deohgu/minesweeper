@@ -7,6 +7,7 @@ const initialState = {
   get flagsAvailable() {
     return this.bombsAmount;
   },
+  cellArray: [],
 };
 
 export const settingsSlice = createSlice({
@@ -31,6 +32,9 @@ export const settingsSlice = createSlice({
     resetFlagsAvailable: (state) => {
       state.flagsAvailable = state.bombsAmount;
     },
+    setCellArray: (state, action) => {
+      state.cellArray = action.payload;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   incFlagsAvailable,
   decFlagsAvailable,
   resetFlagsAvailable,
+  setCellArray,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;
