@@ -17,14 +17,15 @@ export const Scoreboard = () => {
   return (
     <ScoreboardBox>
       <BombsDisplay />
-      <EmoteButton>
+      <EmoteButton
+        onClick={() => {
+          if (gameStatus !== "waiting") dispatch(setGameStatus("waiting")); //  Best option ??
+        }}
+      >
         {/* Reset Icon */}
         <img
           src={face_waiting}
           alt={"reset"}
-          onClick={() => {
-            if (gameStatus !== "waiting") dispatch(setGameStatus("waiting")); //  Best option ??
-          }}
           style={{ height: "100%", imageRendering: "pixelated" }}
         />
       </EmoteButton>
