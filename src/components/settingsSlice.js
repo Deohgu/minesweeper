@@ -8,6 +8,7 @@ const initialState = {
     return this.bombsAmount;
   },
   cellArray: [],
+  gameStatus: "waiting", // Won, lost, waiting, running.
 };
 
 export const settingsSlice = createSlice({
@@ -35,6 +36,9 @@ export const settingsSlice = createSlice({
     setCellArray: (state, action) => {
       state.cellArray = action.payload;
     },
+    setGameStatus: (state, action) => {
+      state.gameStatus = action.payload;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   decFlagsAvailable,
   resetFlagsAvailable,
   setCellArray,
+  setGameStatus,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

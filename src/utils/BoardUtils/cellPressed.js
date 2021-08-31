@@ -1,39 +1,23 @@
 import { mineCheck } from "./mineCheck";
 
 ///////////////////////// Click Handler
-export const cellPressed = (
-  index,
-  gameStatus,
-  cellArray,
-  statusHandler,
-  gridColumns,
-  size
-) => {
+export const cellPressed = (index, cellArray, gridColumns, size) => {
   let cellArrayCopy = JSON.parse(JSON.stringify(cellArray));
-  if (
-    (gameStatus === "waiting" || gameStatus === "running") &&
-    cellArray[index].flagged !== true && // Stops the player from activating a flagged cell.
-    cellArray[index].advancedChecked === false
-  ) {
-    if (cellArray[index].value === "bomb") {
-      // Sets all the cells that are bombs to "advancedChecked" meaning checked, meaning to be visible.
+  if (cellArray[index].value === "bomb") {
+    // Sets all the cells that are bombs to "advancedChecked" meaning checked, meaning to be visible.
 
-      cellArrayCopy.forEach((curr) => {
-        if (curr.value === "bomb") {
-          curr.advancedChecked = true;
-        } else if (curr.flagged === true) {
-          curr.flagged = "wrong";
-        }
-      });
-      // Shows an explosion to demonstrate that it was a bomb
-      cellArrayCopy[index].value = "bombPressed";
+    cellArrayCopy.forEach((curr) => {
+      if (curr.value === "bomb") {
+        curr.advancedChecked = true;
+      } else if (curr.flagged === true) {
+        curr.flagged = "wrong";
+      }
+    });
+    // Shows an explosion to demonstrate that it was a bomb
+    cellArrayCopy[index].value = "bombPressed";
 
-      return statusHandler("lost", cellArrayCopy);
-    } else {
-      return statusHandler(
-        "running",
-        mineCheck(index, index, cellArrayCopy, gridColumns, size)
-      );
-    }
+    return cellArrayCopy;
+  } else {
+    return mineCheck(index, index, cellArrayCopy, gridColumns, size);
   }
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
 import { TimerBox, Counter } from "../Timer/Timer.styled";
 
@@ -28,16 +29,18 @@ const importedImage = {
   counter_null,
 };
 
-export const Timer = (props) => {
+export const Timer = () => {
   const [timerSeconds, setTimerSeconds] = useState("000.00");
+
+  const { gameStatus } = useSelector((state) => state.settings);
 
   const counterRef = useRef(null);
 
   useEffect(() => {
-    if (props.gameStatus === "running") {
+    if (gameStatus === "running") {
       // game started
       startTimer();
-    } else if (props.gameStatus === "won" || props.gameStatus === "lost") {
+    } else if (gameStatus === "won" || gameStatus === "lost") {
       // Game Won or Lost
       clearInterval(counterRef.current); // stops the timer
     } else {
@@ -45,7 +48,7 @@ export const Timer = (props) => {
       clearInterval(counterRef.current);
       setTimerSeconds("000.00"); // resets timer to 0
     }
-  }, [props.gameStatus]);
+  }, [gameStatus]);
 
   const startTimer = () => {
     counterRef.current = setInterval(() => {

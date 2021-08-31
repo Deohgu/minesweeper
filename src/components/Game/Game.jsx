@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  incFlagsAvailable,
-  decFlagsAvailable,
   resetFlagsAvailable,
   setCellArray,
+  setGameStatus,
 } from "../settingsSlice";
 
 import { Scoreboard } from "../Scoreboard/Scoreboard";
@@ -15,12 +14,10 @@ import { Board } from "../Board/Board";
 import { GameBox } from "./Game.styled";
 
 export const Game = () => {
-  const { gridSize, bombsAmount, cellArray } = useSelector(
+  const { gridSize, bombsAmount, cellArray, gameStatus } = useSelector(
     (state) => state.settings
   );
   const dispatch = useDispatch();
-
-  const [gameStatus, setGameStatus] = useState("waiting"); // Won, lost, waiting, running.
 
   ///////////////////////// Creator of grid & Bomb Populator
   // If status of the game changes to "waiting" -> generate a new Cell array.
@@ -48,56 +45,43 @@ export const Game = () => {
     }
   }, [dispatch, gameStatus, bombsAmount, gridSize]);
 
-  // Places flags on right click when the game is considered to be running.
-  const flagHandler = (e, index) => {
-    e.preventDefault();
-    if (gameStatus === "running") {
-      let cellArrayCopy = JSON.parse(JSON.stringify(cellArray));
-      if (cellArrayCopy[index].advancedChecked === false) {
-        if (cellArrayCopy[index].flagged === false) {
-          cellArrayCopy[index].flagged = true;
-          dispatch(decFlagsAvailable());
-        } else {
-          cellArrayCopy[index].flagged = false;
-          dispatch(incFlagsAvailable());
-        }
+  //  Updates game's status
+  useEffect(() => {
+    // Algorithm To be improved
+    let advCheckedAmount = 0;
+    let bombPressed = false;
+    cellArray.forEach((curr) => {
+      if (curr.advancedChecked) {
+        advCheckedAmount++;
       }
-      dispatch(setCellArray(cellArrayCopy));
+      if (curr.value === "bombPressed") {
+        bombPressed = true;
+      }
+    });
+
+    if (bombPressed === true) {
+      dispatch(setGameStatus("lost"));
+    } else if (advCheckedAmount === gridSize - bombsAmount) {
+      dispatch(setGameStatus("won"));
     }
-  };
+  }, [bombsAmount, cellArray, dispatch, gridSize]);
 
-  const statusHandler = (status, grid) => {
-    status !== gameStatus && setGameStatus(status);
-
-    if (grid) {
-      grid !== cellArray && dispatch(setCellArray(grid));
-      // Algorithm To be improved
-      let advCheckedAmount = 0;
-      grid.forEach((curr) => {
-        if (curr.advancedChecked) {
-          advCheckedAmount++;
-        }
+  // makes everything visible if won
+  useEffect(() => {
+    if (gameStatus === "won") {
+      const gridCopy = JSON.parse(JSON.stringify(cellArray));
+      gridCopy.forEach((curr, index) => {
+        gridCopy[index].advancedChecked = true; // makes everything visible
       });
 
-      if (advCheckedAmount === gridSize - bombsAmount) {
-        setGameStatus("won");
-        const gridCopy = JSON.parse(JSON.stringify(grid));
-        gridCopy.forEach((curr) => {
-          curr.advancedChecked = true; // makes everything visible
-        });
-        dispatch(setCellArray(gridCopy));
-      }
+      dispatch(setCellArray(gridCopy));
     }
-  };
+  }, [cellArray, dispatch, gameStatus]);
 
   return (
     <GameBox>
-      <Scoreboard statusHandler={statusHandler} gameStatus={gameStatus} />
-      <Board
-        gameStatus={gameStatus}
-        statusHandler={statusHandler}
-        flagHandler={flagHandler}
-      />
+      <Scoreboard />
+      <Board />
     </GameBox>
   );
 };

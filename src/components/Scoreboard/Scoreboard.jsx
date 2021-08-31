@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setGameStatus } from "../settingsSlice";
 
 import { BombsDisplay } from "./BombsDisplay";
 
@@ -8,7 +10,10 @@ import { ScoreboardBox, EmoteButton } from "./ScoreboardBox.styled";
 
 import face_waiting from "../../assets/face_waiting.png";
 
-export const Scoreboard = ({ statusHandler, gameStatus }) => {
+export const Scoreboard = () => {
+  const { gameStatus } = useSelector((state) => state.settings);
+  const dispatch = useDispatch();
+
   return (
     <ScoreboardBox>
       <BombsDisplay />
@@ -18,12 +23,12 @@ export const Scoreboard = ({ statusHandler, gameStatus }) => {
           src={face_waiting}
           alt={"reset"}
           onClick={() => {
-            statusHandler("waiting");
+            if (gameStatus !== "waiting") dispatch(setGameStatus("waiting")); //  Best option ??
           }}
           style={{ height: "100%", imageRendering: "pixelated" }}
         />
       </EmoteButton>
-      <Timer gameStatus={gameStatus} />
+      <Timer />
     </ScoreboardBox>
   );
 };
