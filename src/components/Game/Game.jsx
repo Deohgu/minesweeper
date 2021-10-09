@@ -7,6 +7,7 @@ import {
   setGameStatus,
 } from "../settingsSlice";
 
+import TitleBar from "../TitleBar/TitleBar";
 import WindowButtons from "../WindowButtons/WindowButtons";
 import { Scoreboard } from "../Scoreboard/Scoreboard";
 import { Board } from "../Board/Board";
@@ -80,6 +81,7 @@ export const Game = () => {
 
   return (
     <Window>
+      <TitleBar />
       <WindowButtons />
       <GameBox>
         <Scoreboard />

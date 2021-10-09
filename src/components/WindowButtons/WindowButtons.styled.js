@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Box } from "../Box";
 
 export const ButtonContainer = styled(Box)`
-  /* height: 10px; */
+  margin-left: 5px;
 `;
 
 export const Buttons = styled(Box)`
