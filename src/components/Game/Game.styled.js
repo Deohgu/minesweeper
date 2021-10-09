@@ -18,6 +18,7 @@ export const GameBox = styled(Box)`
     450px + (450px * 0.15)
   ); // plus 15% in height of the total width for the scoreboard
   margin: 5px;
+  margin-top: 2px;
   border: 8px outset hsl(0deg 0% 92%);
   outline: 2px solid black;
   background-color: hsl(0deg 0% 74%);

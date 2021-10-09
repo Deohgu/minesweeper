@@ -9,7 +9,7 @@ export const ButtonContainer = styled(Box)`
 export const Buttons = styled(Box)`
   font-size: 15px;
   padding: 5px;
-  margin: 6px;
+  margin: 2px;
   margin-left: 0;
 
   &:hover {
