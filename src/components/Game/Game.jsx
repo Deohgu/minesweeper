@@ -7,11 +7,11 @@ import {
   setGameStatus,
 } from "../settingsSlice";
 
+import WindowButtons from "../WindowButtons/WindowButtons";
 import { Scoreboard } from "../Scoreboard/Scoreboard";
-
 import { Board } from "../Board/Board";
 
-import { GameBox } from "./Game.styled";
+import { Window, GameBox } from "./Game.styled";
 
 export const Game = () => {
   const { gridSize, bombsAmount, cellArray, gameStatus } = useSelector(
@@ -79,9 +79,12 @@ export const Game = () => {
   }, [cellArray, dispatch, gameStatus]);
 
   return (
-    <GameBox>
-      <Scoreboard />
-      <Board />
-    </GameBox>
+    <Window>
+      <WindowButtons />
+      <GameBox>
+        <Scoreboard />
+        <Board />
+      </GameBox>
+    </Window>
   );
 };

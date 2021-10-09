@@ -2,6 +2,13 @@ import styled from "styled-components";
 
 import { Box } from "../Box";
 
+export const Window = styled(Box)`
+  flex-direction: column;
+  padding: 5px;
+  padding-top: 0;
+  background-color: hsl(0deg 0% 74%);
+`;
+
 export const GameBox = styled(Box)`
   flex-direction: column;
   width: 100vw;
@@ -12,5 +19,6 @@ export const GameBox = styled(Box)`
     450px + (450px * 0.15)
   ); // plus 15% in height of the total width for the scoreboard
   border: 8px outset hsl(0deg 0% 92%);
+  outline: 2px solid black;
   background-color: hsl(0deg 0% 74%);
 `;
