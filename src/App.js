@@ -8,6 +8,8 @@ import { Game } from "./components/Game/Game";
 
 import { Box } from "./components/Box";
 
+import wallpaperClouds from "./assets/wallpaper.png";
+
 export const App = () => {
   return (
     <Provider store={store}>
@@ -16,7 +18,7 @@ export const App = () => {
         justifyContent={"center"}
         width={"calc(100vw)"}
         height={"100vh"}
-        backgroundColor={"hsl(0, 0%, 15%)"}
+        style={{ backgroundImage: `url(${wallpaperClouds})` }}
       >
         <GlobalStyle />
         <Game />
