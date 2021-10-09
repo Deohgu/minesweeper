@@ -23,11 +23,12 @@ export const MineIcon = styled.img`
 `;
 
 export const WindowsIcons = styled.img`
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   padding: 2px;
   border: 2px outset hsl(0deg 0% 92%);
   background-color: hsl(0deg 0% 74%);
+  image-rendering: unset;
 
   &:not(:last-child) {
     margin-right: 5px;
