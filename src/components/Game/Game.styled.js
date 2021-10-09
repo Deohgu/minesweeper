@@ -20,6 +20,6 @@ export const GameBox = styled(Box)`
   margin: 5px;
   margin-top: 2px;
   border: 8px outset hsl(0deg 0% 92%);
-  outline: 2px solid black;
+  outline: 1px solid black;
   background-color: hsl(0deg 0% 74%);
 `;
