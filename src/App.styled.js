@@ -85,6 +85,7 @@ export const GlobalStyle = createGlobalStyle`
     border-style: none;
     max-width: 100%;
     height: auto;
+    image-rendering: pixelated;
   }
   blockquote,
   q {
