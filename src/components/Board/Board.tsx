@@ -1,8 +1,12 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCellArray, setGameStatus } from "../settingsSlice";
-
-import { incFlagsAvailable, decFlagsAvailable } from "../settingsSlice";
+import {
+  setCellArray,
+  setGameStatus,
+  incFlagsAvailable,
+  decFlagsAvailable,
+  selectSettings,
+} from "../settingsSlice";
 
 import { BoardStyled } from "./Board.styled";
 
@@ -11,12 +15,11 @@ import { Cell } from "../Cell/Cell";
 import { cellPressed } from "../../utils/BoardUtils/cellPressed";
 
 export const Board = () => {
-  const { gridColumns, gridSize, cellArray, gameStatus } = useSelector(
-    (state) => state.settings
-  );
+  const { gridColumns, gridSize, cellArray, gameStatus } =
+    useSelector(selectSettings);
   const dispatch = useDispatch();
 
-  const flagHandler = (e, index) => {
+  const flagHandler = (e: MouseEvent, index: number) => {
     e.preventDefault();
     if (gameStatus === "running") {
       let cellArrayCopy = JSON.parse(JSON.stringify(cellArray));
@@ -33,7 +36,12 @@ export const Board = () => {
     }
   };
 
-  const isClickableSquare = (curr) =>
+  const isClickableSquare = (curr: {
+    value?: "bomb";
+    checked: boolean;
+    advancedChecked: boolean;
+    flagged: boolean;
+  }) =>
     (gameStatus === "waiting" || gameStatus === "running") &&
     curr.flagged !== true &&
     curr.advancedChecked === false;
@@ -54,7 +62,7 @@ export const Board = () => {
                   dispatch(setGameStatus("running"));
               }
             }}
-            onContextMenu={(e) => flagHandler(e, index)}
+            onContextMenu={(e: MouseEvent) => flagHandler(e, index)}
             gridColumns={gridColumns}
             pressed={curr.advancedChecked}
             cellArray={cellArray}
