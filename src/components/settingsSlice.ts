@@ -1,3 +1,4 @@
+import { RootState } from "../App/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialStateTypes = {
@@ -72,5 +73,7 @@ export const {
   setCellArray,
   setGameStatus,
 } = settingsSlice.actions;
+
+export const selectSettings = (state: RootState) => state.settings;
 
 export default settingsSlice.reducer;
