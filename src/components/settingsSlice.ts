@@ -1,6 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+type initialStateTypes = {
+  gridColumns: number;
+  gridSize: number;
+  bombsAmount: number;
+  flagsAvailable: number;
+  cellArray: {
+    value?: "bomb";
+    checked: boolean;
+    advancedChecked: boolean;
+    flagged: boolean;
+  }[];
+  gameStatus: "Won" | "lost" | "waiting" | "running";
+};
+
+const initialState: initialStateTypes = {
   gridColumns: 10,
   gridSize: 100,
   bombsAmount: 20,
@@ -21,7 +35,7 @@ export const settingsSlice = createSlice({
     decrement: (state) => {
       state.bombsAmount -= 1;
     },
-    incrementByAmount: (state, action) => {
+    incrementByAmount: (state, action: PayloadAction<number>) => {
       state.bombsAmount += action.payload;
     },
     incFlagsAvailable: (state) => {
@@ -33,10 +47,16 @@ export const settingsSlice = createSlice({
     resetFlagsAvailable: (state) => {
       state.flagsAvailable = state.bombsAmount;
     },
-    setCellArray: (state, action) => {
+    setCellArray: (
+      state,
+      action: PayloadAction<initialStateTypes["cellArray"]>
+    ) => {
       state.cellArray = action.payload;
     },
-    setGameStatus: (state, action) => {
+    setGameStatus: (
+      state,
+      action: PayloadAction<initialStateTypes["gameStatus"]>
+    ) => {
       state.gameStatus = action.payload;
     },
   },
