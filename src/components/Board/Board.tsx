@@ -5,6 +5,7 @@ import {
   setGameStatus,
   incFlagsAvailable,
   decFlagsAvailable,
+  cellType,
   selectSettings,
 } from "../settingsSlice";
 
@@ -36,12 +37,7 @@ export const Board = () => {
     }
   };
 
-  const isClickableSquare = (curr: {
-    value?: "bomb";
-    checked: boolean;
-    advancedChecked: boolean;
-    flagged: boolean;
-  }) =>
+  const isClickableSquare = (curr: cellType) =>
     (gameStatus === "waiting" || gameStatus === "running") &&
     curr.flagged !== true &&
     curr.advancedChecked === false;
@@ -52,6 +48,7 @@ export const Board = () => {
         return (
           <Cell
             onClick={() => {
+              // Should the onClick and onContextMenu logic be inside the Cell?
               if (isClickableSquare(curr)) {
                 dispatch(
                   setCellArray(

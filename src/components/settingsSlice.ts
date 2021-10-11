@@ -1,18 +1,20 @@
 import { RootState } from "../App/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type initialStateTypes = {
+export type cellType = {
+  value?: "bomb" | number | "bombPressed";
+  checked: boolean;
+  advancedChecked: boolean;
+  flagged: boolean;
+};
+
+export type initialStateTypes = {
   gridColumns: number;
   gridSize: number;
   bombsAmount: number;
   flagsAvailable: number;
-  cellArray: {
-    value?: "bomb";
-    checked: boolean;
-    advancedChecked: boolean;
-    flagged: boolean;
-  }[];
-  gameStatus: "Won" | "lost" | "waiting" | "running";
+  cellArray: cellType[];
+  gameStatus: "won" | "lost" | "waiting" | "running";
 };
 
 const initialState: initialStateTypes = {
