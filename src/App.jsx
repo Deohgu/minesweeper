@@ -6,7 +6,7 @@ import { GlobalStyle } from "./App.styled";
 
 import { Game } from "./components/Game/Game";
 
-import { Box } from "./components/Box";
+import { Box } from "./components/Box/Box";
 
 import wallpaperClouds from "./assets/wallpaper.png";
 

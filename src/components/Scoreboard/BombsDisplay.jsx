@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { selectSettings } from "../settingsSlice";
 
 import { BombsBox, BombsImg } from "./BombsDisplay.styled";
 
@@ -30,7 +31,7 @@ const importedImage = {
 };
 
 export const BombsDisplay = () => {
-  const { flagsAvailable } = useSelector((state) => state.settings);
+  const { flagsAvailable } = useSelector(selectSettings);
 
   // Turns to string to be able to add the 0's
   const stringFlaggedAmount = (flagsAvailable) => {

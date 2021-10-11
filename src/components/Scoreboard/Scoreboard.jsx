@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setGameStatus } from "../settingsSlice";
+import { setGameStatus, selectSettings } from "../settingsSlice";
 
 import { BombsDisplay } from "./BombsDisplay";
 
@@ -11,7 +11,7 @@ import { ScoreboardBox, EmoteButton } from "./ScoreboardBox.styled";
 import face_waiting from "../../assets/face_waiting.png";
 
 export const Scoreboard = () => {
-  const { gameStatus } = useSelector((state) => state.settings);
+  const { gameStatus } = useSelector(selectSettings);
   const dispatch = useDispatch();
 
   return (

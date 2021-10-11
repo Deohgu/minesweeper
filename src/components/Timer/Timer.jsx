@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { selectSettings } from "../settingsSlice";
 
 import { TimerBox, Counter } from "../Timer/Timer.styled";
 
@@ -32,7 +33,7 @@ const importedImage = {
 export const Timer = () => {
   const [timerSeconds, setTimerSeconds] = useState("000.00");
 
-  const { gameStatus } = useSelector((state) => state.settings);
+  const { gameStatus } = useSelector(selectSettings);
 
   const counterRef = useRef(null);
 
