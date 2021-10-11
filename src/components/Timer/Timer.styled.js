@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/index";
+import { Box } from "../Box/Box";
 
 export const TimerBox = styled(Box)`
   box-sizing: border-box;

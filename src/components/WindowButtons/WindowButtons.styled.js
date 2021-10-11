@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Box } from "../Box";
+import { Box } from "../Box/Box";
 
 export const ButtonContainer = styled(Box)`
   margin-left: 5px;
