@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "./App/store";
+import { store } from "./store/store";
 
 import { AppContainer, GlobalStyle } from "./App.styled";
 
