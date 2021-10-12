@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/Box";
-
-export const BombsBox = styled(Box)`
+export const BombsBox = styled.div`
+  display: flex;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;

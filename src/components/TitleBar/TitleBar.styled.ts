@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/Box";
-
-export const TitleBarWrapper = styled(Box)`
+export const TitleBarWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
   color: white;
   padding: 3px;
@@ -13,7 +12,8 @@ export const TitleBarWrapper = styled(Box)`
   );
 `;
 
-export const IconsWrapper = styled(Box)`
+export const IconsWrapper = styled.div`
+  display: flex;
   align-items: center;
 `;
 

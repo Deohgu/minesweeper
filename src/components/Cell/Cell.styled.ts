@@ -1,18 +1,17 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/Box";
-
 type CellStyledTypes = {
   gridColumns: number;
   pressed: boolean;
 };
 
-export const CellStyled = styled(Box)<CellStyledTypes>`
-  font-size: 25px;
-  font-weight: 600;
-
+export const CellStyled = styled.div<CellStyledTypes>`
+  display: flex;
   align-items: center;
   justify-content: center;
+
+  font-weight: 600;
+  font-size: 25px;
 
   width: calc((100% / ${({ gridColumns }) => gridColumns}));
   height: calc((100% / ${({ gridColumns }) => gridColumns}));

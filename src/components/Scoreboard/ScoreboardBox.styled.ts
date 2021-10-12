@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/Box";
-
-export const ScoreboardBox = styled(Box)`
+export const ScoreboardBox = styled.div`
+  display: flex;
   justify-content: space-between;
 
   align-items: center;

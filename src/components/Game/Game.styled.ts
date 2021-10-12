@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/Box";
-
-export const Window = styled(Box)`
+export const Window = styled.div`
+  display: flex;
   flex-direction: column;
   background-color: hsl(0deg 0% 74%);
   border: 3px outset hsl(0deg 0% 92%);
 `;
 
-export const GameBox = styled(Box)`
+export const GameBox = styled.div`
+  display: flex;
   flex-direction: column;
   width: 100vw;
   height: calc(100vw * 1.15);

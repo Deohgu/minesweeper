@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Box } from "../Box/Box";
 
-export const BoardStyled = styled(Box)`
+export const BoardStyled = styled.div`
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
   // 85% as that the parents width is 85% of the height. So with this the component will be square and - 0.06 to remove the extra margin

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-import { Box } from "../Box/Box";
-
-export const ButtonContainer = styled(Box)`
+export const ButtonContainer = styled.div`
+  display: flex;
   margin-left: 5px;
 `;
 
-export const Buttons = styled(Box)`
+export const Buttons = styled.div`
+  display: flex;
   font-size: 15px;
   padding: 5px;
   margin: 2px;
