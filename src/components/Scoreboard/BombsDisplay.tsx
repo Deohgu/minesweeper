@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectSettings } from "../settingsSlice";
+import { selectSettings } from "../../store/settingsSlice";
 
 import { BombsBox, BombsImg } from "./BombsDisplay.styled";
 

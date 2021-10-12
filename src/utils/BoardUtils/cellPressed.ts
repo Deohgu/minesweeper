@@ -1,6 +1,6 @@
 import { mineCheck } from "./mineCheck";
 
-import { initialStateTypes } from "../../components/settingsSlice";
+import { initialStateTypes } from "../../store/settingsSlice";
 
 type CellPressedType = (
   index: number,

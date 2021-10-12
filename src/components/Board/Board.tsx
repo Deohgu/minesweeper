@@ -7,7 +7,7 @@ import {
   decFlagsAvailable,
   cellType,
   selectSettings,
-} from "../settingsSlice";
+} from "../../store/settingsSlice";
 
 import { BoardStyled } from "./Board.styled";
 

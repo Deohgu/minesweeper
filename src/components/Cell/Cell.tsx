@@ -1,6 +1,10 @@
 import React, { ComponentPropsWithRef } from "react";
 import { useSelector } from "react-redux";
-import { initialStateTypes, cellType, selectSettings } from "../settingsSlice";
+import {
+  initialStateTypes,
+  cellType,
+  selectSettings,
+} from "../../store/settingsSlice";
 
 import { CellStyled } from "./Cell.styled";
 

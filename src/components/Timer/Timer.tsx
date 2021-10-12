@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { selectSettings } from "../settingsSlice";
+import { selectSettings } from "../../store/settingsSlice";
 
 import { TimerBox, Counter } from "./Timer.styled";
 

@@ -8,7 +8,7 @@ import {
   cellType,
   initialStateTypes,
   selectSettings,
-} from "../settingsSlice";
+} from "../../store/settingsSlice";
 
 import TitleBar from "../TitleBar/TitleBar";
 import WindowButtons from "../WindowButtons/WindowButtons";

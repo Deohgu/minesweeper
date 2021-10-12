@@ -1,4 +1,4 @@
-import { RootState } from "../App/store";
+import { RootState } from "./store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type cellType = {

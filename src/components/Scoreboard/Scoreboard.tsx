@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setGameStatus, selectSettings } from "../settingsSlice";
+import { setGameStatus, selectSettings } from "../../store/settingsSlice";
 
 import { BombsDisplay } from "./BombsDisplay";
 

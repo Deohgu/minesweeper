@@ -1,4 +1,4 @@
-import { initialStateTypes } from "../../components/settingsSlice";
+import { initialStateTypes } from "../../store/settingsSlice";
 
 type mineCheckType = (
   index: number,

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cellType, initialStateTypes } from "../../components/settingsSlice";
+import { cellType, initialStateTypes } from "../../store/settingsSlice";
 
 import { IconsContainer } from "./toDisplay.styled";
 import { Icons } from "../../components/Cell/Cell.styled";
