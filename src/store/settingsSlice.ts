@@ -25,7 +25,7 @@ const initialState: initialStateTypes = {
     return this.bombsAmount;
   },
   cellArray: [],
-  gameStatus: "waiting", // Won, lost, waiting, running.
+  gameStatus: "waiting",
 };
 
 export const settingsSlice = createSlice({
