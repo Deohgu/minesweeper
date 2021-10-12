@@ -5,7 +5,7 @@ export type cellType = {
   value?: "bomb" | number | "bombPressed";
   checked: boolean;
   advancedChecked: boolean;
-  flagged: boolean;
+  flagged: boolean | "wrong";
 };
 
 export type initialStateTypes = {
