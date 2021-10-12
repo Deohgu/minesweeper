@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Box } from "../../components/Box/Box";
+import { cellType, initialStateTypes } from "../../components/settingsSlice";
 
+import { IconsContainer } from "./toDisplay.styled";
 import { Icons } from "../../components/Cell/Cell.styled";
 
 import num1 from "../../assets/1.png";
@@ -17,30 +18,37 @@ import flag from "../../assets/flag.png";
 import wrong_flag from "../../assets/wrong_flag.png";
 
 // Allows refering in the Icons src with a "variable" variable bellow -> `num${value}`
-const importedImg = { num1, num2, num3, num4, num5, num6, num7, num8 };
+const importedImg: { [key: string]: string } = {
+  num1,
+  num2,
+  num3,
+  num4,
+  num5,
+  num6,
+  num7,
+  num8,
+};
 
-export const toDisplay = (cellArray, index, value) => {
+export const toDisplay = (
+  cellArray: initialStateTypes["cellArray"],
+  index: number,
+  value: cellType["value"]
+): JSX.Element | undefined => {
   if (cellArray[index].advancedChecked === true) {
     if (cellArray[index].value === "bombPressed") {
       return (
-        <Box
-          alignItems={"center"}
-          justifyContent={"center"}
-          backgroundColor={"red"}
-          width={"100%"}
-          height={"100%"}
-        >
+        <IconsContainer>
           {" "}
-          <Icons src={bomb} alt={value} draggable="false" />
-        </Box>
+          <Icons src={bomb} alt={value?.toString()} draggable="false" />
+        </IconsContainer>
       );
     } else if (cellArray[index].value === "bomb") {
-      return <Icons src={bomb} alt={value} draggable="false" />;
+      return <Icons src={bomb} alt={value?.toString()} draggable="false" />;
     } else {
       return (
         <Icons
-          src={importedImg[`num${cellArray[index].value}`]}
-          alt={value}
+          src={importedImg[`num${cellArray[index].value?.toString()}`]}
+          alt={value?.toString()}
           draggable="false"
         />
       );

@@ -16,7 +16,7 @@ import counter_8 from "../../assets/counter_8.png";
 import counter_9 from "../../assets/counter_9.png";
 import counter_null from "../../assets/counter_null.png";
 
-const importedImage = {
+const importedImage: { [key: string]: string } = {
   counter_0,
   counter_1,
   counter_2,
@@ -34,7 +34,7 @@ export const BombsDisplay = () => {
   const { flagsAvailable } = useSelector(selectSettings);
 
   // Turns to string to be able to add the 0's
-  const stringFlaggedAmount = (flagsAvailable) => {
+  const stringFlaggedAmount = (flagsAvailable: number) => {
     const stringfied = flagsAvailable.toString();
     if (stringfied.length === 1) return "00" + flagsAvailable;
     else if (stringfied.length === 2) return "0" + stringfied;
