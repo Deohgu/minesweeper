@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectSettings } from "../settingsSlice";
 
-import { TimerBox, Counter } from "../Timer/Timer.styled";
+import { TimerBox, Counter } from "./Timer.styled";
 
 import counter_0 from "../../assets/counter_0.png";
 import counter_1 from "../../assets/counter_1.png";
@@ -16,7 +16,7 @@ import counter_8 from "../../assets/counter_8.png";
 import counter_9 from "../../assets/counter_9.png";
 import counter_null from "../../assets/counter_null.png";
 
-const importedImage = {
+const importedImage: { [key: string]: string } = {
   counter_0,
   counter_1,
   counter_2,
@@ -35,7 +35,7 @@ export const Timer = () => {
 
   const { gameStatus } = useSelector(selectSettings);
 
-  const counterRef = useRef(null);
+  const counterRef = useRef<ReturnType<typeof setInterval>>();
 
   useEffect(() => {
     if (gameStatus === "running") {
@@ -43,10 +43,10 @@ export const Timer = () => {
       startTimer();
     } else if (gameStatus === "won" || gameStatus === "lost") {
       // Game Won or Lost
-      clearInterval(counterRef.current); // stops the timer
+      clearInterval(Number(counterRef.current)); // stops the timer
     } else {
       // game waiting
-      clearInterval(counterRef.current);
+      clearInterval(Number(counterRef.current));
       setTimerSeconds("000.00"); // resets timer to 0
     }
   }, [gameStatus]);
@@ -54,9 +54,9 @@ export const Timer = () => {
   const startTimer = () => {
     counterRef.current = setInterval(() => {
       setTimerSeconds((timerSeconds) =>
-        timerSeconds <= 9.99
+        Number(timerSeconds) <= 9.99
           ? "00" + (Number(timerSeconds) + 0.01).toFixed(2) // .toFixed deals with floating numbers
-          : timerSeconds <= 99.99
+          : Number(timerSeconds) <= 99.99
           ? "0" + (Number(timerSeconds) + 0.01).toFixed(2)
           : (Number(timerSeconds) + Number("000.01")).toFixed(2)
       );
@@ -66,7 +66,7 @@ export const Timer = () => {
   return (
     <TimerBox>
       <Counter
-        src={importedImage[`counter_${timerSeconds.charAt(0)}`]} // turns into array to be able to select a char string
+        src={importedImage[`counter_${timerSeconds.charAt(0)}`]}
         alt={timerSeconds.charAt(0)}
       />
       <Counter
