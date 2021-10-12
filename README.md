@@ -1,29 +1,30 @@
-# Overview  
+# Overview
 
 <br>
 
-### What is it?
+### About
 
-A Minesweeper Web Application clone of the Windows 98 version.  
-The game is being developed using React.js coupled with Styled Components.  
-Despite being under development is it already functional and the on-going work can been seen in [projects](https://github.com/Deohgu/minesweeper/projects/1).
+A Minesweeper Web Application based on the original Windows 98 version.
+The app was entirely built from scratch including the grid traversing algorithm.
 
 <br>
 
-### Why was it built?
+### Stack
 
-The app has been developed from scratch mostly as a playground for learning.  
-New features will be added over time, so far I have developed :
-
-- An algorithm that randomly assigns states to a 2D array
-- An algorithm that goes through a 2D array and conditional operates based on the states of each Cell
-- An accurate timer built with vanilla JavaScript
+- TypeScript
+- React
+- Redux toolkit
+- styled-components
 
 <br>
 
 ### Future Features?
 
-- Easy start option
+New features will continually be added, that work can been seen in [projects](https://github.com/Deohgu/minesweeper/projects/1).
+
+#### Examples :
+
+- Easy start option (initial press reveals an area)
 - Guess Free game option (game can be completed without having to guess)
 - Infinite Scrolling game mode
 - Minesweeper solver/probability calculator
