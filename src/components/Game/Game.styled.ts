@@ -5,6 +5,9 @@ export const Window = styled.div`
   flex-direction: column;
   background-color: hsl(0deg 0% 74%);
   border: 3px outset hsl(0deg 0% 92%);
+
+  position: absolute;
+  transform: translate(-50%, -50%);
 `;
 
 export const GameBox = styled.div`
