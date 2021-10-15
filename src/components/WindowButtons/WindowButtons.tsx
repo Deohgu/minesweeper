@@ -10,9 +10,9 @@ import {
 } from "./WindowButtons.styled";
 
 const WindowButtons = () => {
-  const buttonRef: any = useRef(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const [toggleMenu, setToggleMenu] = useState(true);
-  const [buttonHeight, setButtonHeight] = useState(0);
+  const [buttonHeight, setButtonHeight] = useState<number | undefined>(0);
 
   useEffect(() => {
     setButtonHeight(buttonRef.current?.offsetHeight);

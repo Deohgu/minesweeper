@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 type WindowMenuTypes = {
   toggleMenu: boolean;
-  buttonHeight: number;
+  buttonHeight: number | undefined;
 };
 
 export const ButtonContainer = styled.div`
@@ -32,7 +32,7 @@ export const WindowMenu = styled.div<WindowMenuTypes>`
   display: flex;
   flex-direction: column;
   margin: 2px 0;
-  transform: translateY(${({ buttonHeight }) => buttonHeight}px);
+  transform: translateY(${({ buttonHeight = 0 }) => buttonHeight}px);
   background-color: hsl(0deg 0% 74%);
   outline: 2px outset hsl(0deg 0% 92%);
 `;
