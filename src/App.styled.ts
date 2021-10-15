@@ -6,6 +6,7 @@ export const AppContainer = styled.div`
   justify-content: center;
   width: calc(100vw);
   height: 100vh;
+  overflow: hidden;
 `;
 
 export const GlobalStyle = createGlobalStyle`
