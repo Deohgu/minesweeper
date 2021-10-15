@@ -11,7 +11,7 @@ import {
 
 const WindowButtons = () => {
   const buttonRef = useRef<HTMLDivElement>(null);
-  const [toggleMenu, setToggleMenu] = useState(true);
+  const [toggleMenu, setToggleMenu] = useState(false);
   const [buttonHeight, setButtonHeight] = useState<number | undefined>(0);
 
   useEffect(() => {
