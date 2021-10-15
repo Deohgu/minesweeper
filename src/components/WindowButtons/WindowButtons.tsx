@@ -18,8 +18,6 @@ const WindowButtons = () => {
     setButtonHeight(buttonRef.current?.offsetHeight);
   }, []);
 
-  console.log("buttonHeight", buttonHeight);
-
   return (
     <ButtonContainer>
       <Buttons onClick={() => setToggleMenu(!toggleMenu)} ref={buttonRef}>
