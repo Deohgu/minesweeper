@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const TitleBarWrapper = styled.div`
+export const TitleBarWrapper = styled.ul.attrs((props) => ({
+  className: props.className,
+}))`
   display: flex;
   justify-content: space-between;
   color: white;

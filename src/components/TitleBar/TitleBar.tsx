@@ -15,7 +15,7 @@ import x from "../../assets/x-icon.png";
 
 const TitleBar = () => {
   return (
-    <TitleBarWrapper>
+    <TitleBarWrapper className={"handle"}>
       <IconsWrapper>
         <MineIcon src={mineImg} alt="Mine Icon" />
         <Title>Minesweeper</Title>

@@ -83,7 +83,7 @@ export const Game = () => {
   }, [cellArray, dispatch, gameStatus]);
 
   return (
-    <Draggable>
+    <Draggable handle=".handle">
       <Window>
         <TitleBar />
         <WindowButtons />
