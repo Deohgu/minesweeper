@@ -40,7 +40,7 @@ const WindowButtons = () => {
             <span style={{ textDecoration: "underline" }}>B</span>eginner
           </WindowMenuText>
           <WindowMenuText>
-            <span style={{ textDecoration: "underline" }}>I</span>ntermidiate
+            <span style={{ textDecoration: "underline" }}>I</span>ntermediate
           </WindowMenuText>
           <WindowMenuText>
             <span style={{ textDecoration: "underline" }}>E</span>xpert
