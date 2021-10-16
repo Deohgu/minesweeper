@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { useSelector } from "react-redux";
 import { selectSettings } from "../../store/settingsSlice";
 
@@ -30,8 +30,8 @@ const importedImage: { [key: string]: string } = {
   counter_null,
 };
 
-export const Timer = () => {
-  const [timerSeconds, setTimerSeconds] = useState("000.00");
+const Timer = () => {
+  const [timerSeconds, setTimerSeconds] = useState(0);
 
   const { gameStatus } = useSelector(selectSettings);
 
@@ -47,49 +47,38 @@ export const Timer = () => {
     } else {
       // game waiting
       clearInterval(Number(counterRef.current));
-      setTimerSeconds("000.00"); // resets timer to 0
+      setTimerSeconds(0); // resets timer to 0
     }
   }, [gameStatus]);
 
   const startTimer = () => {
     counterRef.current = setInterval(() => {
-      setTimerSeconds((timerSeconds) =>
-        Number(timerSeconds) <= 9.99
-          ? "00" + (Number(timerSeconds) + 0.01).toFixed(2) // .toFixed deals with floating numbers
-          : Number(timerSeconds) <= 99.99
-          ? "0" + (Number(timerSeconds) + 0.01).toFixed(2)
-          : (Number(timerSeconds) + Number("000.01")).toFixed(2)
-      );
-    }, 10);
+      setTimerSeconds((timerSeconds) => timerSeconds + 1);
+    }, 1000);
+  };
+
+  const addZeros = () => {
+    if (timerSeconds < 10) return `00${timerSeconds.toString()}`;
+    else if (timerSeconds < 100) return `0${timerSeconds.toString()}`;
+    return timerSeconds.toString();
   };
 
   return (
     <TimerBox>
       <Counter
-        src={importedImage[`counter_${timerSeconds.charAt(0)}`]}
-        alt={timerSeconds.charAt(0)}
+        src={importedImage[`counter_${addZeros().charAt(0)}`]}
+        alt={addZeros().charAt(0)}
       />
       <Counter
-        src={importedImage[`counter_${timerSeconds.charAt(1)}`]}
-        alt={timerSeconds.charAt(1)}
+        src={importedImage[`counter_${addZeros().charAt(1)}`]}
+        alt={addZeros().charAt(1)}
       />
       <Counter
-        src={importedImage[`counter_${timerSeconds.charAt(2)}`]}
-        alt={timerSeconds.charAt(2)}
-      />
-      {/* <div style={{ width: "15px" }} /> */}
-      <Counter
-        src={counter_null} // skips the dot - will fix later
-        alt={"-"}
-      />
-      <Counter
-        src={importedImage[`counter_${timerSeconds.charAt(4)}`]} // skips the dot - will fix later
-        alt={timerSeconds.charAt(4)}
-      />
-      <Counter
-        src={importedImage[`counter_${timerSeconds.charAt(5)}`]}
-        alt={timerSeconds.charAt(5)}
+        src={importedImage[`counter_${addZeros().charAt(2)}`]}
+        alt={addZeros().charAt(2)}
       />
     </TimerBox>
   );
 };
+
+export default memo(Timer);
