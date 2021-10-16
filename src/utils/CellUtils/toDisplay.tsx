@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cellType, initialStateTypes } from "../../store/settingsSlice";
+import { cellType } from "../../store/settingsSlice";
 
 import { IconsContainer } from "./toDisplay.styled";
 import { Icons } from "../../components/Cell/Cell.styled";
@@ -30,32 +30,35 @@ const importedImg: { [key: string]: string } = {
 };
 
 export const toDisplay = (
-  cellArray: initialStateTypes["cellArray"],
-  index: number,
-  value: cellType["value"]
+  cell: cellType
+  // cellArray: initialStateTypes["cellArray"],
+  // index: number,
+  // value: cellType["value"]
 ): JSX.Element | undefined => {
-  if (cellArray[index].advancedChecked === true) {
-    if (cellArray[index].value === "bombPressed") {
+  const { value } = cell;
+
+  if (cell.advancedChecked === true) {
+    if (cell.value === "bombPressed") {
       return (
         <IconsContainer>
           {" "}
           <Icons src={bomb} alt={value?.toString()} draggable="false" />
         </IconsContainer>
       );
-    } else if (cellArray[index].value === "bomb") {
+    } else if (cell.value === "bomb") {
       return <Icons src={bomb} alt={value?.toString()} draggable="false" />;
     } else {
       return (
         <Icons
-          src={importedImg[`num${cellArray[index].value?.toString()}`]}
+          src={importedImg[`num${cell.value?.toString()}`]}
           alt={value?.toString()}
           draggable="false"
         />
       );
     }
-  } else if (cellArray[index].flagged === "wrong") {
+  } else if (cell.flagged === "wrong") {
     return <Icons src={wrong_flag} alt={"wrong"} draggable="false" />;
-  } else if (cellArray[index].flagged === true) {
+  } else if (cell.flagged === true) {
     return <Icons src={flag} alt={"flag"} draggable="false" />;
   }
 };
