@@ -4,7 +4,7 @@ import { setGameStatus, selectSettings } from "../../store/settingsSlice";
 
 import { BombsDisplay } from "./BombsDisplay";
 
-import { Timer } from "../Timer/Timer";
+import Timer from "../Timer/Timer";
 
 import { ScoreboardBox, EmoteButton } from "./ScoreboardBox.styled";
 

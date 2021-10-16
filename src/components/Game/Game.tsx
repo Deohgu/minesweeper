@@ -14,7 +14,7 @@ import {
 import TitleBar from "../TitleBar/TitleBar";
 import WindowButtons from "../WindowButtons/WindowButtons";
 import { Scoreboard } from "../Scoreboard/Scoreboard";
-import { Board } from "../Board/Board";
+import Board from "../Board/Board";
 
 import { Window, GameBox } from "./Game.styled";
 
@@ -80,7 +80,7 @@ export const Game = () => {
 
       dispatch(setCellArray(gridCopy));
     }
-  }, [cellArray, dispatch, gameStatus]);
+  }, [dispatch, gameStatus]); // eslint-disable-line
 
   return (
     <Draggable handle=".handle">
