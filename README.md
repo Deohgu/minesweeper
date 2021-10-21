@@ -31,6 +31,14 @@ New features will continually be added, that work can been seen in [projects](ht
 
 <br>
 
+### How to run
+
+1. `npm ci`
+2. `npm start`
+3. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+<br>
+
 ## Contributing
 
 The [Minesweeper Web App](https://minesweeper.diogosantos.dev/) is open for anyone that is interested.  
