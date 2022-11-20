@@ -1,25 +1,27 @@
 import { RootState } from "./store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type cellType = {
+// TODO: Keys shouldn't be this complex.
+// TODO:   There should be a CellType, a BombCell type that extends the CellType, a EmptyCell(?) that also extends
+export interface CellType {
   value?: "bomb" | number | "bombPressed";
   checked: boolean;
   advancedChecked: boolean;
   flagged: boolean | "wrong";
-};
+}
 
 export type initialStateTypes = {
-  gridColumns: number;
-  gridSize: number;
+  gridColumnsAmount: number;
+  gridLength: number;
   bombsAmount: number;
   flagsAvailable: number;
-  cellArray: cellType[];
+  cellArray: CellType[];
   gameStatus: "won" | "lost" | "waiting" | "running";
 };
 
 const initialState: initialStateTypes = {
-  gridColumns: 10,
-  gridSize: 100,
+  gridColumnsAmount: 10,
+  gridLength: 100,
   bombsAmount: 20,
   get flagsAvailable() {
     return this.bombsAmount;

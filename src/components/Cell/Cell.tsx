@@ -19,8 +19,12 @@ type CellTypes = {
 } & ComponentPropsWithRef<typeof CellStyled>;
 
 const Cell = ({ index, pressed }: CellTypes) => {
-  const { gridSize, gridColumns, gameStatus, cellArray } =
-    useSelector(selectSettings);
+  const {
+    gridLength: gridSize,
+    gridColumnsAmount: gridColumns,
+    gameStatus,
+    cellArray,
+  } = useSelector(selectSettings);
 
   const dispatch = useDispatch();
 

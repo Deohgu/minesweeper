@@ -6,7 +6,7 @@ import {
   resetFlagsAvailable,
   setCellArray,
   setGameStatus,
-  cellType,
+  CellType,
   initialStateTypes,
   selectSettings,
 } from "../../store/settingsSlice";
@@ -19,8 +19,12 @@ import Board from "../Board/Board";
 import { Window, GameBox } from "./Game.styled";
 
 export const Game = () => {
-  const { gridSize, bombsAmount, cellArray, gameStatus } =
-    useSelector(selectSettings);
+  const {
+    gridLength: gridSize,
+    bombsAmount,
+    cellArray,
+    gameStatus,
+  } = useSelector(selectSettings);
   const dispatch = useDispatch();
 
   ///////////////////////// Creator of grid & Bomb Populator
@@ -74,7 +78,7 @@ export const Game = () => {
   useEffect(() => {
     if (gameStatus === "won") {
       const gridCopy = JSON.parse(JSON.stringify(cellArray));
-      gridCopy.forEach((cell: cellType) => {
+      gridCopy.forEach((cell: CellType) => {
         cell.advancedChecked = true; // makes everything visible
       });
 

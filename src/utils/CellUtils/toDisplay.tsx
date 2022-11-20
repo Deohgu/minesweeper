@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cellType } from "../../store/settingsSlice";
+import { CellType } from "../../store/settingsSlice";
 
 import { IconsContainer } from "./toDisplay.styled";
 import { Icons } from "../../components/Cell/Cell.styled";
@@ -30,7 +30,7 @@ const importedImg: { [key: string]: string } = {
 };
 
 export const toDisplay = (
-  cell: cellType
+  cell: CellType
   // cellArray: initialStateTypes["cellArray"],
   // index: number,
   // value: cellType["value"]

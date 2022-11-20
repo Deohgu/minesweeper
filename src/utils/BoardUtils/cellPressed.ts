@@ -5,8 +5,8 @@ import { initialStateTypes } from "../../store/settingsSlice";
 type CellPressedType = (
   index: number,
   cellArray: initialStateTypes["cellArray"],
-  gridColumns: initialStateTypes["gridColumns"],
-  gridSize: initialStateTypes["gridSize"]
+  gridColumns: initialStateTypes["gridColumnsAmount"],
+  gridSize: initialStateTypes["gridLength"]
 ) => initialStateTypes["cellArray"];
 
 // index: number; cellArray: initialStateTypes["cellArray"]; gridColumns: initialStateTypes["gridColumns"]; gridSize: initialStateTypes[""]
