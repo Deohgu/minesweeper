@@ -18,6 +18,9 @@
     "styled-components": "^5.1.1",
     "typescript": "^3.9.10"
   },
+  "engines": {
+    "node": "16.13.2"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
